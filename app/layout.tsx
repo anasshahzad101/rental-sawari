@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Nastaliq_Urdu } from "next/font/google";
+import { Analytics } from "@/components/analytics/Analytics";
 import "./globals.css";
 
 const inter = Inter({
@@ -85,6 +86,14 @@ export const metadata: Metadata = {
     address: false,
     email: false,
   },
+  // Search engine verification. Drop in the real tokens before launch (see
+  // PENDING_TASKS.md → Section D).
+  verification: {
+    google: "REPLACE_WITH_GSC_TOKEN",
+    other: {
+      "msvalidate.01": "REPLACE_WITH_BING_TOKEN",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -94,8 +103,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${notoUrdu.variable}`}>
+      <head>
+        {/* Performance hints — preconnect to font + DNS-prefetch to outbound hosts. */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://api.whatsapp.com" />
+        <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
+      </head>
       <body className="min-h-screen bg-white text-stone-900 font-sans">
         {children}
+        <Analytics />
       </body>
     </html>
   );

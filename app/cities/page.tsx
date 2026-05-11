@@ -25,6 +25,53 @@ export default function CitiesIndex() {
         subtitle="Find verified rent-a-car companies in your city. 8 cities live today, more coming weekly."
       />
 
+      <section className="border-b border-stone-200 bg-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+          <div className="prose">
+            <p className="answer-block">
+              <strong>RentalSawari operates in 8 Pakistani cities — Lahore,
+              Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar,
+              and Quetta — with 1,085 verified rent-a-car companies in
+              total.</strong> Each city has its own vendor density, pricing
+              norms, and operational quirks. Pick a city below to see real
+              listings, real prices, and direct WhatsApp contact.
+            </p>
+            <h2>Why a city-first directory?</h2>
+            <p>
+              Renting a car in Pakistan is a hyper-local decision. The same
+              car model rents for PKR 6,000/day in Faisalabad and PKR
+              8,500/day in Islamabad. The vendor who handles your wedding
+              decoration in Lahore&apos;s DHA Phase 5 isn&apos;t the right vendor
+              for your Northern Areas trip from Bahria Town, Islamabad. We
+              break the country down by city so the listings you see are
+              actually rentable for your trip.
+            </p>
+            <h2>How city pages work</h2>
+            <p>
+              Each city page lists every verified vendor in that city, sorted
+              by Google review count (real social proof, not paid placement).
+              You can filter by area, car type, with-driver vs self-drive,
+              and service category. Every listing has a WhatsApp button with
+              a pre-filled enquiry, plus the company&apos;s phone, address,
+              and average rating. We never insert a booking step — you talk
+              to the vendor directly.
+            </p>
+            <h2>Which cities have the deepest supply?</h2>
+            <p>
+              Lahore (371 vendors), Islamabad (265), and Karachi (192) make
+              up 76% of our directory. Smaller cities — Multan, Peshawar,
+              Quetta — have 20-50 vendors each, but quality is concentrated:
+              Multan has the highest average rating in Pakistan (4.88★).
+              For a full breakdown see the{" "}
+              <Link href="/guides/pakistan-car-rental-market-data-2026">
+                market data report
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {cities.map((city) => (

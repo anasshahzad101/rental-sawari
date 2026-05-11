@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description:
     "Terms governing use of RentalSawari Pakistan as a renter or as a listed rental company.",
   alternates: { canonical: "/terms" },
+  robots: { index: false, follow: true },
 };
 
 export default function TermsPage() {

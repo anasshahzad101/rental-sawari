@@ -13,10 +13,35 @@ const nextConfig = {
   // folder `/rent-a-car/[city]` internally. Canonical tags on each city page
   // point search engines at the hyphenated form.
   async rewrites() {
+    // Order matters — more specific patterns first.
     return [
+      // City × car combos: /rent-a-toyota-corolla-in-lahore → /rent-a/toyota-corolla-in-lahore
+      // The regex constraint `(.+-in-.+)` ensures the slug contains `-in-`.
+      {
+        source: "/rent-a-:slug(.+-in-.+)",
+        destination: "/rent-a/:slug",
+      },
+      // City and area pages: /rent-a-car-lahore, /rent-a-car-dha-lahore, etc.
       {
         source: "/rent-a-car-:city",
         destination: "/rent-a-car/:city",
+      },
+    ];
+  },
+  // Canonicalise to apex (non-www), strip trailing slash, lowercase slugs.
+  // The trailing-slash and case rules also live in Vercel's defaults, but
+  // making them explicit prevents regressions if hosting changes.
+  trailingSlash: false,
+  async redirects() {
+    return [
+      // www → apex (308 permanent). Vercel typically handles this when both
+      // domains are connected, but the rule ensures the behaviour is
+      // codified regardless of host.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.rentalsawari.com" }],
+        destination: "https://rentalsawari.com/:path*",
+        permanent: true,
       },
     ];
   },
@@ -50,6 +75,19 @@ const nextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // Tell Vercel's edge to send Last-Modified-derived ETags for HTML
+      // pages so crawlers can prioritise re-fetch. We can't set a precise
+      // Last-Modified per page from the config — Vercel ships one based on
+      // build time. The sitemap's per-URL `lastmod` is the precise signal.
+      {
+        source: "/(.*)\\.(html|xml)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=3600, must-revalidate",
           },
         ],
       },

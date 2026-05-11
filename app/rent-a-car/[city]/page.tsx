@@ -3,9 +3,15 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cities } from "@/data/cities";
 import { companies } from "@/data/companies";
-import { carTypes } from "@/data/carTypes";
+import { carTypes, popularCarTypes } from "@/data/carTypes";
 import { cityContext } from "@/data/cityContext";
+import { guides } from "@/data/guides";
+import { areas, getArea } from "@/data/areas";
+import { routes, getRoute } from "@/data/routes";
 import { CityContextSection } from "@/components/cities/CityContextSection";
+import { AreaPage } from "@/components/cities/AreaPage";
+import { RoutePage } from "@/components/cities/RoutePage";
+import { RelatedLinks } from "@/components/shared/RelatedLinks";
 import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { BottomCTA } from "@/components/shared/BottomCTA";
@@ -14,8 +20,24 @@ import { Badge } from "@/components/ui/badge";
 import { formatPKR } from "@/lib/utils";
 import { MapPin, Star, Users } from "lucide-react";
 
+/**
+ * Dynamic dispatcher for `/rent-a-car-{slug}` URLs.
+ *
+ * `slug` resolves to one of three rendering paths:
+ *   1. Pure city  (e.g. "lahore")          → CityPageBody
+ *   2. Area-city  (e.g. "dha-lahore")      → AreaPage
+ *   3. Route      (e.g. "lahore-to-hunza") → RoutePage (handled here too;
+ *      see app/data/routes.ts)
+ *
+ * The slug-pattern match is strict — no fall-through guessing.
+ */
+
 export function generateStaticParams() {
-  return cities.map((c) => ({ city: c.slug }));
+  return [
+    ...cities.map((c) => ({ city: c.slug })),
+    ...areas.map((a) => ({ city: a.slug })),
+    ...routes.map((r) => ({ city: r.slug })),
+  ];
 }
 
 export function generateMetadata({
@@ -23,8 +45,37 @@ export function generateMetadata({
 }: {
   params: { city: string };
 }): Metadata {
+  const route = getRoute(params.city);
+  if (route) {
+    return {
+      title: `Rent a Car from ${route.fromName} to ${route.toName} — ${route.distanceKm} km, ${route.hoursLow}-${route.hoursHigh} hrs | RentalSawari`,
+      description: `${route.fromName} to ${route.toName} car rental — ${formatPKR(route.priceFromPKR)}–${formatPKR(route.priceToPKR)} with driver. Vehicle recommendation, drive time, recommended stops, best months. ${route.distanceKm} km.`,
+      alternates: { canonical: `/rent-a-car-${route.slug}` },
+    };
+  }
+
+  const area = getArea(params.city);
+  if (area) {
+    const fewVendors =
+      companies.filter(
+        (c) =>
+          c.city === area.cityName &&
+          area.matchers.some((m) =>
+            c.area.toLowerCase().includes(m.toLowerCase()),
+          ),
+      ).length < 3;
+    return {
+      title: `Rent a Car in ${area.name}, ${area.cityName} | RentalSawari`,
+      description: area.tagline,
+      alternates: { canonical: `/rent-a-car-${area.slug}` },
+      robots: fewVendors
+        ? { index: false, follow: true }
+        : { index: true, follow: true },
+    };
+  }
+
   const city = cities.find((c) => c.slug === params.city);
-  if (!city) return { title: "City not found" };
+  if (!city) return { title: "Not found" };
   return {
     title: `Rent a Car in ${city.name} — ${city.listingCount} Verified Rentals from ${formatPKR(city.startingPrice)}/day`,
     description: `Compare ${city.listingCount} verified rent-a-car companies in ${city.name}. Real prices, direct WhatsApp contact, no booking fees. Areas covered: ${city.popularAreas.slice(0, 3).join(", ")} and more.`,
@@ -32,7 +83,38 @@ export function generateMetadata({
   };
 }
 
-export default function CityPage({ params }: { params: { city: string } }) {
+export default function CityRoute({ params }: { params: { city: string } }) {
+  // Route page wins first (`-to-` is the most specific pattern).
+  const route = getRoute(params.city);
+  if (route) {
+    return (
+      <PageShell>
+        <RoutePage route={route} />
+      </PageShell>
+    );
+  }
+
+  // Area pages next (e.g. "dha-lahore" — multi-token slug).
+  const area = getArea(params.city);
+  if (area) {
+    return (
+      <PageShell
+        bottomCTA={
+          <BottomCTA
+            title={`Own a rent-a-car business in ${area.cityName}?`}
+            subtitle="List your fleet free. Get WhatsApp leads directly."
+            primary={{
+              label: "List Your Business Free",
+              href: "/list-your-business",
+            }}
+          />
+        }
+      >
+        <AreaPage area={area} />
+      </PageShell>
+    );
+  }
+
   const city = cities.find((c) => c.slug === params.city);
   if (!city) notFound();
 
@@ -186,31 +268,36 @@ export default function CityPage({ params }: { params: { city: string } }) {
         services={services}
       />
 
-      {/* Related cities */}
-      <section className="bg-stone-50 border-t border-stone-200">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-          <h2 className="text-xl font-bold text-stone-900">
-            Rent a car in other cities
-          </h2>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {cities
+      <RelatedLinks
+        title={`More from RentalSawari`}
+        subtitle={`Compare ${city.name} with other cities, browse popular cars, and read the guides our renters use most.`}
+        groups={[
+          {
+            title: "Other cities",
+            links: cities
               .filter((c) => c.slug !== city.slug)
-              .map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    href={`/rent-a-car-${c.slug}`}
-                    className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 hover:border-brand hover:text-brand transition-colors"
-                  >
-                    {c.name}
-                    <span className="text-xs text-stone-400">
-                      {c.listingCount}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </div>
-      </section>
+              .map((c) => ({
+                label: `Rent a car in ${c.name}`,
+                href: `/rent-a-car-${c.slug}`,
+                sub: `${c.listingCount}`,
+              })),
+          },
+          {
+            title: "Popular cars",
+            links: popularCarTypes.slice(0, 6).map((c) => ({
+              label: c.name,
+              href: `/cars/${c.slug}`,
+            })),
+          },
+          {
+            title: "Guides for renters",
+            links: guides.slice(0, 4).map((g) => ({
+              label: g.title,
+              href: `/guides/${g.slug}`,
+            })),
+          },
+        ]}
+      />
     </PageShell>
   );
 }

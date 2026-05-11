@@ -33,6 +33,49 @@ export default function CarsIndex() {
         subtitle="From economy hatchbacks to luxury SUVs — every popular model available for rent in Pakistan."
       />
 
+      <section className="border-b border-stone-200 bg-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+          <div className="prose">
+            <p className="answer-block">
+              <strong>Pakistani rental fleets are dominated by twelve common
+              car models</strong> — Suzuki Mehran and Cultus at the budget
+              end, Toyota Corolla and Honda Civic in the family-sedan range,
+              Toyota Hiace and Suzuki APV for vans, Toyota Fortuner and
+              Prado for SUVs, and Toyota Land Cruiser V8 / Mercedes-Benz at
+              the luxury end. Each has different pricing, fuel economy, and
+              Pakistan-specific quirks.
+            </p>
+            <h2>What determines the rental cost of each car?</h2>
+            <p>
+              Daily rate is set by category and age. A Mehran rents from PKR
+              3,500/day; a Honda Civic averages PKR 6,500-8,500/day; a Toyota
+              Hiace runs PKR 9,000-10,500/day; a Land Cruiser V8 reaches PKR
+              32,000-35,000/day. Within each category, newer model years
+              command 15-30% premium. Multi-day rentals discount 10-30%.
+            </p>
+            <h2>Which car should I pick for my trip?</h2>
+            <p>
+              For city use and short out-of-town trips, a sedan (Corolla or
+              Civic) with driver is the default. For Northern Areas travel,
+              a Prado or Land Cruiser V8 is the right call — both have the
+              power and ground clearance for the Karakoram Highway. For
+              groups of 6-12, a Hiace with driver is the standard. For
+              weddings, the rukhsati car is usually a decorated Mercedes or
+              a Land Cruiser V8.
+            </p>
+            <h2>Pakistan-market nuances</h2>
+            <p>
+              Most rental vehicles in Pakistan are used imports — typically
+              2-8 years old. CNG-converted units are common in the budget
+              tier (Mehran, Cultus, APV) and offer significant fuel savings.
+              Higher-end cars (Prado, Land Cruiser, Mercedes) are kept on
+              diesel and command full premium rates. Always confirm the
+              specific year and condition before paying any deposit.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
         {grouped.map(({ cat, items }) => {
           if (items.length === 0) return null;

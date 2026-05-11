@@ -57,7 +57,8 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
 
   const waLink = buildWhatsAppLink(
     company.whatsapp,
-    DEFAULT_WHATSAPP_MESSAGE
+    DEFAULT_WHATSAPP_MESSAGE,
+    { source: "profile", companySlug: company.slug },
   );
 
   const related = companies
@@ -68,23 +69,67 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
   // Google Maps, not from reviews collected on rentalsawari.com — emitting
   // them as our own AggregateRating violates Google's review-snippet policy
   // and risks a manual action. We surface the rating + Google source link
-  // visually instead.
+  // visually instead. When the UGC review system ships (PENDING_TASKS §3.3)
+  // and we have ≥1 real review per vendor, add `aggregateRating` back here
+  // sourced from our own DB only.
+  const provinceFor: Record<string, string> = {
+    Lahore: "Punjab",
+    Islamabad: "Islamabad Capital Territory",
+    Karachi: "Sindh",
+    Rawalpindi: "Punjab",
+    Faisalabad: "Punjab",
+    Multan: "Punjab",
+    Peshawar: "Khyber Pakhtunkhwa",
+    Quetta: "Balochistan",
+  };
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutoRental",
-    "@id": `https://rentalsawari.com/companies/${company.slug}`,
+    "@id": `https://rentalsawari.com/companies/${company.slug}#business`,
     name: company.name,
     url: `https://rentalsawari.com/companies/${company.slug}`,
+    image: "https://rentalsawari.com/logo-mark.png",
+    telephone: company.phone,
+    priceRange: "PKR 3,500–35,000",
     address: {
       "@type": "PostalAddress",
-      addressLocality: company.area,
-      addressRegion: company.city,
+      streetAddress: company.area,
+      addressLocality: company.city,
+      addressRegion: provinceFor[company.city] ?? company.city,
       addressCountry: "PK",
     },
-    telephone: company.phone,
-    ...(company.website ? { sameAs: [company.website] } : {}),
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "00:00",
+        closes: "23:59",
+      },
+    ],
+    areaServed: [
+      { "@type": "City", name: company.city },
+      { "@type": "AdministrativeArea", name: provinceFor[company.city] ?? "Pakistan" },
+    ],
     ...(company.about ? { description: company.about } : {}),
-    areaServed: { "@type": "City", name: company.city },
+    ...(company.website || company.googleMapsUrl
+      ? {
+          sameAs: [company.website, company.googleMapsUrl].filter(
+            (x): x is string => Boolean(x),
+          ),
+        }
+      : {}),
+    makesOffer: company.servicesOffered.map((s) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: s },
+    })),
   };
 
   return (

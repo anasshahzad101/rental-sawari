@@ -65,6 +65,32 @@ export default function CarTypePage({
 
   const startsAt = Number.isFinite(minPrice) ? minPrice : car.startingPrice;
 
+  // Approximate brand parsing — "Toyota Corolla" → "Toyota".
+  const brand = car.name.split(" ")[0];
+
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `https://rentalsawari.com/cars/${car.slug}#product`,
+    name: `${car.name} Rental in Pakistan`,
+    description: `Rent a ${car.name} across 8 Pakistani cities from verified rental companies. ${car.capacity}-seat ${car.category.toLowerCase()}.`,
+    brand: { "@type": "Brand", name: brand },
+    model: car.name,
+    image: car.image,
+    category: car.category,
+    vehicleEngine: { "@type": "EngineSpecification", fuelType: "Petrol" },
+    seatingCapacity: car.capacity,
+    offers: {
+      "@type": "AggregateOffer",
+      lowPrice: startsAt,
+      highPrice: Math.round(startsAt * 1.8),
+      priceCurrency: "PKR",
+      offerCount: Math.max(offerings.length, 1),
+      availability: "https://schema.org/InStock",
+      areaServed: { "@type": "Country", name: "Pakistan" },
+    },
+  };
+
   return (
     <PageShell
       bottomCTA={
@@ -75,6 +101,11 @@ export default function CarTypePage({
         />
       }
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+
       <PageHeader
         crumbs={[
           { label: "Home", href: "/" },

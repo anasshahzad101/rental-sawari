@@ -19,7 +19,9 @@ export function CompanyCard({
   company,
   showFeaturedBadge = true,
 }: CompanyCardProps) {
-  const waLink = buildWhatsAppLink(company.whatsapp, DEFAULT_WHATSAPP_MESSAGE);
+  const waLink = buildWhatsAppLink(company.whatsapp, DEFAULT_WHATSAPP_MESSAGE, {
+    companySlug: company.slug,
+  });
 
   return (
     <article className="relative flex h-full flex-col rounded-2xl border border-stone-200 bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">

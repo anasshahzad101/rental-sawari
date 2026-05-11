@@ -10,14 +10,22 @@ export function formatPKR(amount: number) {
 }
 
 /**
- * Build a pre-filled WhatsApp link. The phone number should include the
- * country code with a leading "+" (e.g. "+923001234567"). wa.me requires the
- * "+" stripped, so we normalize here.
+ * Build a pre-filled WhatsApp link with a referral footer so vendors know
+ * the lead came from RentalSawari. The footer also doubles as our internal
+ * tracking: any incoming WhatsApp message a vendor screenshots to support
+ * will carry the source.
  */
-export function buildWhatsAppLink(phone: string, message: string) {
+export function buildWhatsAppLink(
+  phone: string,
+  message: string,
+  options?: { source?: string; companySlug?: string },
+) {
   const normalized = phone.replace(/[^\d]/g, "");
-  return `https://wa.me/${normalized}?text=${encodeURIComponent(message)}`;
+  const ref = options?.source ?? "directory";
+  const sourceTag = options?.companySlug ? `${ref}/${options.companySlug}` : ref;
+  const fullMessage = `${message}\n\n— sent via rentalsawari.com (ref: ${sourceTag})`;
+  return `https://wa.me/${normalized}?text=${encodeURIComponent(fullMessage)}`;
 }
 
 export const DEFAULT_WHATSAPP_MESSAGE =
-  "Hi, I saw your listing on RentalSawari Pakistan. I'm interested in renting a car.";
+  "Hi, I saw your listing on RentalSawari and I'm interested in renting a car. Could you share availability and your best per-day rate?";

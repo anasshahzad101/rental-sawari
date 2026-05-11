@@ -31,13 +31,23 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "CCBot",
         allow: "/",
       },
-      // Block: scrapers that ignore crawl budgets and have no AI-search use case.
+      // Block: low-value scrapers that ignore crawl budgets. AhrefsBot is
+      // intentionally NOT blocked — we want backlink visibility in Ahrefs
+      // Webmaster Tools (free) once the site is indexed.
       {
-        userAgent: ["Bytespider", "ImagesiftBot", "AhrefsBot"],
+        userAgent: ["Bytespider", "ImagesiftBot"],
         disallow: "/",
       },
     ],
-    sitemap: "https://rentalsawari.com/sitemap.xml",
+    sitemap: [
+      "https://rentalsawari.com/sitemap.xml",
+      "https://rentalsawari.com/sitemap-pages.xml",
+      "https://rentalsawari.com/sitemap-cities.xml",
+      "https://rentalsawari.com/sitemap-cars.xml",
+      "https://rentalsawari.com/sitemap-companies.xml",
+      "https://rentalsawari.com/sitemap-guides.xml",
+      "https://rentalsawari.com/sitemap-compare.xml",
+    ],
     host: "https://rentalsawari.com",
   };
 }

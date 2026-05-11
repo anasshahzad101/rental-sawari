@@ -62,7 +62,7 @@ const organizationJsonLd = {
     contactType: "customer support",
     email: "hello@rentalsawari.com",
     areaServed: "PK",
-    availableLanguage: ["English", "Urdu"],
+    availableLanguage: ["English"],
   },
   sameAs: [
     "https://www.facebook.com/rentalsawari",

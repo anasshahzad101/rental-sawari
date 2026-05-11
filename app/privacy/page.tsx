@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description:
     "How RentalSawari collects, uses, and protects your data. Plain English, no legalese.",
   alternates: { canonical: "/privacy" },
+  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPage() {
