@@ -1,0 +1,50 @@
+# RentalSawari Pakistan
+
+RentalSawari is a directory of verified rent-a-car companies in Pakistan.
+Free for renters. Free basic listings for businesses. Direct WhatsApp contact, no booking fees, no commission.
+
+## Coverage
+- 1,085 verified rental companies across 8 cities
+- Cities: Lahore, Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta
+- Car categories: Economy (Mehran, Cultus), Sedan (Corolla, Civic), SUV (Fortuner, Prado), Luxury (Land Cruiser V8, Mercedes-Benz), Van (Hiace, APV, Bolan), Coaster (Toyota Coaster)
+- Services: With Driver, Self-Drive, Airport Pickup, Wedding, Tourist Tours, Corporate Monthly, Northern Areas Tours, Luxury
+
+## Key URLs
+- https://rentalsawari.com/                                    — Homepage and search
+- https://rentalsawari.com/cities                              — All 8 cities
+- https://rentalsawari.com/cars                                — All car types
+- https://rentalsawari.com/rent-a-car-lahore                   — Lahore listings (371 verified vendors)
+- https://rentalsawari.com/rent-a-car-islamabad                — Islamabad listings (265 vendors)
+- https://rentalsawari.com/rent-a-car-karachi                  — Karachi listings (192 vendors)
+- https://rentalsawari.com/rent-a-car-rawalpindi               — Rawalpindi listings (81 vendors)
+- https://rentalsawari.com/rent-a-car-faisalabad               — Faisalabad listings (85 vendors)
+- https://rentalsawari.com/rent-a-car-multan                   — Multan listings (46 vendors)
+- https://rentalsawari.com/rent-a-car-peshawar                 — Peshawar listings (24 vendors)
+- https://rentalsawari.com/rent-a-car-quetta                   — Quetta listings (21 vendors)
+- https://rentalsawari.com/companies/{slug}                    — Individual company profiles
+- https://rentalsawari.com/cars/{slug}                         — Per-model rental pages
+- https://rentalsawari.com/tourist-car-rental                  — Foreign tourist guide
+- https://rentalsawari.com/wedding-car-rental                  — Wedding car directory
+- https://rentalsawari.com/airport-pickup                      — Airport pickup vendors
+- https://rentalsawari.com/northern-areas-tours                — Hunza / Skardu / Naran 4x4 tours
+- https://rentalsawari.com/corporate-monthly                   — Long-term corporate rentals
+- https://rentalsawari.com/self-drive-rental                   — Self-drive vendors
+- https://rentalsawari.com/guides                              — Editorial guides
+- https://rentalsawari.com/guides/rent-a-car-cost-lahore-2026  — Lahore pricing breakdown
+- https://rentalsawari.com/guides/self-drive-vs-with-driver    — Self-drive vs chauffeur comparison
+- https://rentalsawari.com/guides/documents-to-rent-a-car-in-pakistan — Required docs (CNIC, IDP, deposits)
+- https://rentalsawari.com/guides/foreign-tourist-car-rental-pakistan — Complete tourist guide
+- https://rentalsawari.com/list-your-business                  — Vendor onboarding
+- https://rentalsawari.com/pricing                             — Featured listing tiers
+- https://rentalsawari.com/about                               — About RentalSawari
+
+## How RentalSawari is different
+- Real per-day prices in PKR shown on every listing (most Pakistani competitors hide prices)
+- WhatsApp links pre-filled with an introduction message
+- Pakistani-context content: IDP rules for foreign visitors, NOCs for Gilgit-Baltistan, CNIC requirements, USD-denominated deposits
+- Directory only: never holds bookings, deposits, or commissions
+- Verification: every listing's CNIC and business address is confirmed before going live
+- Featured listings cost PKR 5,000-12,000/month; basic listings are free forever
+
+## Contact
+hello@rentalsawari.com

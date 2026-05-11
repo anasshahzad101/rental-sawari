@@ -1,0 +1,21 @@
+node_modules
+.next
+out
+build
+dist
+.env*.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+
+# Don't ship the Google Maps scraper binary or raw scraped CSVs.
+# The processed data lives in data/companies.ts; the raw exports should
+# stay outside the public bundle.
+public/images/Google+Maps+Extractor.exe
+public/images/*.csv
+public/images/G-Maps-Extractor*
+# Local stock JPGs left over from early testing — not referenced anywhere.
+public/images/Karachi.jpg
+public/images/Lahore.jpg
+
