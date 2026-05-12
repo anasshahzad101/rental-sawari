@@ -31,15 +31,55 @@ const CITIES = [
   { file: "quetta.csv", display: "Quetta" },
 ];
 
+// Multi-city CSV — one file containing rows for many cities, distinguished
+// by the `query` column. Cities listed below get imported with the indicated
+// display name; cities NOT listed here get dropped (e.g. Raiwind because
+// Google Maps treated it loosely and the results are Lahore-overflow).
+const MULTI_CITY_CSV = "Multiple cities data.csv";
+
+const MULTI_CITY_QUERY_MAP = {
+  // query keyword (lowercased) → display name
+  sialkot: "Sialkot",
+  gujranwala: "Gujranwala",
+  gujrat: "Gujrat",
+  sargodha: "Sargodha",
+  sheikhupura: "Sheikhupura",
+  bahawalpur: "Bahawalpur",
+  "rahim yar khan": "Rahim Yar Khan",
+  chakwal: "Chakwal",
+  okara: "Okara",
+  "dera ghazi khan": "Dera Ghazi Khan",
+  kasur: "Kasur",
+  narowal: "Narowal",
+  mianwali: "Mianwali",
+  // raiwind: intentionally omitted — those rows are Lahore vendors mis-tagged.
+};
+
 const FEATURED_PER_CITY = {
+  // Top 3 nationally — featured-fleet city pages
   Lahore: 2,
   Islamabad: 2,
   Karachi: 2,
+  // Tier 2
   Rawalpindi: 1,
   Faisalabad: 1,
   Multan: 1,
   Peshawar: 1,
   Quetta: 1,
+  // Newly added (Punjab tier)
+  Sialkot: 1,
+  Gujranwala: 1,
+  Gujrat: 1,
+  Sargodha: 1,
+  Sheikhupura: 1,
+  Bahawalpur: 1,
+  "Rahim Yar Khan": 1,
+  Chakwal: 1,
+  Okara: 1,
+  "Dera Ghazi Khan": 1,
+  Kasur: 1,
+  Narowal: 1,
+  Mianwali: 1,
 };
 
 // Categories worth keeping. Everything else (hotels, dealers, etc.) is dropped.
@@ -58,6 +98,13 @@ const AREA_HINTS = [
   "Bahria Town", "Bahria",
   "F-6", "F-7", "F-8", "F-10", "F-11", "G-8", "G-9", "G-10", "G-11", "G-13",
   "I-8", "I-9", "I-10", "Blue Area",
+  // Newly added Punjab tier
+  "Civil Lines", "Pasrur Road", "Daska Road", "Sambrial",
+  "G.T. Road", "GT Road",
+  "Satellite Town", "Wahdat Colony", "Gulshan Ravi",
+  "People's Colony", "Peoples Colony",
+  "Model Town Link Road",
+  "Aziz Bhatti Town", "Khaiqaani Town",
   "Clifton", "PECHS", "Gulshan", "North Nazimabad", "Korangi", "Malir",
   "University Town", "Hayatabad",
   "Madina Town", "Peoples Colony", "Susan Road", "D-Ground",
@@ -241,6 +288,101 @@ for (const { file, display } of CITIES) {
 
   stats[display] = cityEntries.length;
   allCompanies.push(...cityEntries);
+}
+
+// ---------- multi-city CSV ----------
+//
+// Single file with rows for many cities. We group rows by query, look up
+// the display name in MULTI_CITY_QUERY_MAP, skip queries not in the map
+// (e.g. Raiwind), then process each city's slice with the same pipeline.
+
+function deriveCityFromQuery(query) {
+  if (!query) return null;
+  // Match patterns like "car rental in lahore, punjab, pakistan".
+  const m = query
+    .toLowerCase()
+    .match(/(?:car rental|rent a car|rent-a-car)\s+(?:in\s+)?([^,]+)/);
+  return m ? m[1].trim() : null;
+}
+
+if (fs.existsSync(path.join(CSV_DIR, MULTI_CITY_CSV))) {
+  const rows = readCSV(MULTI_CITY_CSV);
+  // Bucket by display city.
+  const buckets = new Map();
+  let droppedQueries = new Map();
+  for (const r of rows) {
+    const city = deriveCityFromQuery(r.query || "");
+    const display = MULTI_CITY_QUERY_MAP[city];
+    if (!display) {
+      droppedQueries.set(city || "(blank)", (droppedQueries.get(city || "(blank)") || 0) + 1);
+      continue;
+    }
+    if (!buckets.has(display)) buckets.set(display, []);
+    buckets.get(display).push(r);
+  }
+
+  if (droppedQueries.size > 0) {
+    console.log("Multi-city CSV — dropped queries:");
+    [...droppedQueries.entries()].forEach(([q, n]) =>
+      console.log(`  ${String(n).padStart(4)}  ${q}`),
+    );
+  }
+
+  for (const [display, cityRows] of buckets) {
+    const cityEntries = [];
+    for (const r of cityRows) {
+      const cat = r.main_category || "";
+      if (!KEEP_CATEGORIES.some((re) => re.test(cat))) continue;
+      if (/true/i.test(r.is_temporarily_closed || "")) continue;
+      const phone = normalisePhone(r.phone || "");
+      if (!phone || phone.length < 10) continue;
+      const rating = parseFloat(r.rating);
+      const reviewCount = parseInt(r.reviews, 10) || 0;
+      if (isNaN(rating) && reviewCount === 0) continue;
+
+      const name = cleanName(r.name || "", display);
+      if (!name) continue;
+
+      let slug = slugify(name);
+      if (!slug) continue;
+      if (globalSlugs.has(slug)) slug = `${slug}-${display.toLowerCase().replace(/\s+/g, "-")}`;
+      let suffix = 2;
+      while (globalSlugs.has(slug)) {
+        slug = `${slugify(name)}-${display.toLowerCase().replace(/\s+/g, "-")}-${suffix++}`;
+      }
+      globalSlugs.add(slug);
+
+      cityEntries.push({
+        slug,
+        name,
+        city: display,
+        area: extractArea(r.address || "") || display,
+        rating: isNaN(rating) ? 0 : Number(rating.toFixed(1)),
+        reviewCount,
+        verified: true,
+        featured: false,
+        whatsapp: phone,
+        phone,
+        servicesOffered: deriveServices(r.description),
+        about: cleanDescription(r.description),
+        website: (r.website || "").trim() || undefined,
+        googleMapsUrl: (r.link || "").trim() || undefined,
+      });
+    }
+
+    const featuredCount = FEATURED_PER_CITY[display] || 1;
+    [...cityEntries]
+      .sort((a, b) => b.reviewCount - a.reviewCount)
+      .slice(0, featuredCount)
+      .forEach((e) => { e.featured = true; });
+    cityEntries.sort((a, b) => {
+      if (a.featured !== b.featured) return a.featured ? -1 : 1;
+      return b.reviewCount - a.reviewCount;
+    });
+
+    stats[display] = cityEntries.length;
+    allCompanies.push(...cityEntries);
+  }
 }
 
 // ---------- emit data/companies.ts ----------

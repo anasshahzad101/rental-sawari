@@ -73,13 +73,31 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
   // and we have ≥1 real review per vendor, add `aggregateRating` back here
   // sourced from our own DB only.
   const provinceFor: Record<string, string> = {
-    Lahore: "Punjab",
+    // Federal capital
     Islamabad: "Islamabad Capital Territory",
-    Karachi: "Sindh",
+    // Punjab
+    Lahore: "Punjab",
     Rawalpindi: "Punjab",
     Faisalabad: "Punjab",
     Multan: "Punjab",
+    Sialkot: "Punjab",
+    Gujranwala: "Punjab",
+    Gujrat: "Punjab",
+    Sargodha: "Punjab",
+    Sheikhupura: "Punjab",
+    Bahawalpur: "Punjab",
+    "Rahim Yar Khan": "Punjab",
+    Chakwal: "Punjab",
+    Okara: "Punjab",
+    "Dera Ghazi Khan": "Punjab",
+    Kasur: "Punjab",
+    Narowal: "Punjab",
+    Mianwali: "Punjab",
+    // Sindh
+    Karachi: "Sindh",
+    // Khyber Pakhtunkhwa
     Peshawar: "Khyber Pakhtunkhwa",
+    // Balochistan
     Quetta: "Balochistan",
   };
   const jsonLd = {
