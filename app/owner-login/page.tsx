@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MessageCircle, Lock } from "lucide-react";
 import { PageShell } from "@/components/shared/PageShell";
 import { Button } from "@/components/ui/button";
+import { business } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Owner Login — RentalSawari Pakistan",
@@ -43,7 +44,7 @@ export default function OwnerLoginPage() {
           <div className="mt-6 space-y-3">
             <Button asChild variant="whatsapp" size="lg" className="w-full">
               <a
-                href="https://wa.me/923000000000?text=Hi%2C%20I'm%20a%20listed%20rental%20company%20and%20need%20to%20update%20my%20listing."
+                href={`https://wa.me/${business.whatsappNumber}?text=${encodeURIComponent("Hi, I'm a listed rental company and need to update my listing.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

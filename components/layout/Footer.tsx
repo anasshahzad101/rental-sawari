@@ -1,7 +1,16 @@
 import Link from "next/link";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+  MessageCircle,
+} from "lucide-react";
 import { cities } from "@/data/cities";
 import { popularCarTypes } from "@/data/carTypes";
+import { business } from "@/lib/business";
 
 export function Footer() {
   return (
@@ -38,7 +47,58 @@ export function Footer() {
           </FooterCol>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-stone-800 flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Real contact info — single source: lib/business.ts */}
+        <div className="mt-12 pt-8 border-t border-stone-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+          <a
+            href={`https://wa.me/${business.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-start gap-3 text-stone-400 hover:text-white transition-colors"
+          >
+            <MessageCircle className="h-4 w-4 mt-0.5 shrink-0 text-whatsapp" />
+            <span>
+              <span className="block text-[11px] uppercase tracking-wider text-stone-500">
+                WhatsApp
+              </span>
+              <span className="text-stone-200">{business.phoneDisplay}</span>
+            </span>
+          </a>
+          <a
+            href={`tel:${business.phoneE164}`}
+            className="flex items-start gap-3 text-stone-400 hover:text-white transition-colors"
+          >
+            <Phone className="h-4 w-4 mt-0.5 shrink-0 text-brand-light" />
+            <span>
+              <span className="block text-[11px] uppercase tracking-wider text-stone-500">
+                Phone
+              </span>
+              <span className="text-stone-200">{business.phoneDisplay}</span>
+            </span>
+          </a>
+          <a
+            href={`mailto:${business.email}`}
+            className="flex items-start gap-3 text-stone-400 hover:text-white transition-colors"
+          >
+            <Mail className="h-4 w-4 mt-0.5 shrink-0 text-brand-light" />
+            <span>
+              <span className="block text-[11px] uppercase tracking-wider text-stone-500">
+                Email
+              </span>
+              <span className="text-stone-200">{business.email}</span>
+            </span>
+          </a>
+          <address className="flex items-start gap-3 text-stone-400 not-italic">
+            <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-brand-light" />
+            <span>
+              <span className="block text-[11px] uppercase tracking-wider text-stone-500">
+                Office
+              </span>
+              <span className="text-stone-200">{business.address.display}</span>
+            </span>
+          </address>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-stone-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-stone-400">
             © {new Date().getFullYear()} RentalSawari Pakistan ·{" "}
             <span className="text-stone-500">Made in Pakistan 🇵🇰</span>

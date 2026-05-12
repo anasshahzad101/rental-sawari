@@ -11,6 +11,7 @@ import { ForTourists } from "@/components/home/ForTourists";
 import { ForBusinesses } from "@/components/home/ForBusinesses";
 import { FAQSection } from "@/components/shared/FAQSection";
 import { homepageFAQs } from "@/data/faqs";
+import { business } from "@/lib/business";
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -57,10 +58,19 @@ const organizationJsonLd = {
     "Northern Areas tours",
     "self-drive car rental",
   ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: business.address.streetAddress,
+    addressLocality: business.address.addressLocality,
+    addressRegion: business.address.addressRegion,
+    postalCode: business.address.postalCode,
+    addressCountry: business.address.addressCountry,
+  },
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    email: "hello@rentalsawari.com",
+    telephone: business.phoneE164,
+    email: business.email,
     areaServed: "PK",
     availableLanguage: ["English"],
   },

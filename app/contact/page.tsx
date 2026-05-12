@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Mail, MessageCircle, MapPin, Clock } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Clock, Phone } from "lucide-react";
 import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { business } from "@/lib/business";
 
 export const metadata: Metadata = {
   title: "Contact RentalSawari Pakistan",
@@ -28,25 +29,31 @@ export default function ContactPage() {
             <ContactCard
               Icon={MessageCircle}
               label="WhatsApp"
-              value="+92 300 1234567"
-              href="https://wa.me/923001234567"
+              value={business.phoneDisplay}
+              href={`https://wa.me/${business.whatsappNumber}`}
               accent="whatsapp"
+            />
+            <ContactCard
+              Icon={Phone}
+              label="Phone"
+              value={business.phoneDisplay}
+              href={`tel:${business.phoneE164}`}
             />
             <ContactCard
               Icon={Mail}
               label="Email"
-              value="hello@rentalsawari.com"
-              href="mailto:hello@rentalsawari.com"
+              value={business.email}
+              href={`mailto:${business.email}`}
             />
             <ContactCard
               Icon={MapPin}
               label="Office"
-              value="Lahore, Pakistan"
+              value={business.address.display}
             />
             <ContactCard
               Icon={Clock}
               label="Hours"
-              value="Mon–Sat, 9 AM – 7 PM PKT"
+              value={business.hours}
             />
 
             <div className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
