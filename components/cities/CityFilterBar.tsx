@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Filter } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trackFilterChange } from "@/lib/analytics";
 
 interface FilterValue {
   area: string;
@@ -37,11 +38,13 @@ export function CityFilterBar({
     const next = { ...value, [k]: v };
     setValue(next);
     onChange(next);
+    trackFilterChange(k, String(v));
   }
 
   function reset() {
     setValue(initial);
     onChange(initial);
+    trackFilterChange("reset", "");
   }
 
   const active =

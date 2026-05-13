@@ -4,27 +4,39 @@ import * as React from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackInquirySubmit } from "@/lib/analytics";
 
 interface InquiryFormProps {
   companyName: string;
+  companySlug?: string;
+  city?: string;
   className?: string;
 }
 
-export function InquiryForm({ companyName, className }: InquiryFormProps) {
+export function InquiryForm({
+  companyName,
+  companySlug,
+  city,
+  className,
+}: InquiryFormProps) {
   const [submitted, setSubmitted] = React.useState(false);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const pickupDate = data.get("pickupDate");
     // eslint-disable-next-line no-console
     console.log("[inquiry]", {
       company: companyName,
       name: data.get("name"),
       phone: data.get("phone"),
-      pickupDate: data.get("pickupDate"),
+      pickupDate,
       days: data.get("days"),
       message: data.get("message"),
     });
+    if (companySlug && city) {
+      trackInquirySubmit(companySlug, city, Boolean(pickupDate));
+    }
     setSubmitted(true);
   }
 

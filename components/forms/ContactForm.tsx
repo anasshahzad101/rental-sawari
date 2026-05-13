@@ -4,6 +4,7 @@ import * as React from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackContactSubmit } from "@/lib/analytics";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = React.useState(false);
@@ -11,8 +12,10 @@ export function ContactForm() {
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const subject = (data.get("subject") as string) || "(none)";
     // eslint-disable-next-line no-console
     console.log("[contact]", Object.fromEntries(data.entries()));
+    trackContactSubmit(subject);
     setSubmitted(true);
   }
 

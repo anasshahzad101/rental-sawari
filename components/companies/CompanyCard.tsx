@@ -113,13 +113,28 @@ export function CompanyCard({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Contact ${company.name} via WhatsApp`}
+            data-track="whatsapp"
+            data-company={company.slug}
+            data-company-name={company.name}
+            data-city={company.city}
+            data-area={company.area}
+            data-featured={company.featured ? "true" : "false"}
+            data-rating={company.rating}
+            data-review-count={company.reviewCount}
           >
             <MessageCircle className="h-4 w-4" />
             WhatsApp
           </a>
         </Button>
         <Button asChild variant="outline" size="md">
-          <Link href={`/companies/${company.slug}`}>View Details</Link>
+          <Link
+            href={`/companies/${company.slug}`}
+            data-track="select-content"
+            data-content-type="company"
+            data-item-id={company.slug}
+          >
+            View Details
+          </Link>
         </Button>
       </div>
     </article>

@@ -20,6 +20,7 @@ import { InquiryForm } from "@/components/companies/InquiryForm";
 import { MobileStickyCTA } from "@/components/layout/MobileStickyCTA";
 import { CompanyCard } from "@/components/companies/CompanyCard";
 import { CompanyAvatar } from "@/components/companies/CompanyAvatar";
+import { TrackVendorView } from "@/components/analytics/TrackVendorView";
 import {
   buildWhatsAppLink,
   DEFAULT_WHATSAPP_MESSAGE,
@@ -156,6 +157,7 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <TrackVendorView companySlug={company.slug} city={company.city} />
 
       {/* Hero strip */}
       <section className="border-b border-stone-200 bg-gradient-to-b from-stone-50 to-white">
@@ -220,6 +222,9 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-stone-600 hover:text-brand underline-offset-2 hover:underline truncate max-w-[14rem]"
+                    data-track="outbound"
+                    data-company={company.slug}
+                    data-destination="website"
                   >
                     {company.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
                   </a>
@@ -228,13 +233,35 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
 
               <div className="mt-5 hidden sm:flex flex-wrap gap-3">
                 <Button asChild variant="whatsapp" size="lg">
-                  <a href={waLink} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track="whatsapp"
+                    data-company={company.slug}
+                    data-company-name={company.name}
+                    data-city={company.city}
+                    data-area={company.area}
+                    data-featured={company.featured ? "true" : "false"}
+                    data-rating={company.rating}
+                    data-review-count={company.reviewCount}
+                  >
                     <MessageCircle className="h-5 w-5" />
                     WhatsApp
                   </a>
                 </Button>
                 <Button asChild variant="primary" size="lg">
-                  <a href={`tel:${company.phone}`}>
+                  <a
+                    href={`tel:${company.phone}`}
+                    data-track="phone"
+                    data-company={company.slug}
+                    data-company-name={company.name}
+                    data-city={company.city}
+                    data-area={company.area}
+                    data-featured={company.featured ? "true" : "false"}
+                    data-rating={company.rating}
+                    data-review-count={company.reviewCount}
+                  >
                     <Phone className="h-5 w-5" />
                     Call
                   </a>
@@ -313,6 +340,14 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
                     href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-track="whatsapp"
+                    data-company={company.slug}
+                    data-company-name={company.name}
+                    data-city={company.city}
+                    data-area={company.area}
+                    data-featured={company.featured ? "true" : "false"}
+                    data-rating={company.rating}
+                    data-review-count={company.reviewCount}
                   >
                     <MessageCircle className="h-4 w-4" />
                     Ask for a quote
@@ -370,7 +405,11 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
 
           {/* Right: inquiry + contact */}
           <aside className="space-y-4">
-            <InquiryForm companyName={company.name} />
+            <InquiryForm
+              companyName={company.name}
+              companySlug={company.slug}
+              city={company.city}
+            />
 
             <div className="rounded-2xl border border-stone-200 bg-stone-50 p-5">
               <h3 className="text-sm font-bold text-stone-900 uppercase tracking-wider">
@@ -382,6 +421,14 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between rounded-lg bg-white px-3 py-2.5 border border-stone-200"
+                  data-track="whatsapp"
+                  data-company={company.slug}
+                  data-company-name={company.name}
+                  data-city={company.city}
+                  data-area={company.area}
+                  data-featured={company.featured ? "true" : "false"}
+                  data-rating={company.rating}
+                  data-review-count={company.reviewCount}
                 >
                   <span className="inline-flex items-center gap-2 text-sm font-semibold text-stone-700">
                     <MessageCircle className="h-4 w-4 text-whatsapp" />
@@ -394,6 +441,14 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
                 <a
                   href={`tel:${company.phone}`}
                   className="flex items-center justify-between rounded-lg bg-white px-3 py-2.5 border border-stone-200"
+                  data-track="phone"
+                  data-company={company.slug}
+                  data-company-name={company.name}
+                  data-city={company.city}
+                  data-area={company.area}
+                  data-featured={company.featured ? "true" : "false"}
+                  data-rating={company.rating}
+                  data-review-count={company.reviewCount}
                 >
                   <span className="inline-flex items-center gap-2 text-sm font-semibold text-stone-700">
                     <Phone className="h-4 w-4 text-brand" />
@@ -403,6 +458,22 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
                     {company.phone}
                   </span>
                 </a>
+                {company.googleMapsUrl && (
+                  <a
+                    href={company.googleMapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between rounded-lg bg-white px-3 py-2.5 border border-stone-200"
+                    data-track="outbound"
+                    data-company={company.slug}
+                    data-destination="google_maps"
+                  >
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-stone-700">
+                      <MapPin className="h-4 w-4 text-brand" />
+                      View on Google Maps
+                    </span>
+                  </a>
+                )}
               </div>
             </div>
           </aside>
@@ -440,6 +511,13 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
         whatsapp={company.whatsapp}
         phone={company.phone}
         message={`Hi ${company.name}, I'm interested in renting a car.`}
+        companySlug={company.slug}
+        companyName={company.name}
+        city={company.city}
+        area={company.area}
+        featured={company.featured}
+        rating={company.rating}
+        reviewCount={company.reviewCount}
       />
       <div className="md:hidden h-20" aria-hidden="true" />
     </PageShell>

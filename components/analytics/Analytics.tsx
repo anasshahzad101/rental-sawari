@@ -1,63 +1,45 @@
 import Script from "next/script";
+import { TrackingListener } from "./TrackingListener";
 
 /**
- * Analytics scaffolding — Google Analytics 4 + Microsoft Clarity.
+ * Google Analytics 4 loader + global event delegation.
  *
- * Activates when env vars are set. To enable in production add:
- *   NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
- *   NEXT_PUBLIC_CLARITY_ID=xxxxxxxxxx
+ * Hardcoded measurement ID for simplicity (NEXT_PUBLIC_GA_ID is a public
+ * value — visible in any browser DevTools — so there's no secret to hide).
+ * Override per environment via the env var if you ever need to (e.g. a
+ * separate property for staging).
  *
- * Both are loaded with `strategy="afterInteractive"` so they don't block LCP.
- * Both honour Consent Mode v2: the consent state defaults to denied; flip
- * after the user accepts via your cookie banner (TODO when banner ships).
+ * Consent Mode v2: intentionally NOT defaulted to denied. Pakistan has no
+ * cookie-banner requirement and the launch audience is overwhelmingly
+ * Pakistani — full-fidelity tracking from page load is the right trade-off.
+ * If EU/UK traffic ever crosses ~5% of sessions, add a banner + default-deny.
  */
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-373YQEMVC4";
 
 export function Analytics() {
-  if (!GA_ID && !CLARITY_ID) return null;
+  if (!GA_ID) return null;
 
   return (
     <>
-      {GA_ID && (
-        <>
-          <Script
-            id="ga4-loader"
-            strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          />
-          <Script id="ga4-init" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('consent', 'default', {
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'analytics_storage': 'denied',
-                'wait_for_update': 500
-              });
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}', {
-                send_page_view: true,
-                anonymize_ip: true
-              });
-            `}
-          </Script>
-        </>
-      )}
-      {CLARITY_ID && (
-        <Script id="clarity-init" strategy="afterInteractive">
-          {`
-            (function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "${CLARITY_ID}");
-          `}
-        </Script>
-      )}
+      <Script
+        id="ga4-loader"
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+      />
+      <Script id="ga4-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}', {
+            send_page_view: true,
+            anonymize_ip: false
+          });
+        `}
+      </Script>
+      <TrackingListener />
     </>
   );
 }

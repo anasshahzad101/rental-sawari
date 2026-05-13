@@ -14,6 +14,14 @@ interface MobileStickyCTAProps {
   message?: string;
   onInquire?: () => void;
   className?: string;
+  /** Optional company context — when present, lead clicks attribute to the vendor. */
+  companySlug?: string;
+  companyName?: string;
+  city?: string;
+  area?: string;
+  featured?: boolean;
+  rating?: number;
+  reviewCount?: number;
 }
 
 /**
@@ -26,7 +34,26 @@ export function MobileStickyCTA({
   message = DEFAULT_WHATSAPP_MESSAGE,
   onInquire,
   className,
+  companySlug,
+  companyName,
+  city,
+  area,
+  featured,
+  rating,
+  reviewCount,
 }: MobileStickyCTAProps) {
+  const trackingAttrs = companySlug
+    ? ({
+        "data-company": companySlug,
+        "data-company-name": companyName,
+        "data-city": city,
+        "data-area": area,
+        "data-featured": featured ? "true" : "false",
+        "data-rating": rating,
+        "data-review-count": reviewCount,
+      } as Record<string, string | number | undefined>)
+    : {};
+
   return (
     <div
       className={cn(
@@ -42,6 +69,8 @@ export function MobileStickyCTA({
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl bg-whatsapp text-white py-2.5 text-xs font-semibold"
+        data-track="whatsapp"
+        {...trackingAttrs}
       >
         <MessageCircle className="h-5 w-5" aria-hidden="true" />
         WhatsApp
@@ -49,6 +78,8 @@ export function MobileStickyCTA({
       <a
         href={`tel:${phone}`}
         className="inline-flex flex-col items-center justify-center gap-0.5 rounded-xl bg-brand text-white py-2.5 text-xs font-semibold"
+        data-track="phone"
+        {...trackingAttrs}
       >
         <Phone className="h-5 w-5" aria-hidden="true" />
         Call

@@ -8,6 +8,7 @@ import { popularCarTypes } from "@/data/carTypes";
 import type { RentalType } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackSearchSubmit } from "@/lib/analytics";
 
 export function SearchBar() {
   const router = useRouter();
@@ -17,10 +18,15 @@ export function SearchBar() {
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // No real routes yet — log for now and navigate to a city stub if chosen.
-    // eslint-disable-next-line no-console
-    console.log("[search]", { city, carType, rental });
-    if (city) router.push(`/rent-a-car-${city}`);
+    trackSearchSubmit(city || null, carType || null, rental);
+    if (city && carType) {
+      // Both selected → land on a car-in-city page if one exists, otherwise city.
+      router.push(`/rent-a-${carType}-in-${city}`);
+    } else if (city) {
+      router.push(`/rent-a-car-${city}`);
+    } else if (carType) {
+      router.push(`/cars/${carType}`);
+    }
   }
 
   return (

@@ -4,6 +4,7 @@ import * as React from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackListBusinessSubmit } from "@/lib/analytics";
 
 export function ListBusinessForm() {
   const [submitted, setSubmitted] = React.useState(false);
@@ -11,8 +12,11 @@ export function ListBusinessForm() {
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    const city = (data.get("city") as string) || "(unknown)";
+    const fleet = (data.get("fleet") as string) || "";
     // eslint-disable-next-line no-console
     console.log("[list-business]", Object.fromEntries(data.entries()));
+    trackListBusinessSubmit(city, fleet);
     setSubmitted(true);
   }
 

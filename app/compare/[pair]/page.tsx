@@ -14,6 +14,7 @@ import type { Company } from "@/lib/types";
 import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { CompanyAvatar } from "@/components/companies/CompanyAvatar";
+import { TrackCompareView } from "@/components/analytics/TrackCompareView";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -139,6 +140,7 @@ export default function ComparePage({ params }: { params: { pair: string } }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(compareJsonLd) }}
       />
+      <TrackCompareView vendorA={a.slug} vendorB={b.slug} city={a.city} />
 
       <PageHeader
         crumbs={[
@@ -240,13 +242,37 @@ export default function ComparePage({ params }: { params: { pair: string } }) {
           </p>
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
             <Button asChild variant="whatsapp" size="lg">
-              <a href={buildWhatsAppLink(a.whatsapp, DEFAULT_WHATSAPP_MESSAGE)} target="_blank" rel="noopener noreferrer">
+              <a
+                href={buildWhatsAppLink(a.whatsapp, DEFAULT_WHATSAPP_MESSAGE)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="whatsapp"
+                data-company={a.slug}
+                data-company-name={a.name}
+                data-city={a.city}
+                data-area={a.area}
+                data-featured={a.featured ? "true" : "false"}
+                data-rating={a.rating}
+                data-review-count={a.reviewCount}
+              >
                 <MessageCircle className="h-4 w-4" />
                 Message {a.name.split(" ")[0]}
               </a>
             </Button>
             <Button asChild variant="whatsapp" size="lg">
-              <a href={buildWhatsAppLink(b.whatsapp, DEFAULT_WHATSAPP_MESSAGE)} target="_blank" rel="noopener noreferrer">
+              <a
+                href={buildWhatsAppLink(b.whatsapp, DEFAULT_WHATSAPP_MESSAGE)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="whatsapp"
+                data-company={b.slug}
+                data-company-name={b.name}
+                data-city={b.city}
+                data-area={b.area}
+                data-featured={b.featured ? "true" : "false"}
+                data-rating={b.rating}
+                data-review-count={b.reviewCount}
+              >
                 <MessageCircle className="h-4 w-4" />
                 Message {b.name.split(" ")[0]}
               </a>
