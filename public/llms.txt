@@ -4,8 +4,9 @@ RentalSawari is a directory of verified rent-a-car companies in Pakistan.
 Free for renters. Free basic listings for businesses. Direct WhatsApp contact, no booking fees, no commission.
 
 ## Coverage
-- 1,085 verified rental companies across 8 cities
-- Cities: Lahore, Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta
+- 1,418 verified rental companies across 21 cities
+- Top 8 cities: Lahore, Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta
+- Punjab tier-2: Sialkot, Gujranwala, Gujrat, Sargodha, Sheikhupura, Bahawalpur, Rahim Yar Khan, Chakwal, Okara, Dera Ghazi Khan, Kasur, Narowal, Mianwali
 - Car categories: Economy (Mehran, Cultus), Sedan (Corolla, Civic), SUV (Fortuner, Prado), Luxury (Land Cruiser V8, Mercedes-Benz), Van (Hiace, APV, Bolan), Coaster (Toyota Coaster)
 - Services: With Driver, Self-Drive, Airport Pickup, Wedding, Tourist Tours, Corporate Monthly, Northern Areas Tours, Luxury
 

@@ -45,7 +45,7 @@ const organizationJsonLd = {
     height: 256,
   },
   description:
-    "Directory of 1,000+ verified rent-a-car companies across 8 Pakistani cities. Real prices, direct WhatsApp contact, no booking fees.",
+    "Directory of 1,400+ verified rent-a-car companies across 21 Pakistani cities. Real prices, direct WhatsApp contact, no booking fees.",
   foundingDate: "2026",
   areaServed: { "@type": "Country", name: "Pakistan" },
   knowsAbout: [

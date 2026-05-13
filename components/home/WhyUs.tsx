@@ -20,7 +20,7 @@ const reasons = [
   {
     Icon: MapPin,
     title: "Local Coverage",
-    body: "8 cities, 1,000+ rental companies, growing daily — from Karachi to Hunza.",
+    body: "21 cities, 1,400+ rental companies, growing daily — from Karachi to Gilgit.",
   },
 ];
 

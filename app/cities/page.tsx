@@ -1,122 +1,145 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { MapPin, MessageCircle, ShieldCheck, Banknote } from "lucide-react";
 import { cities } from "@/data/cities";
+import { companies } from "@/data/companies";
 import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { FAQSection } from "@/components/shared/FAQSection";
+import { StatStrip } from "@/components/shared/StatStrip";
+import { FeatureGrid } from "@/components/shared/FeatureGrid";
 import { citiesIndexFAQs } from "@/data/faqs";
 import { formatPKR } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Rent a Car in Pakistan — Browse All Cities",
   description:
-    "Browse verified rent-a-car companies in every major Pakistani city — Lahore, Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta.",
+    "Browse verified rent-a-car companies in every major Pakistani city — Lahore, Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta and more.",
   alternates: { canonical: "/cities" },
 };
 
 export default function CitiesIndex() {
+  const totalVendors = companies.length;
+  const totalReviews = companies.reduce((a, c) => a + c.reviewCount, 0);
+
   return (
     <PageShell>
       <PageHeader
         crumbs={[{ label: "Home", href: "/" }, { label: "Cities" }]}
         eyebrow="Browse"
         title="All Cities"
-        subtitle="Find verified rent-a-car companies in your city. 8 cities live today, more coming weekly."
+        subtitle="Find verified rent-a-car companies in your city. Real prices, direct WhatsApp, no booking fees."
       />
 
-      <section className="border-b border-stone-200 bg-white">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-          <div className="prose">
-            <p className="answer-block">
-              <strong>RentalSawari operates in 8 Pakistani cities — Lahore,
-              Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar,
-              and Quetta — with 1,085 verified rent-a-car companies in
-              total.</strong> Each city has its own vendor density, pricing
-              norms, and operational quirks. Pick a city below to see real
-              listings, real prices, and direct WhatsApp contact.
-            </p>
-            <h2>Why a city-first directory?</h2>
-            <p>
-              Renting a car in Pakistan is a hyper-local decision. The same
-              car model rents for PKR 6,000/day in Faisalabad and PKR
-              8,500/day in Islamabad. The vendor who handles your wedding
-              decoration in Lahore&apos;s DHA Phase 5 isn&apos;t the right vendor
-              for your Northern Areas trip from Bahria Town, Islamabad. We
-              break the country down by city so the listings you see are
-              actually rentable for your trip.
-            </p>
-            <h2>How city pages work</h2>
-            <p>
-              Each city page lists every verified vendor in that city, sorted
-              by Google review count (real social proof, not paid placement).
-              You can filter by area, car type, with-driver vs self-drive,
-              and service category. Every listing has a WhatsApp button with
-              a pre-filled enquiry, plus the company&apos;s phone, address,
-              and average rating. We never insert a booking step — you talk
-              to the vendor directly.
-            </p>
-            <h2>Which cities have the deepest supply?</h2>
-            <p>
-              Lahore (371 vendors), Islamabad (265), and Karachi (192) make
-              up 76% of our directory. Smaller cities — Multan, Peshawar,
-              Quetta — have 20-50 vendors each, but quality is concentrated:
-              Multan has the highest average rating in Pakistan (4.88★).
-              For a full breakdown see the{" "}
-              <Link href="/guides/pakistan-car-rental-market-data-2026">
-                market data report
-              </Link>
-              .
+      <StatStrip
+        stats={[
+          { label: "Cities live", value: cities.length.toString() },
+          { label: "Verified vendors", value: totalVendors.toLocaleString("en-PK") },
+          {
+            label: "Total Google reviews",
+            value:
+              totalReviews >= 1000
+                ? `${(totalReviews / 1000).toFixed(0)}k+`
+                : totalReviews.toString(),
+          },
+          { label: "Booking fees", value: "PKR 0" },
+        ]}
+      />
+
+      <FeatureGrid
+        eyebrow="Why a city-first directory"
+        title="Renting a car in Pakistan is hyper-local"
+        subtitle="The same model rents for 30% less in Faisalabad than Islamabad. The right vendor for a Lahore wedding isn't the right vendor for a Northern Areas trip. We break the country down by city so the listings you see are actually rentable."
+        features={[
+          {
+            Icon: Banknote,
+            title: "Real per-city prices",
+            body: "Each city page shows actual per-day rates in PKR. No 'call for quote' games, no hidden fees.",
+          },
+          {
+            Icon: MessageCircle,
+            title: "Direct WhatsApp contact",
+            body: "Tap any listing's WhatsApp button to message the vendor with a pre-filled inquiry. No middleman.",
+          },
+          {
+            Icon: ShieldCheck,
+            title: "Verified vendors only",
+            body: "Every listed company is checked — CNIC, business address, working number. The Verified badge means we confirmed all three.",
+          },
+        ]}
+      />
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="mb-8 flex items-baseline justify-between flex-wrap gap-2">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-stone-900">
+              All {cities.length} cities
+            </h2>
+            <p className="mt-1 text-sm text-stone-600">
+              Sorted by vendor count. Each city links to a directory of all
+              verified rentals in that city.
             </p>
           </div>
+          <Link
+            href="/guides/pakistan-car-rental-market-data-2026"
+            className="text-sm font-semibold text-brand hover:underline"
+          >
+            See full market data →
+          </Link>
         </div>
-      </section>
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {cities.map((city) => (
-            <li key={city.slug}>
-              <Link
-                href={`/rent-a-car-${city.slug}`}
-                className="group block rounded-2xl border border-stone-200 bg-white shadow-sm hover:shadow-md transition-all overflow-hidden"
-              >
-                <div className="relative aspect-[16/9] overflow-hidden bg-stone-100">
-                  <Image
-                    src={city.heroImage}
-                    alt={`Rent a car in ${city.name}`}
-                    fill
-                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-transparent to-transparent"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                    <h2 className="text-xl font-extrabold tracking-tight">
-                      {city.name}
-                    </h2>
-                    <p className="text-xs text-white/80">{city.nameUrdu}</p>
+          {[...cities]
+            .sort((a, b) => b.listingCount - a.listingCount)
+            .map((city) => (
+              <li key={city.slug}>
+                <Link
+                  href={`/rent-a-car-${city.slug}`}
+                  className="group block rounded-2xl border border-stone-200 bg-white shadow-sm hover:shadow-md transition-all overflow-hidden"
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden bg-stone-100">
+                    <Image
+                      src={city.heroImage}
+                      alt={`Rent a car in ${city.name}`}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-gradient-to-t from-stone-900/85 via-stone-900/15 to-transparent"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-4 text-white flex items-end justify-between gap-3">
+                      <div>
+                        <h2 className="text-xl font-extrabold tracking-tight">
+                          {city.name}
+                        </h2>
+                        <p className="text-xs text-white/80">{city.nameUrdu}</p>
+                      </div>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-xs font-bold text-stone-900">
+                        <MapPin className="h-3 w-3 text-brand" />
+                        {city.listingCount}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-4 sm:p-5">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <p className="text-sm font-semibold text-stone-900">
-                      {city.listingCount} rentals
-                    </p>
-                    <p className="text-sm font-bold text-brand">
-                      From {formatPKR(city.startingPrice)}/day
+                  <div className="p-4 sm:p-5">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <p className="text-sm font-semibold text-stone-900">
+                        {city.listingCount} verified rentals
+                      </p>
+                      <p className="text-sm font-bold text-brand">
+                        From {formatPKR(city.startingPrice)}/day
+                      </p>
+                    </div>
+                    <p className="mt-2 text-xs text-stone-500 line-clamp-1">
+                      {city.popularAreas.join(" · ")}
                     </p>
                   </div>
-                  <p className="mt-2 text-xs text-stone-500 line-clamp-1">
-                    {city.popularAreas.join(" · ")}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
+                </Link>
+              </li>
+            ))}
         </ul>
-      </div>
+      </section>
 
       <FAQSection items={citiesIndexFAQs} />
     </PageShell>

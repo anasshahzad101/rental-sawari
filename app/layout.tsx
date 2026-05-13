@@ -26,11 +26,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://rentalsawari.com"),
   title: {
-    default: "Rent a Car in Pakistan · 1,000+ Verified Vendors · RentalSawari",
+    default: "Rent a Car in Pakistan · 1,400+ Verified Vendors · RentalSawari",
     template: "%s | RentalSawari",
   },
   description:
-    "Verified rent-a-car companies across Lahore, Islamabad, Karachi & 5 more Pakistani cities. Real prices, direct WhatsApp, no booking fees.",
+    "Verified rent-a-car companies across Lahore, Islamabad, Karachi & 18 more Pakistani cities. Real prices, direct WhatsApp, no booking fees.",
   applicationName: "RentalSawari",
   alternates: { canonical: "/" },
   keywords: [
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
     locale: "en_PK",
     url: "https://rentalsawari.com",
     siteName: "RentalSawari",
-    title: "Rent a Car in Pakistan · 1,000+ Verified Vendors · RentalSawari",
+    title: "Rent a Car in Pakistan · 1,400+ Verified Vendors · RentalSawari",
     description:
-      "Verified rent-a-car companies across Lahore, Islamabad, Karachi & 5 more Pakistani cities. Real prices, direct WhatsApp, no booking fees.",
+      "Verified rent-a-car companies across Lahore, Islamabad, Karachi & 18 more Pakistani cities. Real prices, direct WhatsApp, no booking fees.",
     images: [
       {
         url: "/og-image.png",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@rentalsawari",
-    title: "Rent a Car in Pakistan · 1,000+ Verified Vendors · RentalSawari",
+    title: "Rent a Car in Pakistan · 1,400+ Verified Vendors · RentalSawari",
     description:
       "Verified rent-a-car companies across Pakistan. Real prices, direct WhatsApp, no booking fees.",
     images: ["/og-image.png"],

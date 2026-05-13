@@ -25,7 +25,7 @@ export function Hero() {
         <div className="flex flex-col items-center text-center">
           <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-3 py-1 text-xs font-semibold text-brand">
             <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" />
-            1,000+ verified companies · 8 cities
+            1,400+ verified companies · 21 cities
           </span>
 
           <h1 className="font-extrabold tracking-tight text-stone-900 text-4xl sm:text-5xl lg:text-6xl max-w-3xl">
@@ -33,7 +33,7 @@ export function Hero() {
           </h1>
 
           <p className="mt-5 max-w-2xl text-base sm:text-lg text-stone-600">
-            Compare 1,000+ verified rent-a-car companies across 8 cities. Real
+            Compare 1,400+ verified rent-a-car companies across 21 cities. Real
             prices. Direct WhatsApp contact. No booking fees.
           </p>
 
