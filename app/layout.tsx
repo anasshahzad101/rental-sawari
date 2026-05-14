@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Nastaliq_Urdu } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@/components/analytics/Analytics";
 import "./globals.css";
 
@@ -104,25 +105,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${notoUrdu.variable}`}>
       <head>
-        {/* Performance hints — preconnect to font + DNS-prefetch to outbound hosts. */}
+        {/* Performance hints */}
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://api.whatsapp.com" />
         <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-        {/* Google AdSense — base script.
-            Site verification + Auto Ads when enabled in dashboard. Manual
-            <AdSlot /> placements are also wired across guide/use-case/
-            homepage/index pages (see components/ads/AdSlot.tsx). */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4703255031750777"
-          crossOrigin="anonymous"
-        />
       </head>
       <body className="min-h-screen bg-white text-stone-900 font-sans">
         {children}
         <Analytics />
+        {/* Google AdSense — required for site verification + manual AdSlot placements */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4703255031750777"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
