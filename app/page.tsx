@@ -10,8 +10,10 @@ import { PopularGuides } from "@/components/home/PopularGuides";
 import { ForTourists } from "@/components/home/ForTourists";
 import { ForBusinesses } from "@/components/home/ForBusinesses";
 import { FAQSection } from "@/components/shared/FAQSection";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { homepageFAQs } from "@/data/faqs";
 import { business } from "@/lib/business";
+import { ADSENSE_SLOTS } from "@/lib/adsense";
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -101,6 +103,7 @@ export default function HomePage() {
         <CarTypes />
         <WhyUs />
         <FeaturedRentals />
+        <AdSlot slot={ADSENSE_SLOTS.homepage} />
         <UseCases />
         <PopularGuides />
         <ForTourists />

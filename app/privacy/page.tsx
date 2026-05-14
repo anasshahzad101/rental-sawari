@@ -60,11 +60,32 @@ export default function PrivacyPage() {
             </li>
           </ul>
 
-          <h2>Cookies</h2>
+          <h2>Cookies and third-party services</h2>
           <p>
-            We use minimal cookies — essential ones for the site to function
-            and (when we add it) Google Analytics for aggregate traffic
-            stats. No third-party advertising trackers in v1.
+            We use Google Analytics 4 for aggregate traffic statistics
+            (page views, click events, referrer source). Analytics data is
+            collected via Google&apos;s standard cookies; visit{" "}
+            <a href="https://policies.google.com/technologies/cookies">
+              Google&apos;s cookie policy
+            </a>{" "}
+            for details.
+          </p>
+          <p>
+            <strong>Advertising:</strong> we display ads from{" "}
+            <a href="https://policies.google.com/technologies/ads">
+              Google AdSense
+            </a>{" "}
+            on a subset of pages (guides, use-case landings, the homepage,
+            and the cities / cars index pages). Google AdSense uses cookies
+            and similar technologies to serve ads based on your prior
+            visits to this and other websites. You can opt out of
+            personalised advertising by visiting{" "}
+            <a href="https://www.google.com/settings/ads">
+              Google Ad Settings
+            </a>
+            . We deliberately exclude ads from rental-company profiles,
+            city listings, and any page where you&apos;re comparing vendors
+            — those stay ad-free so the search experience is clean.
           </p>
 
           <h2>Your data, your control</h2>

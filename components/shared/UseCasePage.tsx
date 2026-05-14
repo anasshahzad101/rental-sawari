@@ -10,8 +10,10 @@ import { PageHeader } from "./PageHeader";
 import { BottomCTA } from "./BottomCTA";
 import { FAQSection } from "./FAQSection";
 import { CompanyCard } from "@/components/companies/CompanyCard";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { Button } from "@/components/ui/button";
 import { companies } from "@/data/companies";
+import { ADSENSE_SLOTS } from "@/lib/adsense";
 
 export interface UseCasePageProps {
   slug: string;
@@ -158,6 +160,8 @@ export function UseCasePage(props: UseCasePageProps) {
       {props.faqs && props.faqs.length > 0 && (
         <FAQSection items={props.faqs} />
       )}
+
+      <AdSlot slot={ADSENSE_SLOTS.useCase} />
     </PageShell>
   );
 }

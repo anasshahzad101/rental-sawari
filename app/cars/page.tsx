@@ -8,8 +8,10 @@ import { PageHeader } from "@/components/shared/PageHeader";
 import { FAQSection } from "@/components/shared/FAQSection";
 import { StatStrip } from "@/components/shared/StatStrip";
 import { FeatureGrid } from "@/components/shared/FeatureGrid";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { Badge } from "@/components/ui/badge";
 import { carsIndexFAQs } from "@/data/faqs";
+import { ADSENSE_SLOTS } from "@/lib/adsense";
 import { formatPKR } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -126,6 +128,8 @@ export default function CarsIndex() {
           },
         ]}
       />
+
+      <AdSlot slot={ADSENSE_SLOTS.indexPage} />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
         {grouped.map(({ cat, items }) => {

@@ -6,6 +6,8 @@ import { Clock, ArrowLeft } from "lucide-react";
 import { guides } from "@/data/guides";
 import { guideContent } from "@/data/guideContent";
 import { authors, authorPersonJsonLd } from "@/lib/authors";
+import { AdSlot } from "@/components/ads/AdSlot";
+import { ADSENSE_SLOTS } from "@/lib/adsense";
 import { PageShell } from "@/components/shared/PageShell";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { BottomCTA } from "@/components/shared/BottomCTA";
@@ -146,6 +148,8 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
           {body}
         </div>
       </article>
+
+      <AdSlot slot={ADSENSE_SLOTS.guideBody} />
 
       {/* Back link */}
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-12">

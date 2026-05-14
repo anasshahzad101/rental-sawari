@@ -9,7 +9,9 @@ import { PageHeader } from "@/components/shared/PageHeader";
 import { FAQSection } from "@/components/shared/FAQSection";
 import { StatStrip } from "@/components/shared/StatStrip";
 import { FeatureGrid } from "@/components/shared/FeatureGrid";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { citiesIndexFAQs } from "@/data/faqs";
+import { ADSENSE_SLOTS } from "@/lib/adsense";
 import { formatPKR } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -69,6 +71,8 @@ export default function CitiesIndex() {
           },
         ]}
       />
+
+      <AdSlot slot={ADSENSE_SLOTS.indexPage} />
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="mb-8 flex items-baseline justify-between flex-wrap gap-2">

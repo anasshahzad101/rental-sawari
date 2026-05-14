@@ -109,6 +109,16 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://api.whatsapp.com" />
         <link rel="dns-prefetch" href="https://upload.wikimedia.org" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+        {/* Google AdSense — base script.
+            Site verification + Auto Ads when enabled in dashboard. Manual
+            <AdSlot /> placements are also wired across guide/use-case/
+            homepage/index pages (see components/ads/AdSlot.tsx). */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4703255031750777"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-screen bg-white text-stone-900 font-sans">
         {children}
