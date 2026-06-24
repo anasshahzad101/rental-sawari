@@ -25,6 +25,7 @@ import {
   buildWhatsAppLink,
   DEFAULT_WHATSAPP_MESSAGE,
   formatPKR,
+  citySlug,
 } from "@/lib/utils";
 
 export function generateStaticParams() {
@@ -167,7 +168,7 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
               { label: "Home", href: "/" },
               {
                 label: company.city,
-                href: `/rent-a-car-${company.city.toLowerCase()}`,
+                href: `/rent-a-car-${citySlug(company.city)}`,
               },
               { label: company.name },
             ]}
@@ -496,7 +497,7 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
             </ul>
             <div className="mt-6">
               <Link
-                href={`/rent-a-car-${company.city.toLowerCase()}`}
+                href={`/rent-a-car-${citySlug(company.city)}`}
                 className="text-sm font-semibold text-brand hover:underline"
               >
                 See all rentals in {company.city} →

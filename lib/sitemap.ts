@@ -6,10 +6,16 @@
  *   /sitemap.xml             — index
  *   /sitemap-pages.xml       — static marketing pages
  *   /sitemap-cities.xml      — city listing pages
+ *   /sitemap-areas.xml       — area-within-city listing pages
  *   /sitemap-cars.xml        — car type pages
+ *   /sitemap-car-in-city.xml — city × car combination pages
+ *   /sitemap-routes.xml      — intercity route pages
  *   /sitemap-companies.xml   — individual vendor profiles
  *   /sitemap-guides.xml      — editorial articles
  *   /sitemap-compare.xml     — comparison pages
+ *
+ * Keep this list, app/sitemap.xml/route.ts (the index) and app/robots.ts
+ * in sync whenever a sub-sitemap is added or removed.
  */
 
 export const SITE = "https://rentalsawari.com";

@@ -21,7 +21,9 @@ import {
   buildWhatsAppLink,
   DEFAULT_WHATSAPP_MESSAGE,
   cn,
+  citySlug,
 } from "@/lib/utils";
+import { socialMeta } from "@/lib/seo";
 
 /**
  * Comparison page — rentalsawari.com/compare/{slugA}-vs-{slugB}
@@ -83,10 +85,13 @@ export function generateMetadata({
   const pair = findPair(params.pair);
   if (!pair) return { title: "Comparison not found" };
   const { a, b } = pair;
+  const title = `${a.name} vs ${b.name} — Which Rent-a-Car is Better in ${a.city}?`;
+  const description = `Side-by-side comparison of ${a.name} (${a.rating.toFixed(1)}★, ${a.reviewCount} reviews) and ${b.name} (${b.rating.toFixed(1)}★, ${b.reviewCount} reviews) in ${a.city}. Real data, real ratings, direct WhatsApp.`;
   return {
-    title: `${a.name} vs ${b.name} — Which Rent-a-Car is Better in ${a.city}?`,
-    description: `Side-by-side comparison of ${a.name} (${a.rating.toFixed(1)}★, ${a.reviewCount} reviews) and ${b.name} (${b.rating.toFixed(1)}★, ${b.reviewCount} reviews) in ${a.city}. Real data, real ratings, direct WhatsApp.`,
+    title,
+    description,
     alternates: { canonical: `/compare/${a.slug}-vs-${b.slug}` },
+    ...socialMeta({ title, description, path: `/compare/${a.slug}-vs-${b.slug}` }),
   };
 }
 
@@ -145,7 +150,7 @@ export default function ComparePage({ params }: { params: { pair: string } }) {
       <PageHeader
         crumbs={[
           { label: "Home", href: "/" },
-          { label: a.city, href: `/rent-a-car-${a.city.toLowerCase()}` },
+          { label: a.city, href: `/rent-a-car-${citySlug(a.city)}` },
           { label: `${a.name} vs ${b.name}` },
         ]}
         eyebrow={`Comparison · ${a.city}`}

@@ -14,6 +14,7 @@ import { BottomCTA } from "@/components/shared/BottomCTA";
 import { CompanyCard } from "@/components/companies/CompanyCard";
 import { Badge } from "@/components/ui/badge";
 import { formatPKR } from "@/lib/utils";
+import { socialMeta } from "@/lib/seo";
 
 export function generateStaticParams() {
   return carTypes.map((c) => ({ slug: c.slug }));
@@ -26,10 +27,13 @@ export function generateMetadata({
 }): Metadata {
   const car = getCarTypeBySlug(params.slug);
   if (!car) return { title: "Car type not found" };
+  const title = `Rent a ${car.name} in Pakistan — From ${formatPKR(car.startingPrice)}/day`;
+  const description = `Compare verified ${car.name} rentals across Pakistani cities. ${car.capacity}-seat ${car.category.toLowerCase()}, starting from ${formatPKR(car.startingPrice)}/day. Direct WhatsApp contact.`;
   return {
-    title: `Rent a ${car.name} in Pakistan — From ${formatPKR(car.startingPrice)}/day`,
-    description: `Compare verified ${car.name} rentals across Pakistani cities. ${car.capacity}-seat ${car.category.toLowerCase()}, starting from ${formatPKR(car.startingPrice)}/day. Direct WhatsApp contact.`,
+    title,
+    description,
     alternates: { canonical: `/cars/${car.slug}` },
+    ...socialMeta({ title, description, path: `/cars/${car.slug}`, image: car.image }),
   };
 }
 

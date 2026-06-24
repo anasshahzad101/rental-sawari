@@ -15,6 +15,7 @@ import { RelatedLinks } from "@/components/shared/RelatedLinks";
 import { FAQSection } from "@/components/shared/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { formatPKR } from "@/lib/utils";
+import { socialMeta } from "@/lib/seo";
 
 const SITE = "https://rentalsawari.com";
 const MIN_VENDORS = 3;
@@ -93,10 +94,18 @@ export function generateMetadata({
   const city = cities.find((c) => c.slug === parsed.citySlug);
   if (!car || !city) return { title: "Not found" };
   const vendors = vendorsFor(car.slug, city.name);
+  const title = `Rent a ${car.name} in ${city.name} — ${vendors.length} Vendors | RentalSawari`;
+  const description = `Compare ${car.name} rentals in ${city.name} from ${vendors.length} verified vendors. Real prices, direct WhatsApp, no booking fees.`;
   return {
-    title: `Rent a ${car.name} in ${city.name} — ${vendors.length} Vendors | RentalSawari`,
-    description: `Compare ${car.name} rentals in ${city.name} from ${vendors.length} verified vendors. Real prices, direct WhatsApp, no booking fees.`,
+    title,
+    description,
     alternates: { canonical: `/rent-a-${car.slug}-in-${city.slug}` },
+    ...socialMeta({
+      title,
+      description,
+      path: `/rent-a-${car.slug}-in-${city.slug}`,
+      image: car.image,
+    }),
   };
 }
 

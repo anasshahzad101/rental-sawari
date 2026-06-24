@@ -6,6 +6,7 @@ import { Clock, ArrowLeft } from "lucide-react";
 import { guides } from "@/data/guides";
 import { guideContent } from "@/data/guideContent";
 import { authors, authorPersonJsonLd } from "@/lib/authors";
+import { absoluteImage, SITE_URL } from "@/lib/seo";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { ADSENSE_SLOTS } from "@/lib/adsense";
 import { PageShell } from "@/components/shared/PageShell";
@@ -23,6 +24,7 @@ export function generateMetadata({
 }): Metadata {
   const g = guides.find((x) => x.slug === params.slug);
   if (!g) return { title: "Guide not found" };
+  const image = absoluteImage(g.image);
   return {
     title: g.title,
     description: g.excerpt,
@@ -30,8 +32,18 @@ export function generateMetadata({
     openGraph: {
       title: g.title,
       description: g.excerpt,
+      url: `${SITE_URL}/guides/${g.slug}`,
+      siteName: "RentalSawari",
       type: "article",
       publishedTime: g.publishedDate,
+      authors: ["RentalSawari"],
+      images: [{ url: image, alt: g.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: g.title,
+      description: g.excerpt,
+      images: [image],
     },
   };
 }
@@ -55,7 +67,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
     "@type": "Article",
     headline: guide.title,
     description: guide.excerpt,
-    image: `https://rentalsawari.com${guide.image.startsWith("http") ? "" : guide.image}`,
+    image: absoluteImage(guide.image),
     datePublished: guide.publishedDate,
     dateModified: guide.publishedDate,
     author: { "@id": `https://rentalsawari.com/about#${author.slug}` },
