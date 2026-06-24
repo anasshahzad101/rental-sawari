@@ -12,9 +12,11 @@ import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { BottomCTA } from "@/components/shared/BottomCTA";
 import { CompanyCard } from "@/components/companies/CompanyCard";
+import { FAQSection } from "@/components/shared/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { formatPKR } from "@/lib/utils";
 import { socialMeta } from "@/lib/seo";
+import { offersCar } from "@/lib/fleet";
 
 export function generateStaticParams() {
   return carTypes.map((c) => ({ slug: c.slug }));
@@ -27,8 +29,9 @@ export function generateMetadata({
 }): Metadata {
   const car = getCarTypeBySlug(params.slug);
   if (!car) return { title: "Car type not found" };
-  const title = `Rent a ${car.name} in Pakistan — From ${formatPKR(car.startingPrice)}/day`;
-  const description = `Compare verified ${car.name} rentals across Pakistani cities. ${car.capacity}-seat ${car.category.toLowerCase()}, starting from ${formatPKR(car.startingPrice)}/day. Direct WhatsApp contact.`;
+  const year = new Date().getFullYear();
+  const title = `Rent a ${car.name} in Pakistan (${year}) — From ${formatPKR(car.startingPrice)}/day`;
+  const description = `${car.name} rental rates across Pakistan in ${year}, with driver or self-drive — from ${formatPKR(car.startingPrice)}/day. Compare verified vendors in ${cities.length}+ cities and contact owners direct on WhatsApp. No booking fees.`;
   return {
     title,
     description,
@@ -45,29 +48,13 @@ export default function CarTypePage({
   const car = getCarTypeBySlug(params.slug);
   if (!car) notFound();
 
-  // Find companies whose topCars include this model.
-  const offerings = companies.filter((c) =>
-    (c.topCars ?? []).some(
-      (tc) =>
-        tc.name
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-|-$/g, "") === car.slug
-    )
-  );
+  // Vendors that advertise this model in their listing text (see lib/fleet).
+  const offerings = companies
+    .filter((c) => offersCar(c, car.slug))
+    .sort((a, b) => b.reviewCount - a.reviewCount);
 
-  const minPrice = offerings.reduce((min, c) => {
-    const match = (c.topCars ?? []).find(
-      (tc) =>
-        tc.name
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-|-$/g, "") === car.slug
-    );
-    return match ? Math.min(min, match.pricePerDay) : min;
-  }, Infinity);
-
-  const startsAt = Number.isFinite(minPrice) ? minPrice : car.startingPrice;
+  // We don't hold per-vendor prices, so quote the car's market starting rate.
+  const startsAt = car.startingPrice;
 
   // Approximate brand parsing — "Toyota Corolla" → "Toyota".
   const brand = car.name.split(" ")[0];
@@ -77,7 +64,7 @@ export default function CarTypePage({
     "@type": "Product",
     "@id": `https://rentalsawari.com/cars/${car.slug}#product`,
     name: `${car.name} Rental in Pakistan`,
-    description: `Rent a ${car.name} across 8 Pakistani cities from verified rental companies. ${car.capacity}-seat ${car.category.toLowerCase()}.`,
+    description: `Rent a ${car.name} across ${cities.length} Pakistani cities from verified rental companies. ${car.capacity}-seat ${car.category.toLowerCase()}.`,
     brand: { "@type": "Brand", name: brand },
     model: car.name,
     image: car.image,
@@ -94,6 +81,29 @@ export default function CarTypePage({
       areaServed: { "@type": "Country", name: "Pakistan" },
     },
   };
+
+  const carFaqs = [
+    {
+      q: `How much does it cost to rent a ${car.name} per day in Pakistan?`,
+      a: `A ${car.name} rents from about ${formatPKR(car.startingPrice)}/day with driver, depending on the city, model year, and rental length. Multi-day and monthly bookings usually discount 10–30%. Message a vendor on WhatsApp for an exact quote — there is no booking fee.`,
+    },
+    {
+      q: `Can I get the ${car.name} with a driver or self-drive?`,
+      a: `Both. Most ${car.name} rentals in Pakistan come with an experienced driver, and many vendors also offer self-drive for renters with a valid Pakistani licence (a refundable deposit applies). Filter each city's listings by "With Driver" or "Self-Drive".`,
+    },
+    {
+      q: `How many passengers does the ${car.name} seat?`,
+      a: `The ${car.name} is a ${car.capacity}-seat ${car.category.toLowerCase()}, so plan luggage and group size accordingly — for larger groups consider a Hiace (12) or Coaster (26).`,
+    },
+    {
+      q: `Which cities have the most ${car.name} rentals?`,
+      a: `${car.name} rentals are available across ${cities.length}+ Pakistani cities, with the deepest supply in Lahore, Islamabad, and Karachi. Pick your city below to see verified vendors near you.`,
+    },
+    {
+      q: `What documents do I need to rent a ${car.name}?`,
+      a: `An original CNIC, a valid Pakistani driving licence (for self-drive), and a refundable security deposit. Foreign visitors should bring an International Driving Permit and passport with a valid Pakistan visa.`,
+    },
+  ];
 
   return (
     <PageShell
@@ -171,7 +181,9 @@ export default function CarTypePage({
       <section className="bg-stone-50 border-y border-stone-200">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <h2 className="text-xl font-bold text-stone-900">
-            Companies offering the {car.name}
+            {offerings.length > 0
+              ? `${offerings.length} companies offer the ${car.name}`
+              : `Companies offering the ${car.name}`}
           </h2>
           {offerings.length === 0 ? (
             <div className="mt-6 rounded-2xl border border-dashed border-stone-300 bg-white p-10 text-center">
@@ -188,7 +200,7 @@ export default function CarTypePage({
             </div>
           ) : (
             <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-              {offerings.map((c) => (
+              {offerings.slice(0, 24).map((c) => (
                 <li key={c.slug}>
                   <CompanyCard company={c} />
                 </li>
@@ -197,6 +209,12 @@ export default function CarTypePage({
           )}
         </div>
       </section>
+
+      <FAQSection
+        title={`Renting a ${car.name}: FAQs`}
+        subtitle={`Common questions about ${car.name} rental prices, drivers, and documents in Pakistan.`}
+        items={carFaqs}
+      />
 
       {/* Other cars */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16">

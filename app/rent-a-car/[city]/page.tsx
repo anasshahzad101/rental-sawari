@@ -49,7 +49,7 @@ export function generateMetadata({
 }): Metadata {
   const route = getRoute(params.city);
   if (route) {
-    const title = `Rent a Car from ${route.fromName} to ${route.toName} — ${route.distanceKm} km, ${route.hoursLow}-${route.hoursHigh} hrs | RentalSawari`;
+    const title = `Rent a Car from ${route.fromName} to ${route.toName} — ${route.distanceKm} km, ${route.hoursLow}-${route.hoursHigh} hrs`;
     const description = `${route.fromName} to ${route.toName} car rental — ${formatPKR(route.priceFromPKR)}–${formatPKR(route.priceToPKR)} with driver. Vehicle recommendation, drive time, recommended stops, best months. ${route.distanceKm} km.`;
     return {
       title,
@@ -69,7 +69,7 @@ export function generateMetadata({
             c.area.toLowerCase().includes(m.toLowerCase()),
           ),
       ).length < 3;
-    const title = `Rent a Car in ${area.name}, ${area.cityName} | RentalSawari`;
+    const title = `Rent a Car in ${area.name}, ${area.cityName}`;
     const description = area.tagline;
     return {
       title,
