@@ -25,6 +25,7 @@ import {
   buildWhatsAppLink,
   DEFAULT_WHATSAPP_MESSAGE,
   formatPKR,
+  citySlug,
 } from "@/lib/utils";
 
 export function generateStaticParams() {
@@ -38,10 +39,13 @@ export function generateMetadata({
 }): Metadata {
   const c = getCompanyBySlug(params.slug);
   if (!c) return { title: "Company not found" };
-  // Thin-content guard: pages with very few reviews are pre-rendered for
-  // direct access but kept out of the Google index until they accumulate
-  // signal. They flip to indexable automatically as reviewCount grows.
-  const isThin = c.reviewCount < 5;
+  // Thin-content guard. We keep only *genuinely* thin pages out of the index:
+  // a vendor with a unique "about" description carries enough original content
+  // to index even with few reviews, whereas a bare name/phone/rating stub does
+  // not. (Pure reviewCount<5 hid ~240 content-rich vendors — this indexes them.)
+  // Pages flip to indexable automatically as `about` or reviews are added.
+  const hasUniqueContent = Boolean(c.about && c.about.trim().length >= 100);
+  const isThin = c.reviewCount < 5 && !hasUniqueContent;
   return {
     title: `${c.name} — Car Rental in ${c.city} · ${c.rating.toFixed(1)}★`,
     description: `${c.name} is a verified car rental company in ${c.area}, ${c.city}. Services: ${c.servicesOffered.join(", ")}. WhatsApp contact in one tap.`,
@@ -167,7 +171,7 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
               { label: "Home", href: "/" },
               {
                 label: company.city,
-                href: `/rent-a-car-${company.city.toLowerCase()}`,
+                href: `/rent-a-car-${citySlug(company.city)}`,
               },
               { label: company.name },
             ]}
@@ -496,7 +500,7 @@ export default function CompanyPage({ params }: { params: { slug: string } }) {
             </ul>
             <div className="mt-6">
               <Link
-                href={`/rent-a-car-${company.city.toLowerCase()}`}
+                href={`/rent-a-car-${citySlug(company.city)}`}
                 className="text-sm font-semibold text-brand hover:underline"
               >
                 See all rentals in {company.city} →

@@ -5,12 +5,17 @@ import { Clock } from "lucide-react";
 import { guides } from "@/data/guides";
 import { PageShell } from "@/components/shared/PageShell";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { socialMeta } from "@/lib/seo";
+
+const title = "Car Rental Guides — Pakistan";
+const description =
+  "Honest, locally-written guides on renting a car in Pakistan. Pricing, documentation, self-drive vs driver, tourist tips.";
 
 export const metadata: Metadata = {
-  title: "Car Rental Guides — Pakistan",
-  description:
-    "Honest, locally-written guides on renting a car in Pakistan. Pricing, documentation, self-drive vs driver, tourist tips.",
+  title,
+  description,
   alternates: { canonical: "/guides" },
+  ...socialMeta({ title, description, path: "/guides" }),
 };
 
 const dateFmt = new Intl.DateTimeFormat("en-PK", {

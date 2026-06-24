@@ -107,4 +107,74 @@ export const guides: Guide[] = [
     ),
     category: "Tourists",
   },
+  {
+    slug: "rent-a-car-islamabad-to-murree-routes-cost-2026",
+    title: "Islamabad to Murree by Rental Car: Routes, Cost & Tips (2026)",
+    excerpt:
+      "The two routes (Expressway vs the old Lower Topa road), what a day trip vs overnight Murree car rental costs from Islamabad, the best vehicle, and when to avoid the traffic.",
+    readTime: 8,
+    publishedDate: "2026-06-18",
+    image: img(
+      "Islamabad to Murree",
+      "islamabad-murree",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ali_Mujtaba_WLM2017_FAISAL_MOSQUE_019.jpg/1280px-Ali_Mujtaba_WLM2017_FAISAL_MOSQUE_019.jpg",
+    ),
+    category: "Routes",
+  },
+  {
+    slug: "lahore-to-hunza-7-day-itinerary-car-rental",
+    title: "Lahore to Hunza by Rental Car: A 7-Day Itinerary (2026)",
+    excerpt:
+      "A day-by-day Lahore–Hunza road-trip plan with driving hours, overnight stops, the right vehicle, and a realistic 7-day rental cost with driver.",
+    readTime: 12,
+    publishedDate: "2026-06-15",
+    image: img(
+      "Lahore to Hunza",
+      "lahore-hunza",
+      "https://upload.wikimedia.org/wikipedia/commons/b/bc/KKH.png",
+    ),
+    category: "Routes",
+  },
+  {
+    slug: "toyota-corolla-vs-honda-civic-rent-pakistan-2026",
+    title: "Toyota Corolla vs Honda Civic: Which to Rent in Pakistan? (2026)",
+    excerpt:
+      "Daily rates, comfort, fuel economy, and wedding suitability compared head-to-head — so you pick the right sedan for your trip and budget.",
+    readTime: 7,
+    publishedDate: "2026-06-12",
+    image: img(
+      "Corolla vs Civic",
+      "corolla-vs-civic",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Toyota_Corolla_Hybrid_%28E210%29_IMG_4338.jpg/1280px-Toyota_Corolla_Hybrid_%28E210%29_IMG_4338.jpg",
+    ),
+    category: "Buying Guide",
+  },
+  {
+    slug: "cheapest-self-drive-cars-lahore-under-5000-pkr",
+    title: "Cheapest Self-Drive Cars in Lahore Under PKR 5,000/day (2026)",
+    excerpt:
+      "Which cars actually rent self-drive under PKR 5,000/day in Lahore, the deposit and licence rules, where to find them, and the hidden costs to check first.",
+    readTime: 6,
+    publishedDate: "2026-06-10",
+    image: img(
+      "Cheap Self-Drive Lahore",
+      "cheap-self-drive-lahore",
+      "https://upload.wikimedia.org/wikipedia/commons/f/f8/2nd_generation_Suzuki_Cultus.jpg",
+    ),
+    category: "Pricing",
+  },
+  {
+    slug: "wedding-car-rental-lahore-prices-decoration-booking",
+    title: "Wedding Car Rental in Lahore: Prices, Decoration & Booking (2026)",
+    excerpt:
+      "What a decorated wedding car costs in Lahore by vehicle class, what flower decoration adds, how far ahead to book, and the questions to ask before you pay.",
+    readTime: 8,
+    publishedDate: "2026-06-08",
+    image: img(
+      "Wedding Car Lahore",
+      "wedding-car-lahore",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Mercedes-Benz_W223_IMG_6663.jpg/1280px-Mercedes-Benz_W223_IMG_6663.jpg",
+    ),
+    category: "Wedding",
+  },
 ];

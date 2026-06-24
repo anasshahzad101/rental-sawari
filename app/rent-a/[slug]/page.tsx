@@ -15,6 +15,8 @@ import { RelatedLinks } from "@/components/shared/RelatedLinks";
 import { FAQSection } from "@/components/shared/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { formatPKR } from "@/lib/utils";
+import { socialMeta } from "@/lib/seo";
+import { offersCar } from "@/lib/fleet";
 
 const SITE = "https://rentalsawari.com";
 const MIN_VENDORS = 3;
@@ -35,20 +37,9 @@ interface ComboKey {
   citySlug: string;
 }
 
-function slugifyCarName(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
 function vendorsFor(carSlug: string, cityName: string) {
   return companies
-    .filter(
-      (c) =>
-        c.city === cityName &&
-        (c.topCars ?? []).some((tc) => slugifyCarName(tc.name) === carSlug),
-    )
+    .filter((c) => c.city === cityName && offersCar(c, carSlug))
     .sort((a, b) => b.reviewCount - a.reviewCount);
 }
 
@@ -93,10 +84,18 @@ export function generateMetadata({
   const city = cities.find((c) => c.slug === parsed.citySlug);
   if (!car || !city) return { title: "Not found" };
   const vendors = vendorsFor(car.slug, city.name);
+  const title = `Rent a ${car.name} in ${city.name} — ${vendors.length} Vendors`;
+  const description = `Compare ${car.name} rentals in ${city.name} from ${vendors.length} verified vendors. Real prices, direct WhatsApp, no booking fees.`;
   return {
-    title: `Rent a ${car.name} in ${city.name} — ${vendors.length} Vendors | RentalSawari`,
-    description: `Compare ${car.name} rentals in ${city.name} from ${vendors.length} verified vendors. Real prices, direct WhatsApp, no booking fees.`,
+    title,
+    description,
     alternates: { canonical: `/rent-a-${car.slug}-in-${city.slug}` },
+    ...socialMeta({
+      title,
+      description,
+      path: `/rent-a-${car.slug}-in-${city.slug}`,
+      image: car.image,
+    }),
   };
 }
 
@@ -114,13 +113,8 @@ export default function CarInCityPage({
   const vendors = vendorsFor(car.slug, city.name);
   if (vendors.length < MIN_VENDORS) notFound();
 
-  const cheapestOffer = Math.min(
-    ...vendors.flatMap((v) =>
-      (v.topCars ?? [])
-        .filter((tc) => slugifyCarName(tc.name) === car.slug)
-        .map((tc) => tc.pricePerDay),
-    ),
-  );
+  // No per-vendor prices in the data; quote the car's market starting rate.
+  const cheapestOffer = car.startingPrice;
 
   const productJsonLd = {
     "@context": "https://schema.org",

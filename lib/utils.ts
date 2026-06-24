@@ -10,6 +10,17 @@ export function formatPKR(amount: number) {
 }
 
 /**
+ * Convert a city display name to its URL slug.
+ * "Rahim Yar Khan" → "rahim-yar-khan", "Lahore" → "lahore".
+ * City pages live at `/rent-a-car-{slug}`, so any link built from a raw
+ * `company.city` / `a.city` name MUST go through this — a bare `.toLowerCase()`
+ * leaves spaces in multi-word cities and produces a broken (404) link.
+ */
+export function citySlug(cityName: string) {
+  return cityName.toLowerCase().replace(/\s+/g, "-");
+}
+
+/**
  * Build a pre-filled WhatsApp link with a referral footer so vendors know
  * the lead came from RentalSawari. The footer also doubles as our internal
  * tracking: any incoming WhatsApp message a vendor screenshots to support

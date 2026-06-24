@@ -2,23 +2,17 @@ import { buildUrlset, xmlHeaders, SITE } from "@/lib/sitemap";
 import { cities } from "@/data/cities";
 import { carTypes } from "@/data/carTypes";
 import { companies } from "@/data/companies";
+import { offersCar } from "@/lib/fleet";
 
 export const dynamic = "force-static";
 
+// Keep in sync with app/rent-a/[slug]/page.tsx validCombos() — the sitemap
+// must list exactly the car-in-city pages that actually pre-render.
 const MIN_VENDORS = 3;
-
-function slugify(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
 
 function countVendors(carSlug: string, cityName: string): number {
   return companies.filter(
-    (c) =>
-      c.city === cityName &&
-      (c.topCars ?? []).some((tc) => slugify(tc.name) === carSlug),
+    (c) => c.city === cityName && offersCar(c, carSlug),
   ).length;
 }
 
