@@ -669,4 +669,311 @@ export const guideContent: Record<string, ReactNode> = {
       </ul>
     </>
   ),
+
+  "rent-a-car-islamabad-to-murree-routes-cost-2026": (
+    <>
+      <p className="answer-block">
+        <strong>Islamabad to Murree is about 60 km and takes 1.5–2 hours by
+        rental car.</strong> A day trip with driver runs roughly PKR
+        8,000–14,000 for a sedan and PKR 16,000–24,000 for an SUV, including
+        fuel and the driver. Most renters take the Murree Expressway up and
+        keep the car for the full day rather than paying for a one-way drop.
+      </p>
+
+      <h2>Which route should I take from Islamabad to Murree?</h2>
+      <p>
+        There are two routes, and a good driver will pick based on the season
+        and traffic:
+      </p>
+      <ul>
+        <li>
+          <strong>Murree Expressway (via Tarnol / Barakahu):</strong> the fast,
+          modern route — about 60 km and 1.5 hours in clear traffic. The default
+          for almost all rentals.
+        </li>
+        <li>
+          <strong>Old Murree Road (via Lower Topa):</strong> slower and windier
+          but scenic, useful when the Expressway is jammed on summer weekends
+          and Eid holidays.
+        </li>
+      </ul>
+
+      <h2>How much does an Islamabad–Murree car rental cost in 2026?</h2>
+      <p>
+        Pricing depends on vehicle class and whether you want a day trip or an
+        overnight stay. Typical with-driver rates from Islamabad:
+      </p>
+      <table>
+        <thead>
+          <tr><th>Vehicle</th><th>Day trip (with driver, fuel)</th><th>Overnight (2 days)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Corolla / Civic (sedan)</td><td>PKR 8,000–14,000</td><td>PKR 16,000–26,000</td></tr>
+          <tr><td>APV / BR-V (7-seat)</td><td>PKR 12,000–18,000</td><td>PKR 22,000–34,000</td></tr>
+          <tr><td>Fortuner / Prado (SUV)</td><td>PKR 16,000–24,000</td><td>PKR 32,000–48,000</td></tr>
+          <tr><td>Hiace / Grand Cabin (group)</td><td>PKR 14,000–20,000</td><td>PKR 26,000–38,000</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Confirm whether fuel, the driver&apos;s overnight allowance, and tolls
+        are included before you pay. For longer hill trips an SUV is worth the
+        premium — see <a href="/cars/toyota-fortuner">Fortuner</a> and{" "}
+        <a href="/cars/toyota-prado">Prado</a> rates.
+      </p>
+
+      <h2>What is the best car for Murree?</h2>
+      <p>
+        For two to four people in summer, a sedan is fine — the Expressway is
+        well paved. In winter, or if you plan to continue to Patriata, Nathia
+        Gali, or Ayubia, take an SUV with better ground clearance and grip; the
+        upper roads can ice over. For families and groups, a 7-seater or Hiace
+        keeps everyone together.
+      </p>
+
+      <h2>When should I avoid driving to Murree?</h2>
+      <p>
+        Summer weekends, public holidays, and the first snowfall create severe
+        congestion on the Expressway — delays of several hours are common, and
+        Murree authorities sometimes cap entry. Leave Islamabad before 7 am, or
+        travel midweek. A local driver is a real advantage here: they know when
+        to switch to the old road and where to park.
+      </p>
+
+      <p>
+        Ready to book? Compare verified vendors on the{" "}
+        <a href="/rent-a-car-islamabad">Islamabad rent-a-car</a> page and message
+        a few on WhatsApp for a day-trip quote.
+      </p>
+    </>
+  ),
+
+  "lahore-to-hunza-7-day-itinerary-car-rental": (
+    <>
+      <p className="answer-block">
+        <strong>Lahore to Hunza is roughly 1,000 km each way and best done as a
+        7-day round trip by rental car with a driver.</strong> Budget about PKR
+        180,000–320,000 for the week depending on vehicle, covering the car,
+        driver, and fuel. An SUV or a well-maintained Hiace is the right choice
+        for the Karakoram Highway (KKH).
+      </p>
+
+      <h2>How many days do you need from Lahore to Hunza?</h2>
+      <p>
+        Seven days is the comfortable minimum: two long driving days each way
+        plus three days in the valley. Trying to do it in five days means
+        spending almost all your time on the road. The KKH is spectacular but
+        slow in places — plan for driving hours, not just distance.
+      </p>
+
+      <h2>What is a good 7-day Lahore–Hunza itinerary?</h2>
+      <table>
+        <thead>
+          <tr><th>Day</th><th>Route</th><th>Approx. driving</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Lahore → Islamabad → Besham (or Naran via Mansehra)</td><td>9–11 hrs</td></tr>
+          <tr><td>2</td><td>Besham → Chilas → Hunza (Karimabad)</td><td>8–10 hrs</td></tr>
+          <tr><td>3</td><td>Hunza: Baltit & Altit Forts, Karimabad</td><td>Local</td></tr>
+          <tr><td>4</td><td>Hunza: Attabad Lake, Passu Cones, Hussaini Bridge</td><td>2–3 hrs</td></tr>
+          <tr><td>5</td><td>Day trip to Khunjerab Pass (Pakistan–China border)</td><td>5–6 hrs</td></tr>
+          <tr><td>6</td><td>Hunza → Chilas / Besham</td><td>8–10 hrs</td></tr>
+          <tr><td>7</td><td>Besham → Islamabad → Lahore</td><td>9–11 hrs</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What does a 7-day Hunza rental cost?</h2>
+      <p>
+        Northern-areas trips are usually quoted as an all-in package (vehicle +
+        driver + fuel), not a simple daily rate, because the driver is away from
+        base for a week. Rough 2026 ranges from Lahore or Islamabad:
+      </p>
+      <ul>
+        <li><strong>SUV (Fortuner/Prado):</strong> PKR 230,000–320,000 for 7 days.</li>
+        <li><strong>Hiace / Grand Cabin (groups):</strong> PKR 180,000–250,000 for 7 days.</li>
+        <li>Your own hotels, meals, and the Khunjerab national-park fee are extra.</li>
+      </ul>
+      <p>
+        Starting from Islamabad instead of Lahore removes the first ~4 hours of
+        driving and can lower the package — compare both on the{" "}
+        <a href="/rent-a-car-islamabad">Islamabad</a> and{" "}
+        <a href="/rent-a-car-lahore">Lahore</a> pages.
+      </p>
+
+      <h2>Which vehicle is best for the Karakoram Highway?</h2>
+      <p>
+        A 4x4 SUV is ideal for comfort and the rougher stretches near Attabad
+        and beyond Passu. A well-maintained Hiace works for larger groups and is
+        cheaper per head, but insist on a driver experienced on the KKH. Avoid
+        small economy cars for this trip.
+      </p>
+
+      <h2>When is the best time to go?</h2>
+      <p>
+        May–October is the safe window. Cherry blossom is late March–April,
+        autumn colour peaks in October, and Khunjerab Pass is typically open
+        roughly April–November (snow-dependent). Winter travel is for
+        experienced operators only.
+      </p>
+    </>
+  ),
+
+  "toyota-corolla-vs-honda-civic-rent-pakistan-2026": (
+    <>
+      <p className="answer-block">
+        <strong>Rent a Toyota Corolla if you want the cheaper, more practical
+        sedan; rent a Honda Civic if you want a more premium, wedding-worthy
+        ride.</strong> The Corolla runs about PKR 6,500/day and the Civic about
+        PKR 7,500/day with driver. Both seat four comfortably; the Civic feels
+        more upmarket, the Corolla is easier on the budget and fuel.
+      </p>
+
+      <h2>Corolla vs Civic: quick comparison</h2>
+      <table>
+        <thead>
+          <tr><th></th><th>Toyota Corolla</th><th>Honda Civic</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Typical daily rate (with driver)</td><td>PKR 6,500–8,500</td><td>PKR 7,500–10,000</td></tr>
+          <tr><td>Best for</td><td>Business trips, value, daily use</td><td>Weddings, executive transport, prestige</td></tr>
+          <tr><td>Fuel economy</td><td>12–14 km/l motorway</td><td>10–13 km/l motorway</td></tr>
+          <tr><td>Availability</td><td>Highest of any car</td><td>Very high</td></tr>
+          <tr><td>Feel</td><td>Practical, comfortable</td><td>Sportier, more premium interior</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Which is cheaper to rent?</h2>
+      <p>
+        The Corolla — usually by about PKR 1,000–1,500/day. It is also the most
+        widely stocked rental car in Pakistan, so you have the most vendors to
+        compare and the best chance of a last-minute booking. See live{" "}
+        <a href="/cars/toyota-corolla">Corolla</a> and{" "}
+        <a href="/cars/honda-civic">Civic</a> listings.
+      </p>
+
+      <h2>Which is better for a wedding?</h2>
+      <p>
+        The Civic, especially in white, is the more popular rukhsati car — the
+        newer Pakistan-market generation has a premium interior that photographs
+        well. The Corolla still works for the baraat convoy and guest transport
+        at a lower cost. Many couples rent one Civic for the couple and several
+        Corollas for the family.
+      </p>
+
+      <h2>Which should you pick?</h2>
+      <ul>
+        <li><strong>Budget / daily / business:</strong> Corolla.</li>
+        <li><strong>Wedding / executive / first impression:</strong> Civic.</li>
+        <li><strong>Long motorway trips:</strong> Corolla, for fuel economy and ride comfort.</li>
+      </ul>
+    </>
+  ),
+
+  "cheapest-self-drive-cars-lahore-under-5000-pkr": (
+    <>
+      <p className="answer-block">
+        <strong>In Lahore you can rent a self-drive car for under PKR 5,000/day
+        — typically a Suzuki Mehran, Cultus, Wagon R, Alto, or an older
+        Corolla.</strong> Expect a refundable deposit of PKR 25,000–100,000 and
+        a valid Pakistani licence requirement. Self-drive supply is concentrated
+        in Johar Town, DHA, and Gulberg.
+      </p>
+
+      <h2>Which cars rent self-drive under PKR 5,000/day?</h2>
+      <table>
+        <thead>
+          <tr><th>Car</th><th>Typical self-drive rate/day</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Suzuki Mehran / Alto</td><td>PKR 3,000–4,000</td></tr>
+          <tr><td>Suzuki Cultus / Wagon R</td><td>PKR 3,500–4,800</td></tr>
+          <tr><td>Toyota Corolla (older model)</td><td>PKR 4,500–6,000</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Rates rise in wedding season and on weekends. Browse the cheapest
+        category on the <a href="/cars/suzuki-cultus">Cultus</a> and{" "}
+        <a href="/cars/suzuki-mehran">Mehran</a> pages, or filter the{" "}
+        <a href="/rent-a-car-lahore">Lahore listings</a> by &quot;Self-Drive&quot;.
+      </p>
+
+      <h2>What do I need for a self-drive rental in Lahore?</h2>
+      <ul>
+        <li>Original CNIC and a valid Pakistani driving licence.</li>
+        <li>A refundable security deposit (PKR 25,000–100,000 by car class).</li>
+        <li>Sometimes a utility bill or a second reference for verification.</li>
+      </ul>
+
+      <h2>What hidden costs should I check?</h2>
+      <p>
+        Self-drive looks cheap until the extras appear. Before you pay, confirm:
+      </p>
+      <ul>
+        <li><strong>Mileage cap</strong> — many quote 100–150 km/day, then charge per extra km.</li>
+        <li><strong>Fuel policy</strong> — almost always return-as-received.</li>
+        <li><strong>Security deposit refund timeline</strong> and what counts as &quot;damage&quot;.</li>
+        <li><strong>Late-return charges</strong> and whether intercity travel is allowed.</li>
+      </ul>
+
+      <h2>Where in Lahore should I rent self-drive?</h2>
+      <p>
+        Johar Town dominates the self-drive segment, with DHA and Gulberg close
+        behind. Pick a verified vendor with clear deposit terms in writing on
+        WhatsApp before handing over any money.
+      </p>
+    </>
+  ),
+
+  "wedding-car-rental-lahore-prices-decoration-booking": (
+    <>
+      <p className="answer-block">
+        <strong>A decorated wedding car in Lahore costs roughly PKR
+        15,000–60,000+ for the day, depending on the vehicle.</strong> A
+        flower-decorated Civic or Corolla starts around PKR 15,000–25,000, while
+        a Mercedes or Land Cruiser V8 runs PKR 35,000–60,000+. Book 4–8 weeks
+        ahead for peak wedding season (October–February).
+      </p>
+
+      <h2>How much does a wedding car cost in Lahore?</h2>
+      <table>
+        <thead>
+          <tr><th>Vehicle</th><th>Decorated, for the day</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Corolla / Civic (white)</td><td>PKR 15,000–25,000</td></tr>
+          <tr><td>Fortuner / Prado</td><td>PKR 25,000–40,000</td></tr>
+          <tr><td>Mercedes-Benz</td><td>PKR 35,000–55,000</td></tr>
+          <tr><td>Land Cruiser V8</td><td>PKR 40,000–60,000+</td></tr>
+        </tbody>
+      </table>
+      <p>
+        DHA and Gulberg hold the largest decorated-fleet supply in the city.
+        Compare options on the <a href="/wedding-car-rental">wedding car rental</a>{" "}
+        page and the <a href="/rent-a-car-lahore">Lahore listings</a>.
+      </p>
+
+      <h2>What does flower decoration add?</h2>
+      <p>
+        Standard fresh-flower decoration is often included in the wedding-car
+        price or adds about PKR 5,000–15,000. Premium imported-flower or
+        themed decoration can add PKR 20,000+. Confirm whether decoration,
+        driver, and fuel are bundled or billed separately.
+      </p>
+
+      <h2>How far ahead should I book?</h2>
+      <p>
+        For the October–February peak, book 4–8 weeks in advance — the best
+        Mercedes and white Civics go first. Off-season you can often book within
+        a week. Always reconfirm the car and decoration two days before the
+        event.
+      </p>
+
+      <h2>What should I ask before paying?</h2>
+      <ul>
+        <li>Is the exact car (model, colour, year) guaranteed, or a &quot;similar&quot; substitute?</li>
+        <li>Are decoration, driver allowance, fuel, and overtime included?</li>
+        <li>What is the advance, and is it refundable if plans change?</li>
+        <li>How many hours does the booking cover, and what does extra time cost?</li>
+      </ul>
+    </>
+  ),
 };
