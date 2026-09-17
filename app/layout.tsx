@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Nastaliq_Urdu } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@/components/analytics/Analytics";
+import { HelpWidget } from "@/components/chat/HelpWidget";
 import "./globals.css";
 
 const inter = Inter({
@@ -114,6 +115,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white text-stone-900 font-sans">
         {children}
+        <HelpWidget />
         <Analytics />
         {/* Google AdSense — required for site verification + manual AdSlot placements */}
         <Script
