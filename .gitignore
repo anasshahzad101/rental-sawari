@@ -7,6 +7,9 @@ dist
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# Local editor/agent scratch config (dev server launch profile).
+.claude/
 .vercel
 
 # Don't ship the Google Maps scraper binary or raw scraped CSVs.

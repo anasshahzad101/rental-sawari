@@ -1,21 +1,50 @@
 "use client";
 
 import * as React from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackListBusinessSubmit } from "@/lib/analytics";
+import { submitLead } from "@/lib/submitLead";
+import { FormFallback, HoneypotField } from "./FormFallback";
 
 export function ListBusinessForm() {
   const [submitted, setSubmitted] = React.useState(false);
+  const [pending, setPending] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+  const [honeypot, setHoneypot] = React.useState("");
+  const mountedAt = React.useRef(Date.now());
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (pending) return;
     const data = new FormData(e.currentTarget);
     const city = (data.get("city") as string) || "(unknown)";
     const fleet = (data.get("fleet") as string) || "";
-    // eslint-disable-next-line no-console
-    console.log("[list-business]", Object.fromEntries(data.entries()));
+
+    setPending(true);
+    setError(null);
+
+    const fields = Object.fromEntries(
+      Array.from(data.entries())
+        .filter(([key]) => key !== "website")
+        .map(([key, value]) => [key, String(value)]),
+    );
+
+    const result = await submitLead({
+      formType: "list-business",
+      fields,
+      website: honeypot,
+      elapsedMs: Date.now() - mountedAt.current,
+    });
+
+    setPending(false);
+
+    if (!result.ok) {
+      setError(result.error ?? "Something went wrong.");
+      return;
+    }
+
     trackListBusinessSubmit(city, fleet);
     setSubmitted(true);
   }
@@ -39,8 +68,9 @@ export function ListBusinessForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-sm space-y-4"
+      className="relative rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-sm space-y-4"
     >
+      <HoneypotField value={honeypot} onChange={setHoneypot} />
       <h2 className="text-2xl font-extrabold text-stone-900">
         List your business
       </h2>
@@ -75,9 +105,32 @@ export function ListBusinessForm() {
         placeholder="Languages spoken, special cars, anything that makes you stand out..."
       />
 
-      <Button type="submit" variant="accent" size="lg" className="w-full mt-2">
-        <Send className="h-4 w-4" />
-        Submit Application
+      {error && (
+        <FormFallback
+          error={error}
+          source="list-business-form"
+          whatsappMessage="Hi RentalSawari, I want to list my rental company but the website form didn't go through."
+        />
+      )}
+
+      <Button
+        type="submit"
+        variant="accent"
+        size="lg"
+        className="w-full mt-2"
+        disabled={pending}
+      >
+        {pending ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Submitting…
+          </>
+        ) : (
+          <>
+            <Send className="h-4 w-4" />
+            Submit Application
+          </>
+        )}
       </Button>
 
       <p className="text-xs text-stone-500 text-center">
