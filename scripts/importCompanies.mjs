@@ -82,6 +82,80 @@ const FEATURED_PER_CITY = {
   Mianwali: 1,
 };
 
+// Hand-maintained overrides keyed by slug. Merged over the CSV row after
+// import, so vendor-supplied details (fleet, prices, contact, featured plan)
+// survive a re-import. Keep every fact here sourced from the vendor's own
+// Google Business Profile or website — never invent prices or ratings.
+const MANUAL_OVERRIDES = {
+  // Featured plan — details from the vendor's Google profile + website, 2026-09-17.
+  "swati-motors-rent-a-car": {
+    "slug": "swati-motors-rent-a-car",
+    "name": "Swati Motors - Rent A Car",
+    "city": "Islamabad",
+    "area": "I-8 Markaz",
+    "rating": 5,
+    "reviewCount": 35,
+    "verified": true,
+    "featured": true,
+    "whatsapp": "+923395186786",
+    "phone": "+923395186786",
+    "servicesOffered": [
+      "With Driver",
+      "Airport Pickup",
+      "Wedding",
+      "Tourist Tours",
+      "Luxury"
+    ],
+    "topCars": [
+      {
+        "name": "Suzuki Cultus",
+        "pricePerDay": 4500,
+        "withDriver": true
+      },
+      {
+        "name": "Toyota Yaris",
+        "pricePerDay": 6000,
+        "withDriver": true
+      },
+      {
+        "name": "Toyota Corolla",
+        "pricePerDay": 6000,
+        "withDriver": true
+      },
+      {
+        "name": "Honda Civic",
+        "pricePerDay": 7000,
+        "withDriver": true
+      },
+      {
+        "name": "Honda BRV",
+        "pricePerDay": 7500,
+        "withDriver": true
+      },
+      {
+        "name": "Toyota Prado",
+        "pricePerDay": 16000,
+        "withDriver": true
+      },
+      {
+        "name": "Toyota Land Cruiser V8",
+        "pricePerDay": 25000,
+        "withDriver": true
+      }
+    ],
+    "about": "Swati Motors - Rent A Car is an SECP-registered car rental company based in I-8 Markaz, Islamabad, open 24 hours a day. The fleet runs from economy to luxury: Suzuki Cultus from PKR 4,500/day, Toyota Yaris and Toyota Corolla from PKR 6,000, Honda Civic from PKR 7,000, Honda BRV from PKR 7,500, Toyota Prado TX from PKR 16,000 and Toyota Land Cruiser V8 from PKR 25,000. Every car is air-conditioned and comes with a professional local driver on a full-tank-to-full-tank basis. Services cover Islamabad Airport pick and drop, decorated wedding cars, daily and business hire for locals and tourists, and complete tour packages to the northern areas: 5-day / 4-night Skardu itineraries with accommodation and a Basho Valley jeep run from PKR 48,000 with a Corolla to PKR 70,000 with a Prado. Fellow tour operators get cooperative rates of up to 20% off. Quotes and bookings are handled directly on WhatsApp.",
+    "website": "https://swati-motors-and-car-rental.netlify.app/",
+    "googleMapsUrl": "https://www.google.com/maps/place/SWATI+MOTORS+%E2%80%94+RENT+A+CAR,+markaz,+I-8+Markaz+I+8+Markaz+I-8,+Islamabad/data=!4m2!3m1!1s0x38df979a46ffc13b:0x85307f6358349c14"
+  },
+};
+
+function applyOverrides(entries) {
+  for (const e of entries) {
+    const o = MANUAL_OVERRIDES[e.slug];
+    if (o) Object.assign(e, o);
+  }
+}
+
 // Categories worth keeping. Everything else (hotels, dealers, etc.) is dropped.
 const KEEP_CATEGORIES = [
   /car rental/i,
@@ -273,6 +347,8 @@ for (const { file, display } of CITIES) {
     });
   }
 
+  applyOverrides(cityEntries);
+
   // Mark featured: top N by review count for this city.
   const featuredCount = FEATURED_PER_CITY[display] || 1;
   [...cityEntries]
@@ -370,6 +446,7 @@ if (fs.existsSync(path.join(CSV_DIR, MULTI_CITY_CSV))) {
       });
     }
 
+    applyOverrides(cityEntries);
     const featuredCount = FEATURED_PER_CITY[display] || 1;
     [...cityEntries]
       .sort((a, b) => b.reviewCount - a.reviewCount)
@@ -417,6 +494,7 @@ for (const c of allCompanies) {
   lines.push(`    whatsapp: ${tsLiteral(c.whatsapp)},`);
   lines.push(`    phone: ${tsLiteral(c.phone)},`);
   lines.push(`    servicesOffered: ${tsLiteral(c.servicesOffered)},`);
+  if (c.topCars && c.topCars.length) lines.push(`    topCars: ${tsLiteral(c.topCars)},`);
   if (c.about) lines.push(`    about: ${tsLiteral(c.about)},`);
   if (c.website) lines.push(`    website: ${tsLiteral(c.website)},`);
   if (c.googleMapsUrl) lines.push(`    googleMapsUrl: ${tsLiteral(c.googleMapsUrl)},`);
