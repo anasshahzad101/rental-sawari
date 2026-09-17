@@ -1,10 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackInquirySubmit } from "@/lib/analytics";
+import { submitLead } from "@/lib/submitLead";
+import { FormFallback, HoneypotField } from "@/components/forms/FormFallback";
 
 interface InquiryFormProps {
   companyName: string;
@@ -20,20 +22,44 @@ export function InquiryForm({
   className,
 }: InquiryFormProps) {
   const [submitted, setSubmitted] = React.useState(false);
+  const [pending, setPending] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+  const [honeypot, setHoneypot] = React.useState("");
+  const mountedAt = React.useRef(Date.now());
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (pending) return;
     const data = new FormData(e.currentTarget);
     const pickupDate = data.get("pickupDate");
-    // eslint-disable-next-line no-console
-    console.log("[inquiry]", {
-      company: companyName,
-      name: data.get("name"),
-      phone: data.get("phone"),
-      pickupDate,
-      days: data.get("days"),
-      message: data.get("message"),
+
+    setPending(true);
+    setError(null);
+
+    const fields: Record<string, string> = {
+      companyName,
+      ...Object.fromEntries(
+        Array.from(data.entries())
+          .filter(([key]) => key !== "website")
+          .map(([key, value]) => [key, String(value)]),
+      ),
+    };
+    if (city) fields.city = city;
+
+    const result = await submitLead({
+      formType: "inquiry",
+      fields,
+      website: honeypot,
+      elapsedMs: Date.now() - mountedAt.current,
     });
+
+    setPending(false);
+
+    if (!result.ok) {
+      setError(result.error ?? "Something went wrong.");
+      return;
+    }
+
     if (companySlug && city) {
       trackInquirySubmit(companySlug, city, Boolean(pickupDate));
     }
@@ -51,8 +77,8 @@ export function InquiryForm({
         <CheckCircle2 className="mx-auto h-10 w-10 text-success" />
         <h3 className="mt-3 text-lg font-bold text-stone-900">Inquiry sent</h3>
         <p className="mt-1 text-sm text-stone-600">
-          {companyName} typically responds within a few minutes. For the fastest
-          reply, message them on WhatsApp.
+          We&apos;ve passed your details to our team, who will connect you with{" "}
+          {companyName}. For the fastest reply, message them on WhatsApp too.
         </p>
       </div>
     );
@@ -62,10 +88,11 @@ export function InquiryForm({
     <form
       onSubmit={onSubmit}
       className={cn(
-        "rounded-2xl border border-stone-200 bg-white p-5 sm:p-6 shadow-sm",
+        "relative rounded-2xl border border-stone-200 bg-white p-5 sm:p-6 shadow-sm",
         className
       )}
     >
+      <HoneypotField value={honeypot} onChange={setHoneypot} />
       <h3 className="text-lg font-bold text-stone-900">
         Send inquiry to {companyName}
       </h3>
@@ -88,9 +115,34 @@ export function InquiryForm({
         className="mt-3"
       />
 
-      <Button type="submit" variant="primary" size="lg" className="mt-4 w-full">
-        <Send className="h-4 w-4" />
-        Send Inquiry
+      {error && (
+        <div className="mt-3">
+          <FormFallback
+            error={error}
+            source="inquiry-form"
+            whatsappMessage={`Hi RentalSawari, I tried to send an inquiry for ${companyName} but the form didn't go through.`}
+          />
+        </div>
+      )}
+
+      <Button
+        type="submit"
+        variant="primary"
+        size="lg"
+        className="mt-4 w-full"
+        disabled={pending}
+      >
+        {pending ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Sending…
+          </>
+        ) : (
+          <>
+            <Send className="h-4 w-4" />
+            Send Inquiry
+          </>
+        )}
       </Button>
     </form>
   );

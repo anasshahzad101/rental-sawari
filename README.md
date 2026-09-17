@@ -124,6 +124,38 @@ Same goes for images: `lib/placeholder.ts` is the single switch. Flip `usePlaceh
 - JSON-LD for `WebSite` (with `SearchAction`) and `Organization` injected in `app/page.tsx`.
 - Open Graph + Twitter Card metadata in `app/layout.tsx`.
 
+## Forms → email
+
+All three forms (`ContactForm`, `InquiryForm`, `ListBusinessForm`) POST to
+`app/api/lead/route.ts`, which emails the submission to `hello@rentalsawari.com`
+over SMTP. Set these on the host (Hostinger → deployment settings → Environment
+Variables). Nothing is committed, because this repository is public:
+
+| Variable | Required | Default | Notes |
+|---|---|---|---|
+| `SMTP_USER` | yes | — | Full mailbox address, e.g. `hello@rentalsawari.com` |
+| `SMTP_PASS` | yes | — | That mailbox's password |
+| `SMTP_HOST` | no | `smtp.hostinger.com` | |
+| `SMTP_PORT` | no | `465` | 465 = implicit TLS, 587 = STARTTLS |
+| `LEAD_TO_EMAIL` | no | `hello@rentalsawari.com` | Where submissions land |
+| `LEAD_FROM_NAME` | no | `RentalSawari Website` | Display name on the From header |
+
+Until `SMTP_USER` / `SMTP_PASS` exist the route returns 503 and every form shows
+a fallback pointing at WhatsApp and the mailbox. The forms never claim a message
+was sent when it was not. Spam protection is a hidden honeypot field, a minimum
+fill time, and a per-IP rate limit of 5 submissions per 10 minutes.
+
+## Chat widget
+
+`components/chat/HelpWidget.tsx` is a floating four-question assistant mounted
+site-wide in `app/layout.tsx`. It asks need → city → car → timeline, then hands
+off to WhatsApp with a pre-filled summary (carrying the usual `ref` tag) or to
+the matching city listings page. No LLM, no backend, no third-party script — the
+option lists are duplicated in that file to keep the client bundle small, so
+keep their slugs in sync with `data/cities.ts` and `data/carTypes.ts`.
+
 ## Deploying
 
-Built for **Vercel**. After pushing to GitHub, import into Vercel — no env vars needed for the homepage. Set the custom domain when ready.
+Deployed on **Hostinger** (hPanel → Git deployment, Node 22.x, `npm run build`,
+output `.next`), building from `main`. The README previously said Vercel; that is
+no longer accurate. Environment variables live in the deployment settings panel.
