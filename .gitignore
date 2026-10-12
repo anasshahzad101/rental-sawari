@@ -22,3 +22,9 @@ public/images/G-Maps-Extractor*
 public/images/Karachi.jpg
 public/images/Lahore.jpg
 
+
+# Claude Design exports (reference only, not shipped).
+design-reference/
+
+# Local admin data store used in development (no MySQL locally).
+.data/

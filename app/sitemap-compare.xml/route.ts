@@ -1,11 +1,14 @@
 import { buildUrlset, xmlHeaders, SITE } from "@/lib/sitemap";
-import { companies } from "@/data/companies";
+import { getCompanies } from "@/lib/admin/repo/public";
+import type { Company } from "@/lib/types";
 
 export const dynamic = "force-static";
+// Listings change in the admin; refresh the sitemap at most hourly.
+export const revalidate = 3600;
 
 const TOP_PER_CITY = 5;
 
-function comparisonPairSlugs(): string[] {
+function comparisonPairSlugs(companies: Company[]): string[] {
   const slugs: string[] = [];
   const seen = new Set<string>();
   const cities = [...new Set(companies.map((c) => c.city))];
@@ -26,10 +29,11 @@ function comparisonPairSlugs(): string[] {
   return slugs;
 }
 
-export function GET() {
+export async function GET() {
+  const companies = await getCompanies();
   const now = new Date().toISOString();
   const body = buildUrlset(
-    comparisonPairSlugs().map((slug) => ({
+    comparisonPairSlugs(companies).map((slug) => ({
       loc: `${SITE}/compare/${slug}`,
       lastmod: now,
       changefreq: "monthly",

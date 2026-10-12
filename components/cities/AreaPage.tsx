@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MapPin, Star, Users } from "lucide-react";
 import type { Area } from "@/data/areas";
-import { companies as allCompanies } from "@/data/companies";
+import { getCompanies } from "@/lib/admin/repo/public";
 import { cities } from "@/data/cities";
 import { popularCarTypes } from "@/data/carTypes";
 import { guides } from "@/data/guides";
@@ -23,7 +23,8 @@ interface AreaPageProps {
   area: Area;
 }
 
-export function AreaPage({ area }: AreaPageProps) {
+export async function AreaPage({ area }: AreaPageProps) {
+  const allCompanies = await getCompanies();
   const parentCity = cities.find((c) => c.slug === area.citySlug);
   const cityCompanies = allCompanies.filter((c) => c.city === area.cityName);
   const areaCompanies = cityCompanies

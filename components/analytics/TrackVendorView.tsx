@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { trackVendorView } from "@/lib/analytics";
+import { trackOpen } from "@/lib/track";
 
 /**
  * Fires a `vendor_view` event after the visitor stays on a company profile
@@ -16,6 +17,8 @@ interface TrackVendorViewProps {
 
 export function TrackVendorView({ companySlug, city }: TrackVendorViewProps) {
   useEffect(() => {
+    // Admin stats count the open straight away (lib/track.ts dedupes refreshes).
+    trackOpen(companySlug);
     const referrer =
       typeof document !== "undefined" && document.referrer
         ? new URL(document.referrer).pathname

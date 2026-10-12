@@ -1,10 +1,13 @@
 import { buildUrlset, xmlHeaders, SITE } from "@/lib/sitemap";
 import { areas } from "@/data/areas";
-import { companies } from "@/data/companies";
+import { getCompanies } from "@/lib/admin/repo/public";
 
 export const dynamic = "force-static";
+// Listings change in the admin; refresh the sitemap at most hourly.
+export const revalidate = 3600;
 
-export function GET() {
+export async function GET() {
+  const companies = await getCompanies();
   const now = new Date().toISOString();
   const body = buildUrlset(
     areas
