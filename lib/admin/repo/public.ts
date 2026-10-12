@@ -52,7 +52,8 @@ export async function getCompanies(): Promise<Company[]> {
   if (Date.now() < downUntil) return lastGood?.list ?? snapshot();
   try {
     const all = await listAll();
-    const list = all.filter((l) => l.status === "live").map(listingToCompany);
+    // Demo listings (lib/admin/db/demo.ts) are for learning the admin only.
+    const list = all.filter((l) => l.status === "live" && !l.demo).map(listingToCompany);
     lastGood = { at: Date.now(), list };
     return list;
   } catch (e) {

@@ -161,13 +161,28 @@ export function createFileDb(): Db {
     },
 
     async insertMany(table: TableKey, list: Row[], opts: { ignore?: boolean } = {}): Promise<void> {
+      // One pass with key sets, so a big batch (the demo stats) isn't quadratic.
+      const def = TABLES[table] as TableDef;
+      const s = load();
+      const key = idKey(def);
+      const all = rows(table);
+      const keysets = [pkKeys(def), ...(def.unique ?? [])].filter((ks) => ks.length);
+      const sig = (r: Row, ks: string[]) => ks.map((k) => JSON.stringify(r[k] ?? null)).join("|");
+      const seen = keysets.map((ks) => new Set(all.map((x) => sig(x, ks))));
+      let next = key ? s.autoinc[table] ?? all.reduce((m, x) => Math.max(m, Number(x[key]) || 0), 0) : 0;
       for (const row of list) {
-        try {
-          await this.insert(table, row);
-        } catch (e) {
-          if (!opts.ignore) throw e;
+        const r = withDefaults(def, into(def, row));
+        if (key) r[key] = next + 1;
+        const sigs = keysets.map((ks) => sig(r, ks));
+        if (sigs.some((x, i) => seen[i].has(x))) {
+          if (!opts.ignore) throw new Error(`Duplicate entry in ${def.name}`);
+          continue;
         }
+        if (key) s.autoinc[table] = ++next;
+        sigs.forEach((x, i) => seen[i].add(x));
+        all.push(r);
       }
+      save();
     },
 
     async update(table: TableKey, where: Where, patch: Row): Promise<number> {

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { requireAdmin } from "@/lib/admin/auth";
 import { parseRange, rangeQuery } from "@/lib/admin/ranges";
+import { demoCounts, demoIsOn } from "@/lib/admin/repo/demo";
 import { PageBody, PageTop } from "@/components/admin/shell";
+import { DemoKillSwitch } from "./_overview/DemoKillSwitch";
 import { OverviewContent } from "./_overview/OverviewContent";
 import { OverviewSkeleton } from "./_overview/OverviewSkeleton";
 
@@ -20,10 +22,12 @@ export const metadata: Metadata = { title: "Overview" };
 export default async function OverviewPage({ searchParams }: { searchParams: SP }) {
   await requireAdmin();
   const range = parseRange(searchParams);
+  const demo = (await demoIsOn()) ? await demoCounts() : null;
   return (
     <>
       <PageTop title="Overview" dateRange />
       <PageBody className="lg:pt-7">
+        {demo ? <DemoKillSwitch listings={demo.listings} inbox={demo.inbox} /> : null}
         {/* Keyed by the range so a new range shows the skeleton while it loads. */}
         <Suspense key={rangeQuery(range)} fallback={<OverviewSkeleton />}>
           <OverviewContent range={range} />

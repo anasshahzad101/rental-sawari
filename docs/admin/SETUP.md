@@ -24,11 +24,13 @@ In hPanel, go to **Websites → your Node.js app → Environment variables**, ad
 | `DB_PORT` | no | Defaults to `3306` |
 | `ADMIN_SECRET` | no | A separate random string for signing the login cookie. If it isn't set, the password is used, so changing the password logs every device out. |
 | `TRACKING_START` | no | Leave unset. Stats count from the day the app first connects to the database. |
+| `ADMIN_DEMO` | no | Leave unset. Set to `off` before the first connect to skip the demo data. |
 | `SMTP_USER`, `SMTP_PASS` | already used by the forms | Also used for the "new request / claim / report" emails to `hello@rentalsawari.com` |
 
 ### 3. Check it
 1. Open `/admin` and log in.
 2. The Overview should load with 1,418 listings live. If no database is connected, the admin shows a red warning at the top.
+   The first connect also adds **demo data** for learning the admin: 8 listings named "… (Demo)" (never shown on the public site), 90 days of made-up stats and a few sample inbox items. When you're done, press **Kill switch: delete demo data** at the top of the Overview. It deletes only the demo rows, keeps every real visit, and the demo never comes back.
 3. Visit a few listing pages on the public site in another browser or a private window. Your own browser is never counted after you log in. Within a minute or so, the visits appear in the admin.
 
 ## Where things live

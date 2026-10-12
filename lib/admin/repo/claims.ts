@@ -202,6 +202,7 @@ export async function createClaim(input: {
   closeRequested: boolean;
   requestId?: number | null;
   notify?: boolean;
+  demo?: boolean;
 }): Promise<number> {
   const listing = await getListing(input.listingId);
   if (!listing) throw new Error("Listing not found");
@@ -227,6 +228,7 @@ export async function createClaim(input: {
     note: null,
     decidedAt: null,
     requestId: input.requestId ?? null,
+    demo: !!input.demo,
   } as Row);
   if (input.notify !== false) {
     const n = claimRows({ id, changes, closeRequested: input.closeRequested } as Claim, listing).rows.length;

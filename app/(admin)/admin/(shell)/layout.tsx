@@ -1,8 +1,10 @@
 import { requireAdmin } from "@/lib/admin/auth";
 import { dbInfo } from "@/lib/admin/db";
+import { demoIsOn } from "@/lib/admin/repo/demo";
 import { inboxCounts } from "@/lib/admin/repo/inbox";
 import { AdminFrame } from "@/components/admin/shell";
 import { Banner } from "@/components/admin/ui/Banner";
+import { DemoNotice } from "./DemoNotice";
 
 /**
  * Every signed-in admin page: sidebar / tab bar around the page. Pages also
@@ -13,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 export default async function ShellLayout({ children }: { children: React.ReactNode }) {
   await requireAdmin();
-  const counts = await inboxCounts();
+  const [counts, demo] = await Promise.all([inboxCounts(), demoIsOn()]);
   const db = dbInfo();
   return (
     <AdminFrame inboxCount={counts.total}>
@@ -25,6 +27,7 @@ export default async function ShellLayout({ children }: { children: React.ReactN
           </Banner>
         </div>
       )}
+      {demo ? <DemoNotice /> : null}
       {children}
     </AdminFrame>
   );

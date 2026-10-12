@@ -23,13 +23,13 @@ export async function GET(req: Request) {
     const n = normalizePhone(wa);
     if (!n) return json({ match: null });
     const l = await findByNumber(n);
-    return json({ match: l && l.status === "live" ? { slug: l.slug, name: l.name, city: l.city, area: l.area } : null });
+    return json({ match: l && l.status === "live" && !l.demo ? { slug: l.slug, name: l.name, city: l.city, area: l.area } : null });
   }
 
   const q = (url.searchParams.get("q") ?? "").trim().toLowerCase();
   if (q.length < 2) return json({ results: [] });
   const digits = q.replace(/\D/g, "");
-  const all = (await listAll()).filter((l) => l.status === "live");
+  const all = (await listAll()).filter((l) => l.status === "live" && !l.demo);
   const results = all
     .filter((l) =>
       digits.length >= 4
