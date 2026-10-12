@@ -28,3 +28,12 @@ design-reference/
 
 # Local admin data store used in development (no MySQL locally).
 .data/
+
+# Android admin app: build output, and never a signing key (see docs/admin/ANDROID.md)
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.p12
+*.jks
+*.keystore
