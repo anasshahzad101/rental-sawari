@@ -1,0 +1,83 @@
+plugins {
+    id "com.android.application"
+}
+
+/*
+ * RentalSawari Admin for Android: a Trusted Web Activity that opens
+ * https://rentalsawari.com/admin full screen. The app is only a shell; every
+ * screen comes from the website, so admin changes need no new APK.
+ *
+ * Built by .github/workflows/android-app.yml. See docs/admin/ANDROID.md.
+ */
+def twa = [
+    applicationId  : "com.rentalsawari.admin",
+    hostName       : "rentalsawari.com",
+    launchPath     : "/admin",
+    name           : "RentalSawari Admin",
+    launcherName   : "RS Admin",
+    statusBarColor : "#FFFFFF",
+    navigationColor: "#FFFFFF",
+    iconBackground : "#197878",
+]
+
+// The signing key comes from GitHub secrets (never from the repository).
+def keystorePath = System.getenv("ANDROID_KEYSTORE_PATH")
+
+android {
+    namespace "com.rentalsawari.admin"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId twa.applicationId
+        minSdk 21
+        targetSdk 34
+        versionCode((project.findProperty("versionCode") ?: "1").toString().toInteger())
+        versionName((project.findProperty("versionName") ?: "1.0").toString())
+
+        def site = "https://" + twa.hostName
+        resValue "string", "appName", twa.name
+        resValue "string", "launcherName", twa.launcherName
+        resValue "string", "launchUrl", site + twa.launchPath
+        resValue "string", "hostName", twa.hostName
+        resValue "color", "statusBarColor", twa.statusBarColor
+        resValue "color", "navigationColor", twa.navigationColor
+        resValue "color", "iconBackground", twa.iconBackground
+        // Must match public/.well-known/assetlinks.json on the site.
+        resValue "string", "assetStatements",
+            '[{ \\"relation\\": [\\"delegate_permission/common.handle_all_urls\\"],' +
+            ' \\"target\\": {\\"namespace\\": \\"web\\", \\"site\\": \\"' + site + '\\"}}]'
+    }
+
+    buildFeatures {
+        resValues = true
+        buildConfig = false
+    }
+
+    signingConfigs {
+        if (keystorePath) {
+            release {
+                storeFile = file(keystorePath)
+                storeType = "pkcs12"
+                storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("ANDROID_KEY_ALIAS") ?: "rentalsawari-admin"
+                keyPassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            if (keystorePath) signingConfig = signingConfigs.release
+        }
+    }
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
+}
+
+dependencies {
+    implementation "com.google.androidbrowserhelper:androidbrowserhelper:2.5.0"
+}
