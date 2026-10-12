@@ -2,6 +2,7 @@ import "server-only";
 import type { Company } from "@/lib/types";
 import type { CarRow, Listing } from "../types";
 import { normalizePhone, pktDay } from "../format";
+import { DEMO_KEY, seedDemo } from "./demo";
 import type { Db, Row } from "./driver";
 import { createFileDb } from "./file";
 import { createMysqlDb } from "./mysql";
@@ -110,13 +111,22 @@ async function seed(d: Db): Promise<void> {
     await d.insertMany("meta", [{ k: "tracking_start", v: process.env.TRACKING_START || pktDay() }], { ignore: true });
   }
 
-  if ((await d.count("listings")) > 0) return;
+  if ((await d.count("listings")) === 0) {
+    const { companies } = await import("@/data/companies");
+    const rows = companies.map((c) => companyToListing(c, now) as unknown as Row);
+    await d.insertMany("listings", rows, { ignore: true });
+    await d.insertMany("meta", [{ k: "imported_at", v: now }], { ignore: true });
+    console.log(`[admin] Imported ${rows.length} listings into ${d.describe}`);
+  }
 
-  const { companies } = await import("@/data/companies");
-  const rows = companies.map((c) => companyToListing(c, now) as unknown as Row);
-  await d.insertMany("listings", rows, { ignore: true });
-  await d.insertMany("meta", [{ k: "imported_at", v: now }], { ignore: true });
-  console.log(`[admin] Imported ${rows.length} listings into ${d.describe}`);
+  // Demo data for learning the admin: added once, until the kill switch removes it for good.
+  if (!has(DEMO_KEY) && process.env.ADMIN_DEMO !== "off") {
+    try {
+      await seedDemo(d);
+    } catch (e) {
+      console.error("[admin] Demo data could not be added:", e instanceof Error ? e.message : e);
+    }
+  }
 }
 
 export async function getMeta(k: string): Promise<string | null> {

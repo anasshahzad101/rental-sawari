@@ -76,7 +76,14 @@ interface Window {
   prevShown: ShownRow[];
 }
 
-const memo = new Map<string, { at: number; p: Promise<Window> }>();
+// On globalThis so a server action (a separate module copy) clears the cache pages read.
+const gm = globalThis as typeof globalThis & { __rsStatsMemo?: Map<string, { at: number; p: Promise<Window> }> };
+const memo = (gm.__rsStatsMemo ??= new Map<string, { at: number; p: Promise<Window> }>());
+
+/** Drop the short-lived stats cache (after the demo data is deleted). */
+export function forgetStats() {
+  memo.clear();
+}
 
 async function loadWindow(range: RangeInfo, listingId?: number): Promise<Window> {
   const key = `${range.start}|${range.end}|${range.compare}|${listingId ?? "all"}`;

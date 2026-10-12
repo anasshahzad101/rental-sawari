@@ -42,6 +42,8 @@ export interface Listing {
   hiddenAt: string | null;
   createdAt: string;
   updatedAt: string;
+  /** Demo data (never shown on the public site; removed by the kill switch). */
+  demo?: boolean;
 }
 
 /** The fields a person can edit. Everything else is housekeeping. */
@@ -132,6 +134,7 @@ export interface ListingRequest {
   listingId: number | null; // created listing (approved)
   claimId: number | null; // when converted to a claim
   decidedAt: string | null;
+  demo?: boolean;
 }
 
 export type ClaimRole = "owner" | "staff";
@@ -171,6 +174,7 @@ export interface Claim {
   note: string | null;
   decidedAt: string | null;
   requestId: number | null;
+  demo?: boolean;
 }
 
 export type ReportReason = "wrong_number" | "closed" | "prices" | "service" | "scam" | "other";
@@ -187,6 +191,7 @@ export interface Report {
   status: ReportStatus;
   resolvedNote: string | null;
   resolvedAt: string | null;
+  demo?: boolean;
 }
 
 // ── Stats ────────────────────────────────────────────────────────────────

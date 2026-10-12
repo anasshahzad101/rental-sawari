@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `listings` (
   `hidden_at` DATETIME NULL,
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
+  `demo` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_slug` (`slug`),
   KEY `ix_city` (`city`),
@@ -69,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `listing_requests` (
   `listing_id` INT NULL,
   `claim_id` INT NULL,
   `decided_at` DATETIME NULL,
+  `demo` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `ix_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -92,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `claims` (
   `note` TEXT NULL,
   `decided_at` DATETIME NULL,
   `request_id` INT NULL,
+  `demo` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `ix_status` (`status`),
   KEY `ix_listing_id` (`listing_id`)
@@ -108,6 +111,7 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `status` VARCHAR(12) NOT NULL DEFAULT 'new',
   `resolved_note` TEXT NULL,
   `resolved_at` DATETIME NULL,
+  `demo` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `ix_status` (`status`),
   KEY `ix_listing_id` (`listing_id`)
@@ -134,6 +138,7 @@ CREATE TABLE IF NOT EXISTS `stat_events` (
   `source` VARCHAR(10) NOT NULL DEFAULT '',
   `entry` VARCHAR(191) NOT NULL DEFAULT '',
   `device` VARCHAR(8) NOT NULL DEFAULT '',
+  `demo` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `ix_day` (`day`),
   KEY `ix_listing_id_day` (`listing_id`, `day`)
@@ -145,6 +150,7 @@ CREATE TABLE IF NOT EXISTS `stat_shown` (
   `page` VARCHAR(191) NOT NULL,
   `shown` INT NOT NULL DEFAULT 0,
   `pos_sum` INT NOT NULL DEFAULT 0,
+  `demo` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`day`, `listing_id`, `page`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

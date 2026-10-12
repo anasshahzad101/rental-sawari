@@ -73,7 +73,7 @@ export async function resolveRedirect(oldSlug: string): Promise<string | null> {
   const rows = await d.select<{ oldSlug: string; listingId: number }>("listingRedirects", { oldSlug });
   if (!rows[0]) return null;
   const l = await getListing(rows[0].listingId);
-  return l && l.status === "live" ? l.slug : null;
+  return l && l.status === "live" && !l.demo ? l.slug : null;
 }
 
 /** Drop the cache and tell Next to rebuild every page on its next request. */
@@ -275,11 +275,17 @@ export async function uniqueSlug(base: string, exceptId?: number): Promise<strin
 }
 
 /** Create a listing. Returns the new id. */
-export async function createListing(data: ListingEditable, meta: WriteMeta): Promise<number> {
+export async function createListing(data: ListingEditable, meta: WriteMeta, opts: { demo?: boolean } = {}): Promise<number> {
   const d = await getDb();
   const now = new Date().toISOString();
   const slug = await uniqueSlug(data.slug || data.name);
-  const row: Omit<Listing, "id"> = { ...editable({ ...data, slug }), hiddenAt: data.status === "hidden" ? now : null, createdAt: now, updatedAt: now };
+  const row: Omit<Listing, "id"> = {
+    ...editable({ ...data, slug }),
+    hiddenAt: data.status === "hidden" ? now : null,
+    createdAt: now,
+    updatedAt: now,
+    demo: !!opts.demo,
+  };
   const id = await d.insert("listings", row as unknown as Row);
   await writeVersion(id, null, editable(row as Listing), [], meta);
   invalidateListings();

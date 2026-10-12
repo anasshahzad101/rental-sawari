@@ -118,7 +118,7 @@ export async function approveRequest(id: number): Promise<number> {
     actor: "Created from listing request",
     note: `request from ${p.ownerName || "the business"}, approved by you`,
     refId: id,
-  });
+  }, { demo: r.demo });
   const d = await getDb();
   const now = new Date().toISOString();
   await d.update("listingRequests", { id }, { status: "approved", listingId, decidedAt: now, updatedAt: now });
@@ -170,6 +170,7 @@ export async function convertToClaim(id: number): Promise<number> {
     closeRequested: false,
     requestId: id,
     notify: false,
+    demo: r.demo,
   });
   const d = await getDb();
   const now = new Date().toISOString();
