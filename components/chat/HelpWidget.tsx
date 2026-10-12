@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { MessageCircle, X, ChevronLeft, Sparkles } from "lucide-react";
 import { business } from "@/lib/business";
 import { buildWhatsAppLink, cn } from "@/lib/utils";
@@ -76,7 +77,16 @@ const STEPS = [
 
 type AnswerKey = (typeof STEPS)[number]["key"];
 
+/**
+ * Pages with their own sticky bottom action bar on phones (the business
+ * forms): the launcher would sit on top of the form, so it isn't shown there.
+ */
+function hiddenOn(path: string | null) {
+  return !!path && (path === "/list-your-business" || (path.startsWith("/companies/") && path.endsWith("/claim")));
+}
+
 export function HelpWidget() {
+  const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
   const [step, setStep] = React.useState(0);
   const [answers, setAnswers] = React.useState<Partial<Record<AnswerKey, Option>>>(
@@ -126,6 +136,7 @@ export function HelpWidget() {
   const browseHref = city ? `/rent-a-car-${city.slug}` : "/cities";
 
   if (!open) {
+    if (hiddenOn(pathname)) return null;
     return (
       <button
         type="button"

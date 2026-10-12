@@ -5,6 +5,7 @@ import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackInquirySubmit } from "@/lib/analytics";
+import { trackContact } from "@/lib/track";
 import { submitLead } from "@/lib/submitLead";
 import { FormFallback, HoneypotField } from "@/components/forms/FormFallback";
 
@@ -63,6 +64,7 @@ export function InquiryForm({
     if (companySlug && city) {
       trackInquirySubmit(companySlug, city, Boolean(pickupDate));
     }
+    if (companySlug) trackContact(companySlug, "form");
     setSubmitted(true);
   }
 

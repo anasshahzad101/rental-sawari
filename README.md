@@ -14,7 +14,7 @@ Car rental directory for Pakistan. Users search by city, area, and car type, vie
 - **shadcn/ui primitives** (Button, Badge, Dropdown — built into `components/ui`)
 - **lucide-react** icons
 - **next/font** for Inter (English) and Noto Nastaliq Urdu
-- No database / no backend yet — mock data lives in `/data` as typed TS files
+- **MySQL** (Hostinger) for listings, the admin inbox and listing stats — see [Admin](#admin). `data/companies.ts` is only the starting snapshot.
 
 ## Running locally
 
@@ -103,9 +103,15 @@ Fonts:
 - `--font-inter` — Inter, 400-800
 - `--font-noto-urdu` — Noto Nastaliq Urdu (use class `font-urdu`)
 
-## Mock data → real DB
+## Listings data
 
-Every data file imports types from `lib/types.ts` and exports a typed array. When the backend lands, replace the array bodies with DB queries — components never see the shape change because they import the typed export.
+Listings live in the database. Public pages read them through `lib/admin/repo/public.ts` (`getCompanies()`, `getCompanyBySlug()`), which returns the same `Company` shape the components always used, and rebuild within 5 minutes — immediately after an admin change. If the database can't be reached, the site serves the `data/companies.ts` snapshot instead of failing. Cities, cars, areas, routes and guides are still typed files in `/data`.
+
+## Admin
+
+`/admin` is the owner's back office (one password, `ADMIN_PASSWORD`): deep per-listing analytics, the Inbox (new-listing requests from `/list-your-business`, ownership claims from `/companies/{slug}/claim`, problem reports from listing pages), listing edits with full history and undo, and Featured plans. Setup, environment variables and what is counted: **`docs/admin/SETUP.md`**. Design handoff: `design-reference/` (git-ignored). Code: `app/(admin)` (pages and server actions), `components/admin` (UI kit, charts, shell), `lib/admin` (database driver, business rules, stats engine), `lib/track.ts` + `components/analytics/SiteTracker.tsx` (the public tracker), `app/api/t` (where it sends).
+
+The public site and the admin are separate root layouts (`app/(site)` and `app/(admin)`), so no ads, analytics or chat widget ever load in the admin.
 
 Same goes for images: `lib/placeholder.ts` is the single switch. Flip `usePlaceholder` to `false` and every image source falls back to the `realPath` already declared in each data entry.
 

@@ -24,7 +24,10 @@ export function CompanyCard({
   });
 
   return (
-    <article className="relative flex h-full flex-col rounded-2xl border border-stone-200 bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <article
+      data-rs-card={company.slug}
+      className="relative flex h-full flex-col rounded-2xl border border-stone-200 bg-white p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow"
+    >
       {showFeaturedBadge && company.featured && (
         <Badge variant="featured" className="absolute right-4 top-4">
           Featured

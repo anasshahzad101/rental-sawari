@@ -12,7 +12,7 @@ import { FAQSection } from "./FAQSection";
 import { CompanyCard } from "@/components/companies/CompanyCard";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { Button } from "@/components/ui/button";
-import { companies } from "@/data/companies";
+import { getCompanies } from "@/lib/admin/repo/public";
 import { ADSENSE_SLOTS } from "@/lib/adsense";
 
 export interface UseCasePageProps {
@@ -29,7 +29,8 @@ export interface UseCasePageProps {
   faqs?: Array<{ q: string; a: string }>;
 }
 
-export function UseCasePage(props: UseCasePageProps) {
+export async function UseCasePage(props: UseCasePageProps) {
+  const companies = await getCompanies();
   const matchingVendors = companies
     .filter((c) => c.servicesOffered.includes(props.serviceMatch))
     .slice(0, 6);
