@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { normalizePhone } from "@/lib/admin/format";
+import { getListingBySlug } from "@/lib/admin/repo/listings";
+import { createMessage, markEmailed } from "@/lib/admin/repo/messages";
 import {
   FIELD_LABELS,
   leadReplyTo,
@@ -10,8 +13,11 @@ import {
 } from "@/lib/leads";
 
 /**
- * Single endpoint behind every form on the site (contact, vendor inquiry,
- * list-your-business). Delivers the submission by email to LEAD_TO_EMAIL.
+ * Endpoint behind the contact form and the "Send inquiry" form on listing
+ * pages. Each submission is saved to the admin Inbox (Messages) first, then
+ * emailed to LEAD_TO_EMAIL. The visitor sees success when either worked, so a
+ * message is never lost to an email problem. ("list-business" is the old
+ * email-only listing form; the current one posts to /api/listing-requests.)
  *
  * Configure on the host (Hostinger → deployment settings → Environment
  * Variables). Nothing is hard-coded because the password is a secret and this
@@ -24,9 +30,10 @@ import {
  *   LEAD_TO_EMAIL  default hello@rentalsawari.com
  *   LEAD_FROM_NAME default "RentalSawari Website"
  *
- * Without SMTP_USER / SMTP_PASS the route returns 503 and the forms show a
- * fallback telling the visitor to email or WhatsApp directly. It never reports
- * success for a message it did not actually send.
+ * If it could neither save nor email (no database and no SMTP_USER /
+ * SMTP_PASS), the route returns an error and the forms show a fallback telling
+ * the visitor to email or WhatsApp directly. It never reports success for a
+ * message that went nowhere.
  */
 
 export const runtime = "nodejs";
@@ -66,7 +73,43 @@ function escapeHtml(s: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function buildBodies(payload: LeadPayload, meta: { ip: string; when: string }) {
+const SITE = process.env.SITE_URL || "https://rentalsawari.com";
+
+/** Save a contact message or inquiry for the admin Inbox. Returns its id, or null. */
+async function saveToInbox(payload: LeadPayload): Promise<number | null> {
+  if (payload.formType !== "contact" && payload.formType !== "inquiry") return null;
+  try {
+    const rest = { ...payload.fields };
+    const take = (k: string): string | null => {
+      const v = rest[k];
+      delete rest[k];
+      return v || null;
+    };
+    const fromPage = /^\/companies\/([^/?#]+)/.exec(payload.page ?? "")?.[1];
+    const slug = typeof payload.listing === "string" && payload.listing ? payload.listing : fromPage;
+    const listing = payload.formType === "inquiry" && slug ? await getListingBySlug(slug.slice(0, 160)) : null;
+    const companyName = take("companyName");
+    const phone = take("phone");
+    return await createMessage({
+      kind: payload.formType,
+      listingId: listing?.id ?? null,
+      listingName: (companyName ?? listing?.name ?? "").slice(0, 255),
+      name: (take("name") ?? "").slice(0, 200),
+      phone: phone ? normalizePhone(phone) ?? phone.slice(0, 40) : null,
+      email: take("email")?.slice(0, 255) ?? null,
+      subject: take("subject")?.slice(0, 255) ?? null,
+      body: take("message"),
+      details: rest,
+      page: (payload.page ?? "").slice(0, 191),
+    });
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("[lead] could not save to the admin Inbox:", err);
+    return null;
+  }
+}
+
+function buildBodies(payload: LeadPayload, meta: { ip: string; when: string; inboxUrl: string | null }) {
   const rows = orderedEntries(payload.fields).map(([key, value]) => ({
     label: FIELD_LABELS[key] ?? key,
     value,
@@ -80,6 +123,7 @@ function buildBodies(payload: LeadPayload, meta: { ip: string; when: string }) {
     `Page: ${payload.page || "unknown"}`,
     `Received: ${meta.when}`,
     `IP: ${meta.ip}`,
+    ...(meta.inboxUrl ? [`In the admin Inbox: ${meta.inboxUrl}`] : []),
   ].join("\n");
 
   const html = `<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-size:15px;color:#1c1917">
@@ -98,7 +142,9 @@ function buildBodies(payload: LeadPayload, meta: { ip: string; when: string }) {
   <p style="margin-top:18px;color:#78716c;font-size:12px">
     Form: ${escapeHtml(payload.formType)} · Page: ${escapeHtml(
       payload.page || "unknown",
-    )}<br/>Received: ${escapeHtml(meta.when)} · IP: ${escapeHtml(meta.ip)}
+    )}<br/>Received: ${escapeHtml(meta.when)} · IP: ${escapeHtml(meta.ip)}${
+      meta.inboxUrl ? `<br/><a href="${escapeHtml(meta.inboxUrl)}">Open in the admin Inbox</a>` : ""
+    }
   </p>
 </div>`;
 
@@ -149,6 +195,9 @@ export async function POST(req: Request) {
     );
   }
 
+  // Into the admin Inbox first, so it's kept even if the email fails.
+  const saved = await saveToInbox(payload);
+
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
   const to = process.env.LEAD_TO_EMAIL || "hello@rentalsawari.com";
@@ -159,6 +208,7 @@ export async function POST(req: Request) {
   if (!user || !pass) {
     // eslint-disable-next-line no-console
     console.error("[lead] SMTP_USER / SMTP_PASS are not configured");
+    if (saved) return NextResponse.json({ ok: true });
     return NextResponse.json(
       { error: "Email delivery is not configured yet." },
       { status: 503 },
@@ -166,7 +216,8 @@ export async function POST(req: Request) {
   }
 
   const when = new Date().toLocaleString("en-PK", { timeZone: "Asia/Karachi" });
-  const { text, html } = buildBodies(payload, { ip, when });
+  const inboxUrl = saved ? `${SITE}/admin/inbox/messages?id=${saved}` : null;
+  const { text, html } = buildBodies(payload, { ip, when, inboxUrl });
 
   try {
     const transporter = nodemailer.createTransport({
@@ -188,11 +239,13 @@ export async function POST(req: Request) {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error("[lead] send failed:", err);
+    if (saved) return NextResponse.json({ ok: true });
     return NextResponse.json(
       { error: "We could not send your message. Please WhatsApp us instead." },
       { status: 502 },
     );
   }
 
+  if (saved) await markEmailed(saved).catch(() => {});
   return NextResponse.json({ ok: true });
 }

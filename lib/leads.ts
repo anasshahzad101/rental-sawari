@@ -18,6 +18,8 @@ export interface LeadPayload {
   fields: Record<string, string>;
   /** Path the form was submitted from, for context in the email. */
   page?: string;
+  /** Inquiries: the listing's slug, so the admin Inbox can link it. */
+  listing?: string;
   /** Anti-spam: hidden input that humans never fill. */
   website?: string;
   /** Anti-spam: ms between form mount and submit. */

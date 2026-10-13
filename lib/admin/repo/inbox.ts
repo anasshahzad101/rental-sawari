@@ -2,6 +2,7 @@ import "server-only";
 import { dayDiff, pktDay } from "../format";
 import { listClaims } from "./claims";
 import { listAll } from "./listings";
+import { listMessages } from "./messages";
 import { isUrgent, listReports } from "./reports";
 import { listRequests } from "./requests";
 
@@ -12,6 +13,9 @@ export interface InboxCounts {
   claimsReady: number;
   reports: number;
   urgent: number;
+  /** New contact messages + inquiries. */
+  messages: number;
+  inquiries: number;
   total: number;
   newestRequestAt: string | null;
   plansEnding: number; // within 7 days, not ended
@@ -19,10 +23,11 @@ export interface InboxCounts {
 }
 
 export async function inboxCounts(): Promise<InboxCounts> {
-  const [reqs, claims, reports, listings] = await Promise.all([listRequests(), listClaims(), listReports(), listAll()]);
+  const [reqs, claims, reports, listings, messages] = await Promise.all([listRequests(), listClaims(), listReports(), listAll(), listMessages()]);
   const newReqs = reqs.filter((r) => r.status === "new");
   const openClaims = claims.filter((c) => c.status === "waiting" || c.status === "verified");
   const newReports = reports.filter((r) => r.status === "new");
+  const newMessages = messages.filter((m) => m.status === "new");
   const today = pktDay();
   let ending = 0;
   let ended = 0;
@@ -38,7 +43,9 @@ export async function inboxCounts(): Promise<InboxCounts> {
     claimsReady: openClaims.filter((c) => c.status === "verified").length,
     reports: newReports.length,
     urgent: newReports.filter(isUrgent).length,
-    total: newReqs.length + openClaims.length + newReports.length,
+    messages: newMessages.length,
+    inquiries: newMessages.filter((m) => m.kind === "inquiry").length,
+    total: newReqs.length + openClaims.length + newReports.length + newMessages.length,
     newestRequestAt: newReqs[0]?.createdAt ?? null,
     plansEnding: ending,
     plansEnded: ended,

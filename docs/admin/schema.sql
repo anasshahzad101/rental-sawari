@@ -117,6 +117,28 @@ CREATE TABLE IF NOT EXISTS `reports` (
   KEY `ix_listing_id` (`listing_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` DATETIME NOT NULL,
+  `updated_at` DATETIME NOT NULL,
+  `kind` VARCHAR(10) NOT NULL,
+  `listing_id` INT NULL,
+  `listing_name` VARCHAR(255) NOT NULL DEFAULT '',
+  `name` VARCHAR(200) NOT NULL DEFAULT '',
+  `phone` VARCHAR(40) NULL,
+  `email` VARCHAR(255) NULL,
+  `subject` VARCHAR(255) NULL,
+  `body` TEXT NULL,
+  `details` MEDIUMTEXT NOT NULL,
+  `page` VARCHAR(191) NOT NULL DEFAULT '',
+  `emailed` TINYINT(1) NOT NULL DEFAULT 0,
+  `status` VARCHAR(8) NOT NULL DEFAULT 'new',
+  `done_at` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  KEY `ix_status` (`status`),
+  KEY `ix_listing_id` (`listing_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `media` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` DATETIME NOT NULL,

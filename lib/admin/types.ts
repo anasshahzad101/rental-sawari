@@ -194,6 +194,35 @@ export interface Report {
   demo?: boolean;
 }
 
+/** A contact-form message or a rental inquiry sent from a listing page. */
+export type MessageKind = "contact" | "inquiry";
+export type MessageStatus = "new" | "done";
+
+export interface SiteMessage {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  kind: MessageKind;
+  /** The listing an inquiry was sent from (null for the contact form). */
+  listingId: number | null;
+  /** The company name shown on the form, kept in case the listing goes. */
+  listingName: string;
+  name: string;
+  /** "+92…" when it's a valid Pakistani number, otherwise as typed. */
+  phone: string | null;
+  email: string | null;
+  subject: string | null;
+  body: string | null;
+  /** Everything else the form sent (pickup date, days, city…), by field name. */
+  details: Record<string, string>;
+  /** The page it was sent from. */
+  page: string;
+  /** Whether the copy to hello@rentalsawari.com went out. */
+  emailed: boolean;
+  status: MessageStatus;
+  doneAt: string | null;
+}
+
 // ── Stats ────────────────────────────────────────────────────────────────
 
 export type SourceKey = "google" | "direct" | "social" | "ai" | "whatsapp" | "bing" | "other";

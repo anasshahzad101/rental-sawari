@@ -6,13 +6,14 @@ import { normalizePhone } from "@/lib/admin/format";
 import { applyClaim, rejectClaim, reopenClaim, setVerification } from "@/lib/admin/repo/claims";
 import { getListing, patchListing } from "@/lib/admin/repo/listings";
 import { MediaError, resolveLogo } from "@/lib/admin/repo/media";
+import { deleteMessage, setMessageStatus } from "@/lib/admin/repo/messages";
 import { dismissReport, getReport, reopenReport, resolveReport } from "@/lib/admin/repo/reports";
 import { approveRequest, convertToClaim, getRequest, rejectRequest, reopenRequest, setFixes } from "@/lib/admin/repo/requests";
 import * as clean from "@/lib/admin/repo/sanitize";
 import type { ListingRequestPayload, VerifyMethod } from "@/lib/admin/types";
 import type { ActionResult } from "./listings";
 
-/** Server actions for the Inbox: listing requests, claims and problem reports. */
+/** Server actions for the Inbox: listing requests, claims, problem reports and messages. */
 
 function fail(e: unknown): { ok: false; error: string } {
   return { ok: false, error: e instanceof Error ? e.message : "Something went wrong. Try again." };
@@ -213,6 +214,30 @@ export async function hideFromReportAction(reportId: number, alsoResolve: boolea
     if (alsoResolve) await resolveReport(reportId, "Hid the listing.");
     refresh();
     return { ok: true, versionId };
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+// ── Messages (contact form and listing inquiries) ────────────────────────
+
+export async function setMessageDoneAction(id: number, done: boolean): Promise<ActionResult> {
+  await requireAdmin();
+  try {
+    await setMessageStatus(id, done ? "done" : "new");
+    refresh();
+    return { ok: true };
+  } catch (e) {
+    return fail(e);
+  }
+}
+
+export async function deleteMessageAction(id: number): Promise<ActionResult> {
+  await requireAdmin();
+  try {
+    await deleteMessage(id);
+    refresh();
+    return { ok: true };
   } catch (e) {
     return fail(e);
   }

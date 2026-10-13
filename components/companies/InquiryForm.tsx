@@ -50,6 +50,7 @@ export function InquiryForm({
     const result = await submitLead({
       formType: "inquiry",
       fields,
+      listing: companySlug,
       website: honeypot,
       elapsedMs: Date.now() - mountedAt.current,
     });

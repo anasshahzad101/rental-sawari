@@ -923,7 +923,7 @@ export function KitDemo() {
             <ListingHeader listing={{ ...MARGALLA, id: 16, name: "Chenab Car Rental", city: "Gujrat", area: "GT Road", plan: "free", verified: false, status: "hidden" }} tab="history" />
           </Card>
           <Card>
-            <InboxTabs active="requests" counts={{ requests: 3, claims: 2, reports: 4 }} view="new" viewCounts={{ new: 3, done: 18, rejected: 4 }} />
+            <InboxTabs active="requests" counts={{ requests: 3, claims: 2, reports: 4, messages: 5 }} view="new" viewCounts={{ new: 3, done: 18, rejected: 4 }} />
           </Card>
           <Card>
             <Tabs

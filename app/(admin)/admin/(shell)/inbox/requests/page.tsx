@@ -93,7 +93,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Sea
         <InboxTabs
           className={mobileDetail ? "max-lg:hidden" : undefined}
           active="requests"
-          counts={{ requests: counts.requests, claims: counts.claims, reports: counts.reports }}
+          counts={{ requests: counts.requests, claims: counts.claims, reports: counts.reports, messages: counts.messages }}
           view={view}
           viewCounts={{ new: byView.new.length, done: byView.done.length, rejected: byView.rejected.length }}
         />

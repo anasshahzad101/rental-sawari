@@ -174,6 +174,29 @@ export const TABLES = {
     },
     indexes: [["status"], ["listingId"]],
   },
+  /** Contact form and listing-page inquiries (they're emailed too). */
+  messages: {
+    name: "messages",
+    cols: {
+      id: c.id(),
+      createdAt: c.datetime(),
+      updatedAt: c.datetime(),
+      kind: c.str(10),
+      listingId: c.int(true),
+      listingName: c.str(255, false, ""),
+      name: c.str(200, false, ""),
+      phone: c.str(40, true),
+      email: c.str(255, true),
+      subject: c.str(255, true),
+      body: c.text(),
+      details: c.json(),
+      page: c.str(191, false, ""),
+      emailed: c.bool(),
+      status: c.str(8, false, "new"),
+      doneAt: c.datetime(true),
+    },
+    indexes: [["status"], ["listingId"]],
+  },
   media: {
     name: "media",
     cols: {
