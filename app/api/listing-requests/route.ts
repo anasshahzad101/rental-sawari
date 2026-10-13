@@ -21,7 +21,7 @@ export async function POST(req: Request) {
   } catch {
     return json({ ok: false, error: "Invalid request." }, 400);
   }
-  if (looksLikeBot(body)) return json({ ok: true, id: 0 });
+  if (looksLikeBot(body, "listing-requests")) return json({ ok: true, id: 0 });
   if (rateLimited(`req:${clientIp(req)}`, 5, 10 * 60 * 1000)) {
     return json({ ok: false, error: "Too many requests. Please try again in a few minutes." }, 429);
   }
