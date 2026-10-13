@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   } catch {
     return json({ ok: false, error: "Invalid request." }, 400);
   }
-  if (looksLikeBot(body, 1500)) return json({ ok: true });
+  if (looksLikeBot(body, "reports")) return json({ ok: true });
   if (rateLimited(`report:${clientIp(req)}`, 6, 10 * 60 * 1000)) {
     return json({ ok: false, error: "Too many reports. Please try again in a few minutes." }, 429);
   }

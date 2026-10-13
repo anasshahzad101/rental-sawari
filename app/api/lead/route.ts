@@ -36,8 +36,6 @@ const VALID_TYPES: LeadFormType[] = ["contact", "inquiry", "list-business"];
 
 const MAX_FIELD_LENGTH = 5000;
 const MAX_FIELDS = 30;
-/** Forms completed faster than this are almost certainly bots. */
-const MIN_ELAPSED_MS = 1500;
 
 // Very small in-memory throttle. Single-instance hosting, so a Map is enough;
 // it resets on redeploy, which is acceptable for a contact form.
@@ -120,11 +118,10 @@ export async function POST(req: Request) {
   }
 
   // Honeypot: a hidden input real people never see. Pretend it worked so the
-  // bot does not learn anything, but send nothing.
+  // bot does not learn anything, but send nothing. (Fill time is not used to
+  // drop anything: a quick person would see "sent" and the message be lost.)
   if (payload.website) {
-    return NextResponse.json({ ok: true });
-  }
-  if (typeof payload.elapsedMs === "number" && payload.elapsedMs < MIN_ELAPSED_MS) {
+    console.warn(`[lead] dropped a ${payload.formType} submission: honeypot filled`);
     return NextResponse.json({ ok: true });
   }
 
