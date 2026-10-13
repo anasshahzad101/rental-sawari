@@ -48,7 +48,7 @@ export default async function ClaimsPage({ searchParams }: { searchParams: Searc
         <InboxTabs
           className={mobileDetail ? "max-lg:hidden" : undefined}
           active="claims"
-          counts={{ requests: counts.requests, claims: counts.claims, reports: counts.reports }}
+          counts={{ requests: counts.requests, claims: counts.claims, reports: counts.reports, messages: counts.messages }}
           view={view}
           viewCounts={viewCounts}
         />

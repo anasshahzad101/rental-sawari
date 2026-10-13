@@ -102,7 +102,7 @@ export default async function ReportsPage({ searchParams }: { searchParams: Sear
           className={mobileDetail ? "max-lg:hidden" : undefined}
           active="reports"
           hideRejected
-          counts={{ requests: counts.requests, claims: counts.claims, reports: counts.reports }}
+          counts={{ requests: counts.requests, claims: counts.claims, reports: counts.reports, messages: counts.messages }}
           view={view}
           viewCounts={{ new: byView.new.length, done: byView.done.length, rejected: 0 }}
         />

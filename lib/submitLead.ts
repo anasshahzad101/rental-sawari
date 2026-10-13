@@ -12,6 +12,8 @@ export async function submitLead(input: {
   website?: string;
   /** Milliseconds between form mount and submit. */
   elapsedMs?: number;
+  /** Inquiries: the listing's slug. */
+  listing?: string;
 }): Promise<{ ok: boolean; error?: string }> {
   try {
     const res = await fetch("/api/lead", {

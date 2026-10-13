@@ -1,14 +1,14 @@
 import * as React from "react";
 import Link from "next/link";
-import { CalendarClock, ChevronRight, EyeOff, FilePlus2, Flag, UserCheck } from "lucide-react";
+import { CalendarClock, ChevronRight, EyeOff, FilePlus2, Flag, MessageSquare, UserCheck } from "lucide-react";
 import type { InboxCounts } from "@/lib/admin/repo/inbox";
 import { fmtNum, fmtWhen, plural } from "@/lib/admin/format";
 import { cx } from "@/components/admin/ui/cx";
 import type { IconComponent } from "@/components/admin/ui/icons";
 
 /**
- * "Needs you": five tiles (desktop) or one card of five rows (mobile), each
- * opening the page it talks about. Counts come from the Inbox and plans, so
+ * "Needs you": six tiles (desktop, two rows of three) or one card of six rows
+ * (mobile), each opening the page it talks about. Counts come from the Inbox and plans, so
  * they show even on the first day of tracking.
  */
 
@@ -115,6 +115,17 @@ function buildItems(c: InboxCounts, zeroOpens: number, zeroHref: string): Item[]
       mobileSub: c.urgent ? <UrgentPill n={c.urgent} /> : muted(c.reports ? "None urgent" : "Nothing waiting"),
     },
     {
+      key: "messages",
+      href: "/admin/inbox/messages",
+      icon: MessageSquare,
+      tone: "teal",
+      count: c.messages,
+      label: "Messages",
+      mobileLabel: "Messages",
+      sub: c.messages ? muted(`${fmtNum(c.inquiries)} ${c.inquiries === 1 ? "inquiry" : "inquiries"} · ${fmtNum(c.messages - c.inquiries)} contact`) : muted("Nothing waiting"),
+      mobileSub: c.messages ? muted(`${fmtNum(c.inquiries)} ${c.inquiries === 1 ? "inquiry" : "inquiries"} · ${fmtNum(c.messages - c.inquiries)} contact`) : muted("Nothing waiting"),
+    },
+    {
       key: "plans",
       href: "/admin/plans",
       icon: CalendarClock,
@@ -147,7 +158,7 @@ export interface NeedsYouProps {
   className?: string;
 }
 
-/** Desktop: heading + sub line, then 5 tiles in `repeat(5,1fr)`, gap 16. */
+/** Desktop: heading + sub line, then 6 tiles in `repeat(3,1fr)`, gap 16. */
 export function NeedsYouDesktop({ counts, zeroOpens, zeroHref, className }: NeedsYouProps) {
   const items = buildItems(counts, zeroOpens, zeroHref);
   const plans = counts.plansEnding + counts.plansEnded;
@@ -161,7 +172,7 @@ export function NeedsYouDesktop({ counts, zeroOpens, zeroHref, className }: Need
           {fmtNum(counts.total)} waiting in Inbox · {plural(plans, "plan")} to decide
         </span>
       </div>
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         {items.map((it) => {
           const Icon = it.icon;
           return (
@@ -190,7 +201,7 @@ export function NeedsYouDesktop({ counts, zeroOpens, zeroHref, className }: Need
   );
 }
 
-/** Mobile: one card of five 60 px rows (icon, label + sub, number, chevron). */
+/** Mobile: one card of six 60 px rows (icon, label + sub, number, chevron). */
 export function NeedsYouMobile({ counts, zeroOpens, zeroHref, className }: NeedsYouProps) {
   const items = buildItems(counts, zeroOpens, zeroHref);
   return (

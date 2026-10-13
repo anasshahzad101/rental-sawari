@@ -2,23 +2,24 @@ import * as React from "react";
 import { Segmented } from "../ui/controls";
 import { Tabs } from "../ui/Tabs";
 
-export type InboxKind = "requests" | "claims" | "reports";
+export type InboxKind = "requests" | "claims" | "reports" | "messages";
 export type InboxView = "new" | "done" | "rejected";
 
 export interface InboxTabsProps {
   active: InboxKind;
-  counts: { requests: number; claims: number; reports: number };
+  counts: { requests: number; claims: number; reports: number; messages: number };
   view: InboxView;
   viewCounts: { new: number; done: number; rejected: number };
-  /** Reports have no Rejected view. */
+  /** Reports and messages have no Rejected view. */
   hideRejected?: boolean;
   className?: string;
 }
 
 /**
  * Inbox header: underline tabs "Listing requests (3) · Claims (2) · Problem
- * reports (4)" (mobile: Requests / Claims / Reports) and a New · Done ·
- * Rejected segmented filter. All links; the `id` param is dropped.
+ * reports (4) · Messages (5)" (mobile: Requests / Claims / Reports /
+ * Messages) and a New · Done · Rejected segmented filter. All links; the `id`
+ * param is dropped.
  */
 export function InboxTabs({ active, counts, view, viewCounts, hideRejected, className }: InboxTabsProps) {
   const base = `/admin/inbox/${active}`;
@@ -31,6 +32,7 @@ export function InboxTabs({ active, counts, view, viewCounts, hideRejected, clas
     <div className={["flex flex-col gap-3.5", className].filter(Boolean).join(" ")}>
       <Tabs
         mobileFill
+        mobileStack
         mobileHeight={48}
         active={active}
         aria-label="Inbox"
@@ -38,6 +40,7 @@ export function InboxTabs({ active, counts, view, viewCounts, hideRejected, clas
           { key: "requests", label: "Listing requests", mobileLabel: "Requests", count: counts.requests, href: "/admin/inbox/requests" },
           { key: "claims", label: "Claims", count: counts.claims, href: "/admin/inbox/claims" },
           { key: "reports", label: "Problem reports", mobileLabel: "Reports", count: counts.reports, href: "/admin/inbox/reports" },
+          { key: "messages", label: "Messages", count: counts.messages, href: "/admin/inbox/messages" },
         ]}
       />
       <div className="flex items-center gap-3">

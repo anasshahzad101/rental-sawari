@@ -22,12 +22,14 @@ export interface TabsProps {
   mobileFill?: boolean;
   /** Tab height on mobile: 44 (default) or 48. */
   mobileHeight?: 44 | 48;
+  /** Under 1024 px, put the count pill under the label (fits four tabs with counts on a phone). */
+  mobileStack?: boolean;
   className?: string;
   "aria-label"?: string;
 }
 
 /** Underline tabs: 44 px, 2 px teal underline on the active tab, optional icon and count pill. */
-export function Tabs({ items, active, onChange, mobileFill, mobileHeight = 44, className, ...rest }: TabsProps) {
+export function Tabs({ items, active, onChange, mobileFill, mobileHeight = 44, mobileStack, className, ...rest }: TabsProps) {
   return (
     <div
       role="tablist"
@@ -41,6 +43,7 @@ export function Tabs({ items, active, onChange, mobileFill, mobileHeight = 44, c
           on ? "border-brand-700 font-semibold text-brand-700" : "border-transparent font-medium text-quiet-text hover:text-ink",
           mobileFill && "max-lg:min-w-0 max-lg:flex-1 max-lg:px-0.5",
           mobileHeight === 48 && "max-lg:h-12",
+          mobileStack && "max-lg:h-auto max-lg:min-h-12 max-lg:flex-col max-lg:gap-0.5 max-lg:py-1.5 max-lg:text-[14px]/[18px]",
         );
         const Icon = it.icon;
         const inner = (
@@ -58,6 +61,7 @@ export function Tabs({ items, active, onChange, mobileFill, mobileHeight = 44, c
               <span
                 className={cx(
                   "num inline-block h-[22px] min-w-[22px] flex-none rounded-full px-[7px] text-center text-[12px]/[22px] font-bold",
+                  mobileStack && "max-lg:h-[18px] max-lg:min-w-[18px] max-lg:px-[5px] max-lg:text-[11px]/[18px]",
                   on ? "bg-brand-700 text-white" : "bg-fill text-quiet-text",
                 )}
               >
