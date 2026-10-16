@@ -8,7 +8,7 @@ import {
   Car as CarIcon,
 } from "lucide-react";
 import type { RouteData } from "@/data/routes";
-import { companies as allCompanies } from "@/data/companies";
+import { getCompanies } from "@/lib/admin/repo/public";
 import { cities } from "@/data/cities";
 import { popularCarTypes } from "@/data/carTypes";
 import { guides } from "@/data/guides";
@@ -26,7 +26,8 @@ const SITE = "https://rentalsawari.com";
  * (those are the operators who can actually pick up + start the trip).
  */
 
-export function RoutePage({ route }: { route: RouteData }) {
+export async function RoutePage({ route }: { route: RouteData }) {
+  const allCompanies = await getCompanies();
   const fromVendors = allCompanies
     .filter((c) => c.city.toLowerCase() === route.fromName.toLowerCase())
     .sort((a, b) => b.reviewCount - a.reviewCount)

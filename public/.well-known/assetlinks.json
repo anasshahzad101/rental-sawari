@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.rentalsawari.admin",
+      "sha256_cert_fingerprints": ["FE:E7:F0:9B:5F:78:4E:4F:02:95:4E:A3:F7:A2:09:56:73:BA:ED:CD:64:61:4B:A7:ED:30:79:1F:43:94:6B:F3"]
+    }
+  }
+]

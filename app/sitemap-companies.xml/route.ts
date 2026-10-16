@@ -1,9 +1,12 @@
 import { buildUrlset, xmlHeaders, SITE } from "@/lib/sitemap";
-import { companies } from "@/data/companies";
+import { getCompanies } from "@/lib/admin/repo/public";
 
 export const dynamic = "force-static";
+// Listings change in the admin; refresh the sitemap at most hourly.
+export const revalidate = 3600;
 
-export function GET() {
+export async function GET() {
+  const companies = await getCompanies();
   const now = new Date().toISOString();
   // Thin pages (fewer than 5 reviews) carry a noindex via per-page metadata
   // but we still list them in the sitemap so Google crawls and discovers

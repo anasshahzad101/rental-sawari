@@ -17,7 +17,8 @@ These must be done before you submit to Search Console / publish broadly.
 | L3 | Replace placeholder author in `lib/authors.ts` | Real name + LinkedIn URL. Person schema is currently anchored to a placeholder LinkedIn |
 | L4 | Set `NEXT_PUBLIC_GA_ID` env var (e.g. `G-XXXXXXXXXX`) on Vercel | Activates GA4 in `components/analytics/Analytics.tsx` |
 | L5 | Set `NEXT_PUBLIC_CLARITY_ID` env var on Vercel | Activates Microsoft Clarity |
-| L6 | Add an MX record + email mailbox for `hello@`, `legal@`, `privacy@rentalsawari.com` | All site copy and JSON-LD references these |
+| L6 | ~~Add an MX record~~ (done — `mx1/mx2.hostinger.com` are live). Still need the **`hello@rentalsawari.com` mailbox** plus `legal@`, `privacy@` | All site copy and JSON-LD reference these |
+| L10 | Set `SMTP_USER` + `SMTP_PASS` (and optionally `SMTP_HOST`, `SMTP_PORT`, `LEAD_TO_EMAIL`) in Hostinger deployment settings | **Blocks all three forms.** Until then `/api/lead` returns 503 and forms show a WhatsApp/email fallback. See README → "Forms → email" |
 | L7 | Point `rentalsawari.com` DNS to Vercel + connect both `rentalsawari.com` and `www.rentalsawari.com` (the redirect in `next.config.mjs` handles canonicalisation) | |
 | L8 | Submit `https://hstspreload.org/` for HSTS preload eligibility | Already configured via `next.config.mjs` headers |
 | L9 | Submit `/sitemap.xml` to Google Search Console + Bing Webmaster Tools | The sitemap-index references 9 sub-sitemaps |

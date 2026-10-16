@@ -14,7 +14,7 @@ Car rental directory for Pakistan. Users search by city, area, and car type, vie
 - **shadcn/ui primitives** (Button, Badge, Dropdown — built into `components/ui`)
 - **lucide-react** icons
 - **next/font** for Inter (English) and Noto Nastaliq Urdu
-- No database / no backend yet — mock data lives in `/data` as typed TS files
+- **MySQL** (Hostinger) for listings, the admin inbox and listing stats — see [Admin](#admin). `data/companies.ts` is only the starting snapshot.
 
 ## Running locally
 
@@ -103,9 +103,15 @@ Fonts:
 - `--font-inter` — Inter, 400-800
 - `--font-noto-urdu` — Noto Nastaliq Urdu (use class `font-urdu`)
 
-## Mock data → real DB
+## Listings data
 
-Every data file imports types from `lib/types.ts` and exports a typed array. When the backend lands, replace the array bodies with DB queries — components never see the shape change because they import the typed export.
+Listings live in the database. Public pages read them through `lib/admin/repo/public.ts` (`getCompanies()`, `getCompanyBySlug()`), which returns the same `Company` shape the components always used, and rebuild within 5 minutes — immediately after an admin change. If the database can't be reached, the site serves the `data/companies.ts` snapshot instead of failing. Cities, cars, areas, routes and guides are still typed files in `/data`.
+
+## Admin
+
+`/admin` is the owner's back office (one password, `ADMIN_PASSWORD`): deep per-listing analytics, the Inbox (new-listing requests from `/list-your-business`, ownership claims from `/companies/{slug}/claim`, problem reports from listing pages), listing edits with full history and undo, and Featured plans. Setup, environment variables and what is counted: **`docs/admin/SETUP.md`**. Design handoff: `design-reference/` (git-ignored). Code: `app/(admin)` (pages and server actions), `components/admin` (UI kit, charts, shell), `lib/admin` (database driver, business rules, stats engine), `lib/track.ts` + `components/analytics/SiteTracker.tsx` (the public tracker), `app/api/t` (where it sends).
+
+The public site and the admin are separate root layouts (`app/(site)` and `app/(admin)`), so no ads, analytics or chat widget ever load in the admin.
 
 Same goes for images: `lib/placeholder.ts` is the single switch. Flip `usePlaceholder` to `false` and every image source falls back to the `realPath` already declared in each data entry.
 
@@ -124,6 +130,38 @@ Same goes for images: `lib/placeholder.ts` is the single switch. Flip `usePlaceh
 - JSON-LD for `WebSite` (with `SearchAction`) and `Organization` injected in `app/page.tsx`.
 - Open Graph + Twitter Card metadata in `app/layout.tsx`.
 
+## Forms → email
+
+All three forms (`ContactForm`, `InquiryForm`, `ListBusinessForm`) POST to
+`app/api/lead/route.ts`, which emails the submission to `hello@rentalsawari.com`
+over SMTP. Set these on the host (Hostinger → deployment settings → Environment
+Variables). Nothing is committed, because this repository is public:
+
+| Variable | Required | Default | Notes |
+|---|---|---|---|
+| `SMTP_USER` | yes | — | Full mailbox address, e.g. `hello@rentalsawari.com` |
+| `SMTP_PASS` | yes | — | That mailbox's password |
+| `SMTP_HOST` | no | `smtp.hostinger.com` | |
+| `SMTP_PORT` | no | `465` | 465 = implicit TLS, 587 = STARTTLS |
+| `LEAD_TO_EMAIL` | no | `hello@rentalsawari.com` | Where submissions land |
+| `LEAD_FROM_NAME` | no | `RentalSawari Website` | Display name on the From header |
+
+Until `SMTP_USER` / `SMTP_PASS` exist the route returns 503 and every form shows
+a fallback pointing at WhatsApp and the mailbox. The forms never claim a message
+was sent when it was not. Spam protection is a hidden honeypot field, a minimum
+fill time, and a per-IP rate limit of 5 submissions per 10 minutes.
+
+## Chat widget
+
+`components/chat/HelpWidget.tsx` is a floating four-question assistant mounted
+site-wide in `app/layout.tsx`. It asks need → city → car → timeline, then hands
+off to WhatsApp with a pre-filled summary (carrying the usual `ref` tag) or to
+the matching city listings page. No LLM, no backend, no third-party script — the
+option lists are duplicated in that file to keep the client bundle small, so
+keep their slugs in sync with `data/cities.ts` and `data/carTypes.ts`.
+
 ## Deploying
 
-Built for **Vercel**. After pushing to GitHub, import into Vercel — no env vars needed for the homepage. Set the custom domain when ready.
+Deployed on **Hostinger** (hPanel → Git deployment, Node 22.x, `npm run build`,
+output `.next`), building from `main`. The README previously said Vercel; that is
+no longer accurate. Environment variables live in the deployment settings panel.

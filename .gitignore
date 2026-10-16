@@ -7,6 +7,9 @@ dist
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# Local editor/agent scratch config (dev server launch profile).
+.claude/
 .vercel
 
 # Don't ship the Google Maps scraper binary or raw scraped CSVs.
@@ -19,3 +22,18 @@ public/images/G-Maps-Extractor*
 public/images/Karachi.jpg
 public/images/Lahore.jpg
 
+
+# Claude Design exports (reference only, not shipped).
+design-reference/
+
+# Local admin data store used in development (no MySQL locally).
+.data/
+
+# Android admin app: build output, and never a signing key (see docs/admin/ANDROID.md)
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.p12
+*.jks
+*.keystore

@@ -1,20 +1,50 @@
 "use client";
 
 import * as React from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { trackContactSubmit } from "@/lib/analytics";
+import { submitLead } from "@/lib/submitLead";
+import { business } from "@/lib/business";
+import { FormFallback, HoneypotField } from "./FormFallback";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = React.useState(false);
+  const [pending, setPending] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+  const [honeypot, setHoneypot] = React.useState("");
+  const mountedAt = React.useRef(Date.now());
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (pending) return;
     const data = new FormData(e.currentTarget);
     const subject = (data.get("subject") as string) || "(none)";
-    // eslint-disable-next-line no-console
-    console.log("[contact]", Object.fromEntries(data.entries()));
+
+    setPending(true);
+    setError(null);
+
+    const fields = Object.fromEntries(
+      Array.from(data.entries())
+        .filter(([key]) => key !== "website")
+        .map(([key, value]) => [key, String(value)]),
+    );
+
+    const result = await submitLead({
+      formType: "contact",
+      fields,
+      website: honeypot,
+      elapsedMs: Date.now() - mountedAt.current,
+    });
+
+    setPending(false);
+
+    if (!result.ok) {
+      setError(result.error ?? "Something went wrong.");
+      return;
+    }
+
     trackContactSubmit(subject);
     setSubmitted(true);
   }
@@ -25,7 +55,8 @@ export function ContactForm() {
         <CheckCircle2 className="mx-auto h-10 w-10 text-success" />
         <h3 className="mt-3 text-lg font-bold text-stone-900">Message sent</h3>
         <p className="mt-1 text-sm text-stone-600">
-          We&apos;ll reply within 1 business day.
+          It&apos;s on its way to {business.email}. We&apos;ll reply within 1
+          business day.
         </p>
       </div>
     );
@@ -34,21 +65,40 @@ export function ContactForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm space-y-3"
+      className="relative rounded-2xl border border-stone-200 bg-white p-6 shadow-sm space-y-3"
     >
+      <HoneypotField value={honeypot} onChange={setHoneypot} />
       <Field label="Your name" name="name" required />
       <Field label="Email" name="email" type="email" required />
       <Field label="Subject" name="subject" required />
-      <Field
-        label="Message"
-        name="message"
-        textarea
-        rows={5}
-        required
-      />
-      <Button type="submit" variant="primary" size="lg" className="w-full">
-        <Send className="h-4 w-4" />
-        Send Message
+      <Field label="Message" name="message" textarea rows={5} required />
+
+      {error && (
+        <FormFallback
+          error={error}
+          source="contact-form"
+          whatsappMessage="Hi RentalSawari, the contact form on your site didn't go through. My question:"
+        />
+      )}
+
+      <Button
+        type="submit"
+        variant="primary"
+        size="lg"
+        className="w-full"
+        disabled={pending}
+      >
+        {pending ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Sending…
+          </>
+        ) : (
+          <>
+            <Send className="h-4 w-4" />
+            Send Message
+          </>
+        )}
       </Button>
     </form>
   );
