@@ -305,4 +305,196 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    slug: "self-drive-car-rental-lahore",
+    title: "Self-Drive Car Rental in Lahore — Requirements & Best Areas (2026)",
+    excerpt:
+      "Where to find self-drive rentals in Lahore, what documents and deposits you need, realistic rates, and the contract clauses worth reading twice.",
+    readTime: 6,
+    publishedDate: "2026-10-19",
+    image: img(
+      "Self-Drive Lahore",
+      "self-drive-lahore",
+      "https://upload.wikimedia.org/wikipedia/commons/7/70/Mehran_Model_2001_Right_Side_View_At_Lowari_Pass%2CChitral%2CKPK.jpg",
+    ),
+    category: "Buying Guide",
+    faqs: [
+      {
+        q: "What documents do I need for self-drive in Lahore?",
+        a: "An original CNIC, a valid Pakistani driving licence, and a refundable security deposit of PKR 25,000–100,000 depending on the car. Some vendors also ask for a utility bill as address proof. Foreign visitors need a passport, valid visa, and International Driving Permit.",
+      },
+      {
+        q: "How much does self-drive cost in Lahore?",
+        a: "Self-drive rates in Lahore run PKR 3,000–5,000/day for economy cars, PKR 5,000–7,000/day for sedans, and PKR 12,000–18,000/day for SUVs — roughly PKR 1,500–3,000/day cheaper than with-driver hire.",
+      },
+      {
+        q: "Which areas of Lahore have the most self-drive options?",
+        a: "Johar Town dominates Lahore's self-drive segment, with Gulberg and Wapda Town as secondary hubs. DHA vendors rarely offer self-drive because their fleets skew luxury.",
+      },
+      {
+        q: "Is there a mileage limit on self-drive rentals?",
+        a: "Usually yes — most Lahore vendors cap self-drive at 200–300 km/day within the city, with PKR 20–40/km beyond that. Intercity self-drive needs prior approval and sometimes a higher deposit.",
+      },
+    ],
+  },
+  {
+    slug: "rent-a-car-without-driver-karachi-islamabad",
+    title: "Rent a Car Without a Driver in Karachi & Islamabad (2026) — Deposits & CNIC Rules",
+    excerpt:
+      "How no-driver rentals work in Karachi and Islamabad — deposit ranges, CNIC and licence rules, insurance realities, and which vendors actually hand over the keys.",
+    readTime: 6,
+    publishedDate: "2026-10-19",
+    image: img(
+      "Rent Without Driver",
+      "without-driver",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Toyota_Corolla_Hybrid_%28E210%29_IMG_4338.jpg/1280px-Toyota_Corolla_Hybrid_%28E210%29_IMG_4338.jpg",
+    ),
+    category: "Buying Guide",
+    faqs: [
+      {
+        q: "How much is the deposit for a no-driver rental?",
+        a: "Expect a refundable deposit of PKR 25,000–50,000 for economy cars, PKR 50,000–100,000 for sedans and SUVs in Karachi and Islamabad. Deposits are returned at handover after a damage and fuel-level check.",
+      },
+      {
+        q: "Can I rent without a driver using someone else's CNIC?",
+        a: "No — reputable vendors require the renter's own original CNIC and driving licence. Renting on a borrowed CNIC voids any insurance arrangement and most vendors will refuse at pickup.",
+      },
+      {
+        q: "Is insurance included in self-drive rentals?",
+        a: "Basic third-party cover is standard; comprehensive cover is rare on self-drive contracts. Most agreements make the renter liable for damage up to the deposit amount — read the accident clause before signing.",
+      },
+      {
+        q: "Which city is easier for first-time self-drive renters?",
+        a: "Islamabad — wider roads, calmer traffic, and vendors in F-10/F-11 accustomed to foreign and first-time renters. Karachi self-drive is concentrated in PECHS, Gulshan, and DHA and suits experienced city drivers.",
+      },
+    ],
+  },
+  {
+    slug: "monthly-car-rental-companies-pakistan",
+    title: "Monthly Car Rental for Companies in Pakistan (2026) — Rates & Contracts",
+    excerpt:
+      "What corporate monthly rentals cost in Pakistan by vehicle class, what a proper contract includes, and how to structure driver, fuel, and maintenance terms.",
+    readTime: 7,
+    publishedDate: "2026-10-19",
+    image: img(
+      "Corporate Monthly",
+      "corporate-monthly",
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/2021_Toyota_Land_Cruiser_300_3.4_ZX_%28Colombia%29_front_view_04.png",
+    ),
+    category: "Business",
+    faqs: [
+      {
+        q: "How much is a monthly car rental for a company in Pakistan?",
+        a: "Monthly corporate rates in 2026: economy cars PKR 90,000–130,000/month, sedans PKR 150,000–220,000/month, SUVs PKR 350,000–550,000/month — typically 15–30% below equivalent daily rates, driver included.",
+      },
+      {
+        q: "What should a corporate rental contract include?",
+        a: "Vehicle replacement guarantee within 24 hours of breakdown, driver backup clause, insurance responsibilities, fuel policy, mileage caps, and invoice/PAN details for tax withholding. Get the replacement SLA in writing.",
+      },
+      {
+        q: "Is fuel included in monthly corporate rates?",
+        a: "Usually not. Most contracts bill fuel at actuals or set a monthly fuel cap. Clarify whether the driver's salary, meals, and accommodation on travel days are included — on good contracts they are.",
+      },
+      {
+        q: "Which cities have the strongest corporate rental supply?",
+        a: "Islamabad (MNC and NGO concentration), Karachi (corporate headquarters), and Lahore. All three have vendors experienced with monthly invoicing, GST invoices, and multi-vehicle fleet contracts.",
+      },
+    ],
+  },
+  {
+    slug: "airport-pickup-car-service-pakistan",
+    title: "Airport Pickup Car Services in Pakistan (2026) — Lahore, Karachi, Islamabad",
+    excerpt:
+      "What airport pickup costs at LHE, KHI, and ISB, how meet-and-greet works, and how to book a reliable pickup for late-night and early-morning flights.",
+    readTime: 5,
+    publishedDate: "2026-10-19",
+    image: img(
+      "Airport Pickup",
+      "airport-pickup",
+      "https://upload.wikimedia.org/wikipedia/commons/9/90/Toyota_Coaster_GX_XZB70.jpg",
+    ),
+    category: "Services",
+    faqs: [
+      {
+        q: "How much does airport pickup cost in Pakistan?",
+        a: "Airport pickup typically adds PKR 500–2,000 over the standard daily rate: roughly PKR 4,500–8,000 total for a sedan pickup at Lahore (LHE), Karachi (KHI), or Islamabad (ISB) including the first day's hire.",
+      },
+      {
+        q: "How does meet-and-greet work at Pakistani airports?",
+        a: "Share your flight number on WhatsApp when booking. The driver tracks the flight, waits at arrivals with a name card, and messages you on landing. Most vendors include 60 minutes of free waiting after landing.",
+      },
+      {
+        q: "Can I book a pickup for a 3 AM flight?",
+        a: "Yes — established vendors in all three cities run 24/7 airport services. Book at least 12–24 hours ahead for late-night pickups and confirm the driver's name and number the evening before.",
+      },
+      {
+        q: "What if my flight is delayed?",
+        a: "Drivers track flight status via the flight number you provide, so delays are absorbed automatically. Beyond 60–90 minutes of post-landing waiting, a small waiting charge (PKR 200–500/hour) may apply.",
+      },
+    ],
+  },
+  {
+    slug: "northern-areas-rental-car-guide",
+    title: "Northern Areas by Rental Car (2026) — Hunza, Skardu, Naran: Vehicles & Rules",
+    excerpt:
+      "Which vehicle for which valley, what multi-day packages cost, NOC and permit realities, and the season windows that matter for Hunza, Skardu, and Naran.",
+    readTime: 9,
+    publishedDate: "2026-10-19",
+    image: img(
+      "Northern Areas",
+      "northern-areas",
+      "https://upload.wikimedia.org/wikipedia/commons/b/bc/KKH.png",
+    ),
+    category: "Travel",
+    faqs: [
+      {
+        q: "Which car is best for a Hunza trip?",
+        a: "A sedan handles the Karakoram Highway to Hunza comfortably in season (May–October). For Skardu side valleys, Deosai, or winter travel, book an SUV (Prado, Fortuner) — ground clearance and 4x4 matter off the KKH.",
+      },
+      {
+        q: "How much does a 5-day Hunza package cost?",
+        a: "A 5-day Islamabad–Hunza package costs roughly USD 800–1,500 (PKR 225,000–420,000) including vehicle, driver, fuel, and tolls — sedan at the low end, Land Cruiser at the top.",
+      },
+      {
+        q: "Do I need an NOC to visit the Northern Areas?",
+        a: "Pakistani nationals need no NOC for Hunza, Skardu, or Naran. Foreign tourists should carry passport and visa copies; some border-adjacent zones (e.g. toward Khunjerab) may require registration at checkposts — your driver handles this.",
+      },
+      {
+        q: "When is the best season for a Northern Areas road trip?",
+        a: "June–September for full access (Babusar Top, Deosai open). April–May and October are quieter with lower rates. November–March: Naran and Babusar close; Hunza remains accessible via the KKH with a 4x4 recommended.",
+      },
+    ],
+  },
+  {
+    slug: "islamabad-to-hunza-rental-car-itinerary",
+    title: "Islamabad to Hunza by Rental Car — 7-Day Itinerary & Costs (2026)",
+    excerpt:
+      "A realistic day-by-day Islamabad–Hunza itinerary with drive times, stopovers, and what the full trip costs with a rental car and driver.",
+    readTime: 9,
+    publishedDate: "2026-10-19",
+    image: img(
+      "Islamabad to Hunza",
+      "isb-hunza-itinerary",
+      "https://upload.wikimedia.org/wikipedia/commons/b/bc/KKH.png",
+    ),
+    category: "Travel",
+    faqs: [
+      {
+        q: "How long is the drive from Islamabad to Hunza?",
+        a: "Islamabad to Karimabad is roughly 600 km — 13–15 hours of driving via the Karakoram Highway, or 9–10 hours via the Babusar route (June–September only). Plan two days up with a Naran or Chilas stopover.",
+      },
+      {
+        q: "How much does a 7-day Islamabad–Hunza rental cost?",
+        a: "A 7-day package with driver costs roughly PKR 300,000–550,000 (USD 1,050–1,950) all-in — sedan at the low end, Land Cruiser at the top — covering vehicle, driver, fuel, and tolls. Hotels are extra.",
+      },
+      {
+        q: "Is the Babusar Top route worth it?",
+        a: "Yes, in season (June–September): it cuts 3–4 hours and passes Naran and Lulusar Lake. It closes November–May and after heavy rain — always confirm status with your driver the day before.",
+      },
+      {
+        q: "Can I do Hunza in fewer than 7 days?",
+        a: "Five days is the practical minimum: two up, two back, one full day in Hunza. Seven days adds Attabad Lake, Passu, and Khunjerab without rushed driving days.",
+      },
+    ],
+  },
 ];

@@ -1190,4 +1190,297 @@ export const guideContent: Record<string, ReactNode> = {
       </ul>
     </>
   ),
+  "self-drive-car-rental-lahore": (
+    <>
+      <p className="answer-block">
+        <strong>Self-drive rental in Lahore costs PKR 3,000–18,000/day
+        depending on the car, plus a refundable deposit of PKR
+        25,000–100,000.</strong> You need an original CNIC and a valid
+        Pakistani driving licence; Johar Town, Gulberg, and Wapda Town have
+        the deepest self-drive supply.
+      </p>
+
+      <h2>Where in Lahore should I look for self-drive?</h2>
+      <p>
+        Johar Town dominates Lahore&apos;s self-drive segment — vendors here
+        are set up for key handovers, inspections, and deposit handling.
+        Gulberg and Wapda Town are strong secondary hubs. DHA vendors rarely
+        offer self-drive: their fleets skew luxury and the deposit risk on a
+        PKR 2 crore Land Cruiser is one most operators won&apos;t take.
+      </p>
+
+      <h2>What documents and deposit do I need?</h2>
+      <ul>
+        <li>Original CNIC (they hold a copy, not the card).</li>
+        <li>Valid Pakistani driving licence — check the expiry before booking.</li>
+        <li>Refundable deposit: PKR 25,000–50,000 economy, up to PKR 100,000 for SUVs.</li>
+        <li>Sometimes a utility bill as address proof, and one local reference.</li>
+      </ul>
+      <p>
+        Foreign visitors need a passport, valid Pakistan visa, and an
+        International Driving Permit; expect the higher end of deposit ranges.
+      </p>
+
+      <h2>What does self-drive actually cost?</h2>
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Self-drive daily rate</th><th>Deposit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Economy (Cultus, Wagon R)</td><td>PKR 3,000–5,000</td><td>PKR 25,000–50,000</td></tr>
+          <tr><td>Sedan (Corolla, Civic)</td><td>PKR 5,000–7,000</td><td>PKR 50,000–75,000</td></tr>
+          <tr><td>SUV (Sportage, BRV)</td><td>PKR 12,000–18,000</td><td>PKR 75,000–100,000</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What contract clauses matter most?</h2>
+      <p>
+        Three clauses decide whether a self-drive deal is safe: the
+        <strong> mileage cap</strong> (typically 200–300 km/day, PKR 20–40/km
+        beyond), the <strong>accident liability clause</strong> (renter
+        usually pays damage up to the deposit — comprehensive insurance is
+        rare), and the <strong>intercity permission</strong> line (taking the
+        car out of Lahore without written approval can forfeit the deposit).
+      </p>
+    </>
+  ),
+  "rent-a-car-without-driver-karachi-islamabad": (
+    <>
+      <p className="answer-block">
+        <strong>Renting a car without a driver in Karachi or Islamabad costs
+        PKR 3,000–7,000/day for common cars plus a refundable deposit of PKR
+        25,000–100,000.</strong> You must present your own CNIC and driving
+        licence — rentals on borrowed documents are refused at pickup.
+      </p>
+
+      <h2>How do deposits and refunds work?</h2>
+      <p>
+        Deposits are paid at handover (cash or bank transfer) and refunded at
+        return after a joint inspection: bodywork, fuel level, odometer, and
+        toll records. Photograph the car — including wheels and the
+        windscreen — at both ends. Refund disputes almost always trace back to
+        undocumented pre-existing scratches.
+      </p>
+
+      <h2>What are the CNIC and licence rules?</h2>
+      <ul>
+        <li>Your own original CNIC — not a family member&apos;s.</li>
+        <li>A valid licence; Learner permits are not accepted.</li>
+        <li>Foreigners: passport, valid visa, and International Driving Permit.</li>
+        <li>Some vendors add a second CNIC-verified local guarantor for higher-value cars.</li>
+      </ul>
+
+      <h2>Where is self-drive supply concentrated?</h2>
+      <p>
+        In Karachi: PECHS, Gulshan-e-Iqbal, and DHA — most listings serve
+        multi-day and out-of-city renters. In Islamabad: F-10 and F-11, with
+        vendors accustomed to foreign renters and embassy staff. Filter
+        RentalSawari listings by &quot;Self-Drive&quot; in either city to see
+        current verified options.
+      </p>
+
+      <h2>Karachi or Islamabad — which suits a first-timer?</h2>
+      <p>
+        Islamabad. Wider roads, grid layout, calmer traffic, and vendors who
+        regularly onboard first-time and foreign renters. Karachi rewards
+        experienced city drivers; if that&apos;s you, start with a weekday
+        booking to learn the car before a weekend trip.
+      </p>
+    </>
+  ),
+  "monthly-car-rental-companies-pakistan": (
+    <>
+      <p className="answer-block">
+        <strong>Corporate monthly car rental in Pakistan costs PKR
+        90,000–550,000 per month in 2026 depending on vehicle class</strong> —
+        economy PKR 90,000–130,000, sedans PKR 150,000–220,000, SUVs PKR
+        350,000–550,000 — typically 15–30% below equivalent daily rates, with
+        driver included.
+      </p>
+
+      <h2>What do monthly rates look like by vehicle class?</h2>
+      <table>
+        <thead>
+          <tr><th>Class</th><th>Monthly rate (with driver)</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Economy</td><td>PKR 90,000–130,000</td><td>Field staff, sales teams</td></tr>
+          <tr><td>Sedan (Corolla, Civic)</td><td>PKR 150,000–220,000</td><td>Managers, client visits</td></tr>
+          <tr><td>SUV (Fortuner, Prado)</td><td>PKR 350,000–550,000</td><td>Executives, site visits</td></tr>
+          <tr><td>Hiace / Coaster</td><td>PKR 250,000–450,000</td><td>Staff shuttles</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What should the contract include?</h2>
+      <ul>
+        <li><strong>Replacement SLA</strong> — a substitute vehicle within 24 hours of breakdown.</li>
+        <li><strong>Driver backup</strong> — a relief driver when yours is sick or on leave.</li>
+        <li><strong>Insurance split</strong> — who pays what in an accident, in writing.</li>
+        <li><strong>Fuel &amp; mileage policy</strong> — actuals vs monthly cap, and the per-km overage.</li>
+        <li><strong>Invoicing</strong> — GST invoice with the vendor&apos;s NTN for your withholding records.</li>
+      </ul>
+
+      <h2>How do I get the best monthly rate?</h2>
+      <p>
+        Commit to 6–12 months, bundle multiple vehicles with one vendor, and
+        let the vendor handle driver payroll — vendors price driver-included
+        contracts lower than car-only leases because driver retention is
+        their problem, not yours. Compare verified vendors with corporate
+        experience on RentalSawari&apos;s corporate-monthly page.
+      </p>
+    </>
+  ),
+  "airport-pickup-car-service-pakistan": (
+    <>
+      <p className="answer-block">
+        <strong>Airport pickup in Pakistan costs roughly PKR 4,500–8,000 for
+        a sedan in 2026</strong> — the standard daily rate plus a PKR
+        500–2,000 airport surcharge — at Lahore (LHE), Karachi (KHI), and
+        Islamabad (ISB). Meet-and-greet at arrivals is standard; drivers
+        track your flight number.
+      </p>
+
+      <h2>What does pickup cost at each airport?</h2>
+      <table>
+        <thead>
+          <tr><th>Airport</th><th>Sedan pickup (typical)</th><th>Surcharge over daily rate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lahore Allama Iqbal (LHE)</td><td>PKR 4,500–7,500</td><td>PKR 500–1,500</td></tr>
+          <tr><td>Karachi Jinnah (KHI)</td><td>PKR 4,500–7,500</td><td>PKR 500–1,500</td></tr>
+          <tr><td>Islamabad International (ISB)</td><td>PKR 5,000–8,000</td><td>PKR 800–2,000</td></tr>
+        </tbody>
+      </table>
+
+      <h2>How does meet-and-greet actually work?</h2>
+      <p>
+        When booking on WhatsApp, send your flight number, terminal, and
+        passenger count. The driver tracks the flight, parks in the arrivals
+        lane, and messages you when you land — most hold a name card at the
+        exit. Sixty minutes of free waiting after landing is standard.
+      </p>
+
+      <h2>How do I book for late-night or early-morning flights?</h2>
+      <p>
+        Established vendors at all three airports run 24/7. Book 12–24 hours
+        ahead for 2–6 AM pickups, and confirm the driver&apos;s name, photo,
+        and plate number the evening before. For groups, Hiace and Coaster
+        pickups are available at roughly double the sedan rate.
+      </p>
+
+      <h2>What if my flight is delayed or diverted?</h2>
+      <p>
+        Delays are absorbed automatically — the driver sees the same flight
+        status you do. Waiting beyond 60–90 minutes after landing may add PKR
+        200–500/hour. If the flight diverts to another city, message the
+        vendor immediately; most will re-quote or cancel without penalty if
+        the car hasn&apos;t left their lot.
+      </p>
+    </>
+  ),
+  "northern-areas-rental-car-guide": (
+    <>
+      <p className="answer-block">
+        <strong>A 5-day Northern Areas package from Islamabad costs PKR
+        225,000–420,000 (USD 800–1,500) all-in in 2026.</strong> Sedans handle
+        Hunza via the Karakoram Highway in season; book an SUV for Skardu
+        side valleys, Deosai, or any winter travel. Pakistani nationals need
+        no NOC for Hunza, Skardu, or Naran.
+      </p>
+
+      <h2>Which vehicle for which valley?</h2>
+      <table>
+        <thead>
+          <tr><th>Destination</th><th>Recommended vehicle</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hunza (KKH direct)</td><td>Sedan or SUV</td><td>Paved throughout in season</td></tr>
+          <tr><td>Naran &amp; Babusar</td><td>Sedan Jun–Sep; SUV otherwise</td><td>Babusar Top closed Nov–May</td></tr>
+          <tr><td>Skardu + Deosai</td><td>SUV (Prado, Fortuner)</td><td>Deosai is unpaved plateau</td></tr>
+          <tr><td>Fairy Meadows</td><td>SUV to Raikot + local jeep</td><td>Final track is jeep-only</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What do multi-day packages include?</h2>
+      <p>
+        Standard packages bundle vehicle, experienced mountain driver, fuel,
+        and tolls. Hotels are usually excluded — you book your own, which
+        keeps pricing honest. The driver&apos;s overnight allowance is built
+        into the package rate; confirm this explicitly so there are no
+        per-night surprises.
+      </p>
+
+      <h2>Do I need permits or an NOC?</h2>
+      <p>
+        Pakistani nationals need no NOC for Hunza, Skardu, Naran, or Swat.
+        Carry your CNIC — checkposts register travellers entering Gilgit-
+        Baltistan. Foreign tourists should carry passport and visa copies;
+        border-adjacent zones (Khunjerab Pass, some side valleys) may require
+        checkpost registration, which your driver handles routinely.
+      </p>
+
+      <h2>When should I go — and when should I not?</h2>
+      <p>
+        June–September gives full access: Babusar Top, Deosai, and all side
+        valleys open. April–May and October are quieter with 10–20% lower
+        package rates. November–March closes Naran and Babusar entirely;
+        Hunza stays reachable via the KKH, but book a 4x4 and a driver who
+        knows winter conditions. Avoid Eid weeks unless you book a month
+        ahead — rates spike and good drivers sell out first.
+      </p>
+    </>
+  ),
+  "islamabad-to-hunza-rental-car-itinerary": (
+    <>
+      <p className="answer-block">
+        <strong>A 7-day Islamabad–Hunza rental car trip costs roughly PKR
+        300,000–550,000 (USD 1,050–1,950) all-in with a driver in
+        2026.</strong> The drive is ~600 km each way via the Karakoram
+        Highway — plan two days up, three in Hunza, two back, with stopovers
+        in Naran or Chilas.
+      </p>
+
+      <h2>What does the day-by-day itinerary look like?</h2>
+      <table>
+        <thead>
+          <tr><th>Day</th><th>Route</th><th>Drive time</th><th>Overnight</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Islamabad → Naran (via Babusar, Jun–Sep) or Besham (KKH)</td><td>6–8 hrs</td><td>Naran / Besham</td></tr>
+          <tr><td>2</td><td>Naran → Karimabad via Lulusar Lake &amp; Rakaposhi viewpoint</td><td>6–7 hrs</td><td>Karimabad</td></tr>
+          <tr><td>3</td><td>Karimabad — Baltit Fort, Altit Fort, Eagle&apos;s Nest sunset</td><td>Local</td><td>Karimabad</td></tr>
+          <tr><td>4</td><td>Attabad Lake → Passu Cones → Hussaini Bridge</td><td>3–4 hrs</td><td>Passu / Gulmit</td></tr>
+          <tr><td>5</td><td>Khunjerab Pass day trip (4,693 m, Pak–China border)</td><td>6–7 hrs return</td><td>Passu / Karimabad</td></tr>
+          <tr><td>6</td><td>Karimabad → Naran / Chilas</td><td>7–9 hrs</td><td>Naran / Chilas</td></tr>
+          <tr><td>7</td><td>Return to Islamabad</td><td>6–8 hrs</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What does the full trip cost?</h2>
+      <p>
+        Sedan packages run PKR 300,000–380,000 for 7 days; Prado/Fortuner
+        PKR 400,000–480,000; Land Cruiser PKR 480,000–550,000+. Rates include
+        the vehicle, driver, fuel, and tolls; hotels and meals are yours to
+        book. May–October is peak — book 3–4 weeks ahead.
+      </p>
+
+      <h2>Which route up — Babusar or the KKH?</h2>
+      <p>
+        Babusar Top (June–September) is shorter and more scenic: Naran,
+        Lulusar Lake, and a 4,173 m pass. The KKH via Besham and Chilas is
+        the year-round route — longer, but reliable. Most drivers go up via
+        Babusar in season and return the same way; a loop (up Babusar, back
+        KKH) adds variety but an extra half-day.
+      </p>
+
+      <h2>Is Khunjerab Pass worth a full day?</h2>
+      <p>
+        Yes if skies are clear — the world&apos;s highest paved border
+        crossing (4,693 m) with ibex and marmot sightings in Khunjerab
+        National Park. Skip it if you&apos;re altitude-sensitive or pressed
+        for time; Passu and Attabad alone justify the trip. Entry tickets to
+        the park are per-person, paid at the gate.
+      </p>
+    </>
+  ),
 };
