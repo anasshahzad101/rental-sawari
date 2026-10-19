@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MapPin, Star, Users } from "lucide-react";
 import type { Area } from "@/data/areas";
+import { areas } from "@/data/areas";
 import { getCompanies } from "@/lib/admin/repo/public";
 import { cities } from "@/data/cities";
 import { popularCarTypes } from "@/data/carTypes";
@@ -8,6 +9,7 @@ import { guides } from "@/data/guides";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { CompanyCard } from "@/components/companies/CompanyCard";
 import { RelatedLinks } from "@/components/shared/RelatedLinks";
+import { FAQSection } from "@/components/shared/FAQSection";
 import { Badge } from "@/components/ui/badge";
 import { formatPKR } from "@/lib/utils";
 
@@ -205,13 +207,41 @@ export async function AreaPage({ area }: AreaPageProps) {
         )}
       </section>
 
+      <FAQSection
+        title={`Renting a car in ${area.name}: FAQs`}
+        subtitle={`Common questions about hiring a car in ${area.name}, ${area.cityName}.`}
+        items={[
+          {
+            q: `How much does it cost to rent a car in ${area.name}, ${area.cityName}?`,
+            a: `Rentals in ${area.name} start from ${formatPKR(parentCity?.startingPrice ?? 3500)}/day for economy cars, matching city-wide ${area.cityName} rates. Sedans with driver average PKR 6,000–8,500/day and SUVs PKR 15,000–24,000/day depending on vehicle and season.`,
+          },
+          {
+            q: `How many rental companies serve ${area.name}?`,
+            a: `RentalSawari lists ${areaCompanies.length} verified vendors based in ${area.name}. Many more ${area.cityName} vendors from neighbouring areas also offer pickup and drop-off in ${area.name} — message any listing on WhatsApp to confirm.`,
+          },
+          {
+            q: `Can I get a car delivered to ${area.name}?`,
+            a: `Yes — most ${area.cityName} vendors deliver to ${area.name} addresses, often free within the city for multi-day bookings. With-driver rentals simply pick you up; self-drive vendors usually deliver the car and collect the deposit at handover.`,
+          },
+          {
+            q: `Is self-drive available in ${area.name}?`,
+            a: `Self-drive availability in ${area.name} depends on the vendor — filter the listings on the main ${area.cityName} page by "Self-Drive" and mention ${area.name} as your pickup point. Expect a refundable deposit of PKR 25,000–100,000 and a valid CNIC + driving licence.`,
+          },
+        ]}
+      />
+
       <RelatedLinks
         title="More from RentalSawari"
         subtitle={`Compare ${area.name} with other ${area.cityName} neighbourhoods, browse cars, and read related guides.`}
         groups={[
           {
             title: `Other ${area.cityName} areas`,
-            links: [],
+            links: areas
+              .filter((a) => a.citySlug === area.citySlug && a.slug !== area.slug)
+              .map((a) => ({
+                label: `Rent a car in ${a.name}`,
+                href: `/rent-a-car-${a.slug}`,
+              })),
           },
           {
             title: "Popular cars",

@@ -12,6 +12,7 @@ import { ADSENSE_SLOTS } from "@/lib/adsense";
 import { PageShell } from "@/components/shared/PageShell";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { BottomCTA } from "@/components/shared/BottomCTA";
+import { FAQSection } from "@/components/shared/FAQSection";
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
@@ -168,6 +169,14 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
       </article>
 
       <AdSlot slot={ADSENSE_SLOTS.guideBody} />
+
+      {/* Visible Q&A block → FAQPage schema (SEO plan §1.3) */}
+      {guide.faqs && guide.faqs.length > 0 && (
+        <FAQSection
+          title={`${guide.title} — FAQs`}
+          items={guide.faqs}
+        />
+      )}
 
       {/* Back link */}
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-12">

@@ -225,4 +225,24 @@ export const cityContext: Record<string, CityContext> = {
     bestFor:
       "Mianwali is best for: Namal Lake day trips, Kalabagh and Indus-route travel, KPK-direction journeys, and weddings. A small but practical market for driver-included hire on the Punjab–KPK edge.",
   },
+  "rahim-yar-khan": {
+    intro:
+      "Rahim Yar Khan has 22 verified rent-a-car companies serving the largest city on the Karachi–Lahore corridor between Multan and Sukkur. The market runs almost entirely on with-driver hire — 18 of the 22 vendors list driver-included service — and demand peaks around wedding season and long-haul trips toward Bahawalpur, Sukkur, and Karachi. Economy rentals start at PKR 3,200/day, among the lowest rates in the directory for a city this size.",
+    whereToRent:
+      "Cantt and Civil Lines host the most established vendors and the widest vehicle choice. Saddar and Model Town have budget-friendly, family-run operations. Operators near the New General Bus Stand and Khanpur Adda are convenient for intercity pickups and onward travel toward Khanpur and Bahawalpur. Book early for December–January wedding dates — the premium fleet here is thin.",
+    pricingNotes:
+      "Rahim Yar Khan prices in 2026: economy cars (Cultus, Wagon R) from PKR 3,200/day; sedans with driver PKR 6,000–7,500/day; SUVs PKR 15,000–20,000/day. Long one-way runs to Karachi or Lahore are usually quoted as fixed fares rather than daily rates, and multi-day bookings commonly get 15–25% off.",
+    bestFor:
+      "Rahim Yar Khan is best for: Karachi–Lahore corridor trips, Bahawalpur and Cholistan (Derawar Fort) excursions, weddings at below-big-city prices, and intercity family travel toward Khanpur and Sadiqabad. A practical, low-cost rental base for the south-Punjab/Sindh border region.",
+  },
+  "dera-ghazi-khan": {
+    intro:
+      "Dera Ghazi Khan has 18 verified rent-a-car companies serving the west-bank Indus city that links Punjab to Balochistan via the Indus Highway. With-driver hire dominates (15 of 18 vendors), with a small but growing self-drive segment. Rentals here serve a mix of local family travel, Fort Munro and Sulaiman-range hill trips, and business routes toward Dera Ismail Khan, Multan, and Quetta. Economy rentals start at PKR 3,500/day.",
+    whereToRent:
+      "Civil Lines and the Cantt area host the most reliable vendors and the operators most experienced with Indus Highway long-hauls. Block 19 and Block 20 have newer, mid-market operations. Khosa Market and College Road vendors are convenient for city pickups. For Fort Munro or Balochistan-direction trips, choose a vendor with SUVs or well-maintained sedans — the hill section is hard on older vehicles.",
+    pricingNotes:
+      "Dera Ghazi Khan prices in 2026: economy cars from PKR 3,500/day; sedans with driver PKR 6,000–7,500/day; SUVs PKR 15,000–21,000/day — expect the upper end for Fort Munro and mountain routes. Trips toward Quetta and Dera Ismail Khan are typically fixed-fare. Multi-day discounts of 15–25% are common outside peak season.",
+    bestFor:
+      "Dera Ghazi Khan is best for: Fort Munro and Sulaiman-range trips, Indus Highway travel toward Quetta and Dera Ismail Khan, and budget-friendly with-driver hire. The natural rental base for west-Punjab and Balochistan-border journeys.",
+  },
 };

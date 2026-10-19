@@ -109,4 +109,6 @@ export interface Guide {
   publishedDate: string;
   image: string;
   category: string;
+  /** Optional visible Q&A block; rendered via FAQSection (emits FAQPage schema). */
+  faqs?: { q: string; a: string }[];
 }

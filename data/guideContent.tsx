@@ -976,4 +976,218 @@ export const guideContent: Record<string, ReactNode> = {
       </ul>
     </>
   ),
+  "rent-a-car-cost-karachi-2026": (
+    <>
+      <p className="answer-block">
+        <strong>Renting a car in Karachi costs PKR 3,800–23,000 per day in
+        2026 depending on category.</strong> Economy hatchbacks start at PKR
+        3,800/day with driver, sedans (Corolla, Civic) average PKR
+        6,500–8,500/day, Hiace vans run PKR 9,000–10,500/day, and SUVs
+        (Fortuner, Prado) sit at PKR 17,000–23,000/day.
+      </p>
+
+      <h2>What does each car category cost in Karachi?</h2>
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Typical cars</th><th>Daily rate (with driver)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Economy</td><td>Mehran, Cultus, Wagon R</td><td>PKR 3,800–5,000</td></tr>
+          <tr><td>Sedan</td><td>Corolla, Civic, City</td><td>PKR 6,500–8,500</td></tr>
+          <tr><td>Van</td><td>Hiace, APV</td><td>PKR 9,000–10,500</td></tr>
+          <tr><td>SUV</td><td>Fortuner, Prado, Sportage</td><td>PKR 17,000–23,000</td></tr>
+          <tr><td>Luxury</td><td>Mercedes E/S-Class, Land Cruiser V8</td><td>PKR 28,000–40,000+</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Rates are for within-city use with a driver. Fuel, tolls, and the
+        driver&apos;s meal allowance on outstation trips are extra.
+      </p>
+
+      <h2>Is self-drive cheaper in Karachi?</h2>
+      <p>
+        Yes — self-drive saves PKR 1,500–3,000/day against with-driver rates,
+        but requires a refundable deposit of PKR 25,000–100,000, a valid
+        Pakistani licence, and usually a CNIC copy. Self-drive supply is
+        concentrated in PECHS, Gulshan, and DHA.
+      </p>
+
+      <h2>What do outstation and one-way trips cost?</h2>
+      <p>
+        One-way rentals to Hyderabad or Bahawalpur carry a PKR 15,000–25,000
+        surcharge over the daily rate. Coastal multi-day packages (Hingol
+        National Park, Gwadar) run PKR 35,000–60,000 for 2–3 days with an
+        SUV and driver.
+      </p>
+
+      <h2>How does Karachi compare to Lahore and Islamabad?</h2>
+      <p>
+        Karachi sedans price roughly level with Lahore and 5–10% below
+        Islamabad. Karachi&apos;s real difference is structure: ride-hailing
+        dominates short trips, so rental vendors focus on multi-day,
+        corporate, and tourist bookings — which means better multi-day
+        discounts (10–20% for 3+ days) than other cities.
+      </p>
+    </>
+  ),
+  "rent-a-car-cost-islamabad-2026": (
+    <>
+      <p className="answer-block">
+        <strong>Renting a car in Islamabad costs PKR 4,000–25,000 per day in
+        2026.</strong> Economy cars start at PKR 4,000/day, sedans with driver
+        average PKR 7,500–9,000/day, Hiace vans PKR 9,500–11,000/day, and SUVs
+        PKR 18,000–25,000/day. Rawalpindi runs 5–10% cheaper across every
+        category.
+      </p>
+
+      <h2>What does each car category cost in the twin cities?</h2>
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Islamabad (with driver)</th><th>Rawalpindi (with driver)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Economy</td><td>PKR 4,000–5,500</td><td>PKR 3,500–5,000</td></tr>
+          <tr><td>Sedan (Corolla, Civic)</td><td>PKR 7,500–9,000</td><td>PKR 6,500–8,000</td></tr>
+          <tr><td>Hiace van</td><td>PKR 9,500–11,000</td><td>PKR 9,000–10,000</td></tr>
+          <tr><td>SUV (Fortuner, Prado)</td><td>PKR 18,000–25,000</td><td>PKR 16,000–22,000</td></tr>
+          <tr><td>Luxury (Mercedes, LC V8)</td><td>PKR 30,000–45,000</td><td>PKR 28,000–40,000</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Why is Islamabad more expensive than Lahore?</h2>
+      <p>
+        Islamabad averages 10–15% above Lahore for equivalent vehicles. Three
+        reasons: higher demand from diplomats, NGOs, and MNCs on monthly
+        contracts; the tourist premium on Northern-Areas-bound rentals; and a
+        vendor pool that skews toward newer fleets with English-speaking
+        drivers.
+      </p>
+
+      <h2>What do Northern Areas packages cost from Islamabad?</h2>
+      <p>
+        A 5-day Hunza or Naran package runs roughly USD 800–1,500 (PKR
+        225,000–420,000) all-in — vehicle, driver, fuel, and tolls. SUVs cost
+        more but handle the Karakoram Highway better; sedans manage the Naran
+        route in season. Book 2–4 weeks ahead for June–August.
+      </p>
+
+      <h2>How much is airport pickup at Islamabad International?</h2>
+      <p>
+        ISB airport pickup adds PKR 800–2,000 over the daily rate depending on
+        vehicle class. Most F-10, F-7, and Bahria Town vendors include
+        meet-and-greet at arrivals; share your flight number on WhatsApp and
+        the driver tracks delays.
+      </p>
+    </>
+  ),
+  "hiace-rental-prices-pakistan-2026": (
+    <>
+      <p className="answer-block">
+        <strong>A Toyota Hiace with driver costs PKR 9,000–11,000 per day in
+        Pakistan in 2026</strong> — Lahore PKR 9,000–10,000, Islamabad PKR
+        9,500–11,000, Karachi PKR 9,000–10,500. Outstation trips are usually
+        quoted per-km (PKR 55–75/km) or as fuel-inclusive fixed fares.
+      </p>
+
+      <h2>What does a Hiace cost in each city?</h2>
+      <table>
+        <thead>
+          <tr><th>City</th><th>Hiace daily rate (with driver)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lahore</td><td>PKR 9,000–10,000</td></tr>
+          <tr><td>Islamabad</td><td>PKR 9,500–11,000</td></tr>
+          <tr><td>Rawalpindi</td><td>PKR 9,000–10,000</td></tr>
+          <tr><td>Karachi</td><td>PKR 9,000–10,500</td></tr>
+          <tr><td>Faisalabad</td><td>PKR 8,500–9,500</td></tr>
+          <tr><td>Multan</td><td>PKR 8,000–9,500</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Rates exclude fuel and tolls. Multi-day bookings typically earn
+        10–20% off the daily rate.
+      </p>
+
+      <h2>How many people actually fit in a Hiace?</h2>
+      <p>
+        A standard Hiace seats 12–14 passengers plus the driver. For
+        comfortable long trips with luggage, plan on 10–12 people. Groups of
+        15+ should book a Toyota Coaster (25–29 seats, PKR
+        15,000–20,000/day).
+      </p>
+
+      <h2>What do outstation and mountain trips cost?</h2>
+      <p>
+        For Hunza, Naran, and Swat group trips, expect the equivalent of PKR
+        12,000–15,000/day on multi-day packages — the rate absorbs the
+        driver&apos;s overnight allowance and hill-route wear. Most vendors
+        quote fixed all-inclusive fares for standard itineraries (e.g.
+        Islamabad–Hunza 5 days).
+      </p>
+
+      <h2>Hiace vs two sedans — which is cheaper for a group?</h2>
+      <p>
+        For 8–12 people, one Hiace (PKR 9,000–11,000/day + one fuel bill) is
+        almost always cheaper than two sedans (PKR 13,000–17,000/day + two
+        fuel bills). Below 7 people, a single SUV is more comfortable for
+        mountain routes.
+      </p>
+    </>
+  ),
+  "wedding-car-rental-prices-pakistan-2026": (
+    <>
+      <p className="answer-block">
+        <strong>Wedding car rental in Pakistan costs PKR 8,000–50,000+ per
+        event in 2026.</strong> A decorated Corolla or Civic runs PKR
+        8,000–15,000; a Mercedes E-Class or BMW 5-Series PKR 25,000–40,000;
+        and a Land Cruiser V8 or Mercedes S-Class PKR 28,000–50,000+,
+        depending on city and season.
+      </p>
+
+      <h2>What does each wedding car class cost?</h2>
+      <table>
+        <thead>
+          <tr><th>Vehicle</th><th>Typical event price</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Corolla / Civic (decorated)</td><td>PKR 8,000–15,000</td></tr>
+          <tr><td>Camry / Accord</td><td>PKR 15,000–22,000</td></tr>
+          <tr><td>Mercedes E-Class / BMW 5-Series</td><td>PKR 25,000–40,000</td></tr>
+          <tr><td>Mercedes S-Class / Land Cruiser V8</td><td>PKR 28,000–50,000+</td></tr>
+          <tr><td>Classic / vintage cars</td><td>PKR 30,000–80,000</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Prices are per event (typically 6–10 hours covering baraat and
+        walima movements). December–January peak dates command a 20–40%
+        premium.
+      </p>
+
+      <h2>How much does flower decoration add?</h2>
+      <p>
+        Fresh-flower decoration adds PKR 3,000–12,000 depending on coverage —
+        a simple bonnet arrangement at the low end, full bonnet-plus-roof-plus
+        -side garlands at the top. Artificial decoration is cheaper (PKR
+        1,500–4,000) but photographers notice. Most vendors coordinate with
+        their regular decorator.
+      </p>
+
+      <h2>Which city offers the best wedding-car value?</h2>
+      <p>
+        Lahore has the deepest premium fleet (most S-Class and V8 supply) at
+        market-standard prices. Faisalabad and Multan run 15–25% cheaper for
+        equivalent vehicles — worth the delivery fee for budget weddings.
+        Islamabad is best for executive fleets with English-speaking
+        chauffeurs.
+      </p>
+
+      <h2>What should I confirm before paying the advance?</h2>
+      <ul>
+        <li>The exact car — model, year, colour — in writing, with a named backup vehicle.</li>
+        <li>Whether decoration, fuel, driver allowance, and overtime are included.</li>
+        <li>Hours covered, and the per-hour rate beyond the booking window.</li>
+        <li>Advance amount (typically 25–50%) and its refund terms.</li>
+      </ul>
+    </>
+  ),
 };
