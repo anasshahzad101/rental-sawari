@@ -51,8 +51,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const route = getRoute(params.city);
   if (route) {
-    const title = `Rent a Car from ${route.fromName} to ${route.toName} — ${route.distanceKm} km, ${route.hoursLow}-${route.hoursHigh} hrs`;
-    const description = `${route.fromName} to ${route.toName} car rental — ${formatPKR(route.priceFromPKR)}–${formatPKR(route.priceToPKR)} with driver. Vehicle recommendation, drive time, recommended stops, best months. ${route.distanceKm} km.`;
+    const year = new Date().getFullYear();
+    const title = `${route.fromName} to ${route.toName} by Rental Car — Cost, Routes & Tips (${year})`;
+    const description = `${route.fromName} to ${route.toName} car rental — ${formatPKR(route.priceFromPKR)}–${formatPKR(route.priceToPKR)} with driver. Vehicle picks, drive time, stops, best months. ${route.distanceKm} km.`;
     return {
       title,
       description,
@@ -71,7 +72,7 @@ export async function generateMetadata({
             c.area.toLowerCase().includes(m.toLowerCase()),
           ),
       ).length < 3;
-    const title = `Rent a Car in ${area.name}, ${area.cityName}`;
+    const title = `Rent a Car in ${area.name}, ${area.cityName} — Verified Local Vendors`;
     const description = area.tagline;
     return {
       title,
@@ -88,7 +89,7 @@ export async function generateMetadata({
   if (!city) return { title: "Not found" };
   const year = new Date().getFullYear();
   const title = `Rent a Car in ${city.name} (${year}) — From ${formatPKR(city.startingPrice)}/day, ${city.listingCount}+ Vendors`;
-  const description = `Compare ${city.listingCount} verified rent-a-car companies in ${city.name} — with driver or self-drive. Real ${year} prices from ${formatPKR(city.startingPrice)}/day, no booking fees, contact owners direct on WhatsApp. Covers ${city.popularAreas.slice(0, 3).join(", ")} & more.`;
+  const description = `Compare ${city.listingCount} verified rent-a-car companies in ${city.name}. ${year} prices from ${formatPKR(city.startingPrice)}/day, direct WhatsApp, no booking fees.`;
   return {
     title,
     description,
@@ -180,7 +181,8 @@ export default async function CityRoute({ params }: { params: { city: string } }
   ];
 
   // ItemList schema declares the directory page's list of vendors so AI
-  // engines can extract the top entries as a ranked answer.
+  // engines can extract the top entries as a ranked answer. Each entry embeds
+  // a LocalBusiness with NAP + rating (per the SEO action plan §1.3).
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -193,6 +195,26 @@ export default async function CityRoute({ params }: { params: { city: string } }
       position: i + 1,
       url: `https://rentalsawari.com/companies/${c.slug}`,
       name: c.name,
+      item: {
+        "@type": "LocalBusiness",
+        name: c.name,
+        url: `https://rentalsawari.com/companies/${c.slug}`,
+        telephone: c.phone,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: c.area ? `${c.area}, ${c.city}` : c.city,
+          addressCountry: "PK",
+        },
+        ...(c.reviewCount > 0
+          ? {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: c.rating.toFixed(1),
+                reviewCount: c.reviewCount,
+              },
+            }
+          : {}),
+      },
     })),
   };
 

@@ -33,6 +33,8 @@ export async function POST(req: Request) {
   const whatsapp = clean.phone(body.whatsapp);
   const errors: Record<string, string> = {};
   if (!name) errors.name = "Enter your company name";
+  else if (!clean.isValidCompanyName(name))
+    errors.name = "Name must be at least 3 characters and start with a letter or digit";
   if (!isSiteCity(city) && !cityOther) errors.city = "Choose your city";
   if (!ownerName) errors.ownerName = "Enter your name";
   if (!whatsapp) errors.whatsapp = "Enter a WhatsApp number like 0300 1234567";

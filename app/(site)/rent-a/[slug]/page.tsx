@@ -87,8 +87,8 @@ export async function generateMetadata({
   const city = cities.find((c) => c.slug === parsed.citySlug);
   if (!car || !city) return { title: "Not found" };
   const vendors = vendorsFor(await getCompanies(), car.slug, city.name);
-  const title = `Rent a ${car.name} in ${city.name} — ${vendors.length} Vendors`;
-  const description = `Compare ${car.name} rentals in ${city.name} from ${vendors.length} verified vendors. Real prices, direct WhatsApp, no booking fees.`;
+  const title = `Rent a ${car.name} in ${city.name} — From ${formatPKR(car.startingPrice)}/day`;
+  const description = `Rent a ${car.name} in ${city.name} from ${formatPKR(car.startingPrice)}/day. Compare ${vendors.length} verified vendors, direct WhatsApp, no booking fees.`;
   return {
     title,
     description,

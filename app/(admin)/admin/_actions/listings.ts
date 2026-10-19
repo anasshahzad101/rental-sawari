@@ -52,6 +52,8 @@ async function toEditable(input: ListingFormInput, ref: string): Promise<{ data?
   const fieldErrors: Record<string, string> = {};
   const name = clean.str(input.name, 255);
   if (!name) fieldErrors.name = "Enter the listing name";
+  else if (!clean.isValidCompanyName(name))
+    fieldErrors.name = "Name must be at least 3 characters and start with a letter or digit";
   const city = clean.str(input.city, 60);
   if (!(CITIES as readonly string[]).includes(city)) fieldErrors.city = "Choose a city";
   const whatsapp = normalizePhone(input.whatsapp);

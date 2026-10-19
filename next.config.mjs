@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    // Serve modern formats — AVIF first (smallest), WebP fallback (SEO plan §1.5).
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "placehold.co" },
       { protocol: "https", hostname: "images.unsplash.com" },
@@ -71,6 +73,16 @@ const nextConfig = {
       // Long-cache the auto-generated favicon and brand assets.
       {
         source: "/(logo-mark|logo-full|logo|icon).png",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // Wikimedia copies use content-hash filenames — safe to cache forever.
+      {
+        source: "/images/wikimedia/:path*",
         headers: [
           {
             key: "Cache-Control",

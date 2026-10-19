@@ -15,7 +15,7 @@ import { ADSENSE_SLOTS } from "@/lib/adsense";
 import { formatPKR } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Rent a Car in Pakistan — Browse All Cities",
+  title: `Browse ${cities.length} Cities — Verified Rent a Car Companies in Pakistan`,
   description:
     "Browse verified rent-a-car companies in every major Pakistani city — Lahore, Islamabad, Karachi, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta and more.",
   alternates: { canonical: "/cities" },

@@ -25,12 +25,18 @@ export function generateMetadata({
   const g = guides.find((x) => x.slug === params.slug);
   if (!g) return { title: "Guide not found" };
   const image = absoluteImage(g.image);
+  // Plan template: "{Title} ({year}) | RentalSawari Guides". Most guide titles
+  // already carry a year — append one only when missing, and use an absolute
+  // title so the layout's "%s | RentalSawari" template doesn't double-brand.
+  const year = new Date().getFullYear();
+  const titled = /\b(19|20)\d{2}\b/.test(g.title) ? g.title : `${g.title} (${year})`;
+  const fullTitle = `${titled} | RentalSawari Guides`;
   return {
-    title: g.title,
+    title: { absolute: fullTitle },
     description: g.excerpt,
     alternates: { canonical: `/guides/${g.slug}` },
     openGraph: {
-      title: g.title,
+      title: fullTitle,
       description: g.excerpt,
       url: `${SITE_URL}/guides/${g.slug}`,
       siteName: "RentalSawari",
@@ -41,7 +47,7 @@ export function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: g.title,
+      title: fullTitle,
       description: g.excerpt,
       images: [image],
     },

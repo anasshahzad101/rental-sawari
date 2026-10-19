@@ -86,8 +86,9 @@ export async function generateMetadata({
   const pair = await findPair(params.pair);
   if (!pair) return { title: "Comparison not found" };
   const { a, b } = pair;
-  const title = `${a.name} vs ${b.name} — Which Rent-a-Car is Better in ${a.city}?`;
-  const description = `Side-by-side comparison of ${a.name} (${a.rating.toFixed(1)}★, ${a.reviewCount} reviews) and ${b.name} (${b.rating.toFixed(1)}★, ${b.reviewCount} reviews) in ${a.city}. Real data, real ratings, direct WhatsApp.`;
+  const year = new Date().getFullYear();
+  const title = `${a.name} vs ${b.name} in Pakistan (${year}) — Which to Rent?`;
+  const description = `${a.name} (★${a.rating.toFixed(1)}, ${a.reviewCount} reviews) vs ${b.name} (★${b.rating.toFixed(1)}, ${b.reviewCount} reviews) in ${a.city}. Real data, direct WhatsApp.`;
   return {
     title,
     description,

@@ -72,6 +72,26 @@ export async function AreaPage({ area }: AreaPageProps) {
             position: i + 1,
             url: `${SITE}/companies/${c.slug}`,
             name: c.name,
+            item: {
+              "@type": "LocalBusiness",
+              name: c.name,
+              url: `${SITE}/companies/${c.slug}`,
+              telephone: c.phone,
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: c.area ? `${c.area}, ${c.city}` : c.city,
+                addressCountry: "PK",
+              },
+              ...(c.reviewCount > 0
+                ? {
+                    aggregateRating: {
+                      "@type": "AggregateRating",
+                      ratingValue: c.rating.toFixed(1),
+                      reviewCount: c.reviewCount,
+                    },
+                  }
+                : {}),
+            },
           })),
         }
       : null;

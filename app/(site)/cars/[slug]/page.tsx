@@ -24,16 +24,19 @@ export function generateStaticParams() {
   return carTypes.map((c) => ({ slug: c.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
-}): Metadata {
+}): Promise<Metadata> {
   const car = getCarTypeBySlug(params.slug);
   if (!car) return { title: "Car type not found" };
   const year = new Date().getFullYear();
-  const title = `Rent a ${car.name} in Pakistan (${year}) — From ${formatPKR(car.startingPrice)}/day`;
-  const description = `${car.name} rental rates across Pakistan in ${year}, with driver or self-drive — from ${formatPKR(car.startingPrice)}/day. Compare verified vendors in ${cities.length}+ cities and contact owners direct on WhatsApp. No booking fees.`;
+  const vendorCount = (await getCompanies()).filter((c) =>
+    offersCar(c, car.slug),
+  ).length;
+  const title = `${car.name} Rental in Pakistan (${year}) — From ${formatPKR(car.startingPrice)}/day, ${vendorCount} Vendors`;
+  const description = `${car.name} rental from ${formatPKR(car.startingPrice)}/day across Pakistan in ${year}. Compare ${vendorCount} verified vendors, direct WhatsApp, no booking fees.`;
   return {
     title,
     description,

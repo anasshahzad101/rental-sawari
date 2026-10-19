@@ -70,3 +70,12 @@ export function int(v: unknown, max = 100000): number | null {
   const n = Math.round(Number(v));
   return Number.isFinite(n) && n >= 0 ? Math.min(n, max) : null;
 }
+
+/**
+ * Company-name guard (SEO action plan §1.4): at least 3 characters and must
+ * start with a letter or digit — Latin or Urdu/Arabic. Blocks broken scraped
+ * names like "& Travels" from entering the store and becoming page titles.
+ */
+export function isValidCompanyName(name: string): boolean {
+  return name.length >= 3 && /^[\p{L}\p{N}]/u.test(name);
+}

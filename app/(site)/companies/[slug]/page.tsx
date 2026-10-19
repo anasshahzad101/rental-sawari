@@ -53,8 +53,8 @@ export async function generateMetadata({
   const hasUniqueContent = Boolean(c.about && c.about.trim().length >= 100);
   const isThin = c.reviewCount < 5 && !hasUniqueContent;
   return {
-    title: `${c.name} — Car Rental in ${c.city} · ${c.rating.toFixed(1)}★`,
-    description: `${c.name} is a verified car rental company in ${c.area}, ${c.city}. Services: ${c.servicesOffered.join(", ")}. WhatsApp contact in one tap.`,
+    title: `${c.name} — Car Rental in ${c.city} · ★${c.rating.toFixed(1)} (${c.reviewCount})`,
+    description: `${c.name} — verified car rental in ${c.area}, ${c.city}. ${c.servicesOffered.slice(0, 3).join(", ")}. Direct WhatsApp, no booking fees.`,
     alternates: { canonical: `/companies/${c.slug}` },
     robots: isThin
       ? { index: false, follow: true }
