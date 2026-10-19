@@ -36,6 +36,7 @@ export function Footer() {
           <FooterCol title="For Businesses">
             <FooterLink href="/list-your-business">List Your Business</FooterLink>
             <FooterLink href="/pricing">Pricing</FooterLink>
+            <FooterLink href="/pakistan-car-rental-price-index-2026">Price Index 2026</FooterLink>
             <FooterLink href="/owner-login">Owner Login</FooterLink>
           </FooterCol>
 
