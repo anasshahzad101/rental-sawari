@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64" role="img" aria-label="Verified Vendor on RentalSawari">
+  <rect x="1" y="1" width="238" height="62" rx="12" fill="#ffffff" stroke="#0F766E" stroke-width="2"/>
+  <circle cx="34" cy="32" r="17" fill="#0F766E"/>
+  <path d="M26.5 32.5l5 5 9.5-10" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="28" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1c1917" letter-spacing="0.5">VERIFIED VENDOR</text>
+  <text x="60" y="45" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0F766E">on RentalSawari.com</text>
+</svg>

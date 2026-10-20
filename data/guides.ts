@@ -106,6 +106,24 @@ export const guides: Guide[] = [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Reflection_of_Farah_Baksh_Terrace_%28Upper_Terrace%29_main_building.jpg/1280px-Reflection_of_Farah_Baksh_Terrace_%28Upper_Terrace%29_main_building.jpg",
     ),
     category: "Tourists",
+    faqs: [
+      {
+        q: "Can foreign tourists rent a car in Pakistan?",
+        a: "Yes — with-driver hire is the norm and recommended. Self-drive is legal with a passport, valid visa, and International Driving Permit, but is not advised outside major cities. Deposits for tourists are usually quoted in USD (200–1,000).",
+      },
+      {
+        q: "Do foreigners need an NOC for Hunza and Gilgit-Baltistan?",
+        a: "Foreign nationals need a No-Objection Certificate for Gilgit-Baltistan. Verified tour operators arrange it in about 24 hours, usually free or for a small fee — you don't handle it yourself.",
+      },
+      {
+        q: "Which airport should tourists fly into for the Northern Areas?",
+        a: "Islamabad (ISB) — closest to the mountains, the most English-friendly rental market, and the standard launch point for Hunza, Skardu, and Naran packages.",
+      },
+      {
+        q: "How much does a tourist car rental cost in Pakistan?",
+        a: "City day hire with driver runs USD 25–40/day; a 5-day Hunza package costs USD 800–1,500 all-in; airport pickup is USD 15–30. Card payment is uncommon — carry USD cash.",
+      },
+    ],
   },
   {
     slug: "rent-a-car-islamabad-to-murree-routes-cost-2026",
@@ -137,9 +155,9 @@ export const guides: Guide[] = [
   },
   {
     slug: "toyota-corolla-vs-honda-civic-rent-pakistan-2026",
-    title: "Toyota Corolla vs Honda Civic: Which to Rent in Pakistan? (2026)",
+    title: "Toyota Corolla vs Honda Civic vs Suzuki Cultus: Which to Rent in Pakistan? (2026)",
     excerpt:
-      "Daily rates, comfort, fuel economy, and wedding suitability compared head-to-head — so you pick the right sedan for your trip and budget.",
+      "Daily rates, comfort, fuel economy, and wedding suitability compared three ways — so you pick the right car for your trip and budget.",
     readTime: 7,
     publishedDate: "2026-06-12",
     image: img(

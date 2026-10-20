@@ -167,11 +167,30 @@ export default async function CompanyPage({ params }: { params: { slug: string }
     })),
   };
 
+  // WebPage + Speakable so voice/AI engines can lift the page's key facts
+  // (name, city, rating, services) as a spoken answer (SEO plan §1.3).
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `https://rentalsawari.com/companies/${company.slug}#webpage`,
+    url: `https://rentalsawari.com/companies/${company.slug}`,
+    name: `${company.name} — Car Rental in ${company.city}`,
+    about: { "@id": `https://rentalsawari.com/companies/${company.slug}#business` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".answer-block"],
+    },
+  };
+
   return (
     <PageShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
       />
       <TrackVendorView companySlug={company.slug} city={company.city} />
 

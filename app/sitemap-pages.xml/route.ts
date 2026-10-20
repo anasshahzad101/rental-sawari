@@ -15,6 +15,8 @@ const STATIC = [
   { path: "/tourist-packages", priority: 0.7, freq: "weekly" as const },
   { path: "/guides", priority: 0.7, freq: "weekly" as const },
   { path: "/pakistan-car-rental-price-index-2026", priority: 0.7, freq: "monthly" as const },
+  { path: "/verified-badge", priority: 0.5, freq: "monthly" as const },
+  { path: "/press", priority: 0.5, freq: "monthly" as const },
   { path: "/list-your-business", priority: 0.7, freq: "monthly" as const },
   { path: "/pricing", priority: 0.6, freq: "monthly" as const },
   { path: "/about", priority: 0.5, freq: "monthly" as const },

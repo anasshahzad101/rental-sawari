@@ -663,9 +663,71 @@ export const guideContent: Record<string, ReactNode> = {
       <ul>
         <li>Has English-speaking customer service on WhatsApp.</li>
         <li>Has a Verified badge on RentalSawari.</li>
-        <li>Has explicit "Tourist Tours" or "Northern Areas" in services.</li>
+        <li>Has explicit &quot;Tourist Tours&quot; or &quot;Northern Areas&quot; in services.</li>
         <li>Quotes USD-equivalent deposits transparently.</li>
         <li>Has reviews mentioning foreign customers.</li>
+      </ul>
+
+      <h2>What does a tourist rental actually cost?</h2>
+      <table>
+        <thead>
+          <tr><th>Trip type</th><th>Typical cost (USD)</th><th>What&apos;s included</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>City day hire (sedan + driver)</td><td>25–40/day</td><td>Car, driver, city fuel limits</td></tr>
+          <tr><td>Airport pickup (LHE, ISB, KHI)</td><td>15–30</td><td>Meet-and-greet, 60 min waiting</td></tr>
+          <tr><td>Lahore → Islamabad one-way</td><td>60–100</td><td>M2 motorway, tolls, driver</td></tr>
+          <tr><td>5-day Hunza package</td><td>800–1,500</td><td>SUV, mountain driver, fuel, tolls</td></tr>
+          <tr><td>10-day grand north loop</td><td>1,400–2,500</td><td>Hunza + Skardu, 4x4, driver allowance</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Which city should I fly into?</h2>
+      <p>
+        <strong>Islamabad (ISB)</strong> is the best entry point for most
+        tourists — closest to the Northern Areas, the most
+        English-friendly rental market, and the easiest airport to
+        navigate. <strong>Lahore (LHE)</strong> suits culture-first trips
+        (Walled City, food, Mughal architecture) with an easy motorway
+        transfer to Islamabad. <strong>Karachi (KHI)</strong> is the entry
+        for coastal routes and business travel but is the least
+        tourist-oriented of the three.
+      </p>
+
+      <h2>How do visas and the e-Visa work?</h2>
+      <p>
+        Pakistan&apos;s e-Visa system covers most nationalities — apply
+        online 1–2 weeks before travel; tourist visas are typically 30–90
+        days, single or multiple entry. Citizens of some countries
+        (including Malaysia, Turkey, and the UAE) get visa-on-arrival or
+        visa-free entry. Print your e-Visa approval and carry it with your
+        passport — immigration asks for it, and so do some Northern Areas
+        checkposts.
+      </p>
+
+      <h2>What about money, SIM cards, and connectivity?</h2>
+      <ul>
+        <li><strong>Cash:</strong> bring USD or EUR and exchange at the airport or city exchange companies — rates beat hotel desks. ATMs in major cities work with foreign cards; north of Gilgit they&apos;re unreliable.</li>
+        <li><strong>SIM:</strong> buy a Jazz or Zong SIM at the airport (passport required). Coverage is excellent in cities and along the KKH; expect dead zones in side valleys.</li>
+        <li><strong>WhatsApp:</strong> it&apos;s how Pakistan does business — every vendor, driver, and hotel uses it. Set it up before you land.</li>
+      </ul>
+
+      <h2>When is the best time to visit?</h2>
+      <p>
+        <strong>October–November and March–April</strong> offer the best
+        mix of clear mountain skies, mild city weather, and lower rental
+        rates. June–August is peak Northern Areas season (book vehicles
+        3–4 weeks ahead) but cities are hot. December–February closes
+        Naran and Babusar; Hunza stays open and is dramatically quiet —
+        with 4x4 strongly advised.
+      </p>
+
+      <h2>What cultural practicalities should I know?</h2>
+      <ul>
+        <li>Dress modestly — long trousers and covered shoulders work everywhere; women should carry a light scarf for mosques and rural areas.</li>
+        <li>Friday midday (12–3 PM) slows everything — plan intercity drives around Jummah prayers.</li>
+        <li>During Ramadan, daytime restaurants close in smaller towns; hotels and highway stops still serve travellers.</li>
+        <li>Tipping drivers PKR 500–1,000/day (or ~10%) is customary and appreciated, especially on multi-day mountain trips.</li>
       </ul>
     </>
   ),
@@ -820,48 +882,63 @@ export const guideContent: Record<string, ReactNode> = {
   "toyota-corolla-vs-honda-civic-rent-pakistan-2026": (
     <>
       <p className="answer-block">
-        <strong>Rent a Toyota Corolla if you want the cheaper, more practical
-        sedan; rent a Honda Civic if you want a more premium, wedding-worthy
-        ride.</strong> The Corolla runs about PKR 6,500/day and the Civic about
-        PKR 7,500/day with driver. Both seat four comfortably; the Civic feels
-        more upmarket, the Corolla is easier on the budget and fuel.
+        <strong>Rent a Toyota Corolla for the best balance of price and
+        comfort, a Honda Civic for a more premium wedding-worthy ride, and a
+        Suzuki Cultus when budget matters most.</strong> Daily rates with
+        driver: Cultus PKR 4,500–6,000, Corolla PKR 6,500–8,500, Civic PKR
+        7,500–10,000. The Corolla is the practical all-rounder; the Civic is
+        the prestige pick; the Cultus is the value pick.
       </p>
 
-      <h2>Corolla vs Civic: quick comparison</h2>
+      <h2>Corolla vs Civic vs Cultus: quick comparison</h2>
       <table>
         <thead>
-          <tr><th></th><th>Toyota Corolla</th><th>Honda Civic</th></tr>
+          <tr><th></th><th>Suzuki Cultus</th><th>Toyota Corolla</th><th>Honda Civic</th></tr>
         </thead>
         <tbody>
-          <tr><td>Typical daily rate (with driver)</td><td>PKR 6,500–8,500</td><td>PKR 7,500–10,000</td></tr>
-          <tr><td>Best for</td><td>Business trips, value, daily use</td><td>Weddings, executive transport, prestige</td></tr>
-          <tr><td>Fuel economy</td><td>12–14 km/l motorway</td><td>10–13 km/l motorway</td></tr>
-          <tr><td>Availability</td><td>Highest of any car</td><td>Very high</td></tr>
-          <tr><td>Feel</td><td>Practical, comfortable</td><td>Sportier, more premium interior</td></tr>
+          <tr><td>Typical daily rate (with driver)</td><td>PKR 4,500–6,000</td><td>PKR 6,500–8,500</td><td>PKR 7,500–10,000</td></tr>
+          <tr><td>Best for</td><td>Budget trips, city runs, small families</td><td>Business trips, value, daily use</td><td>Weddings, executive transport, prestige</td></tr>
+          <tr><td>Fuel economy</td><td>14–18 km/l motorway</td><td>12–14 km/l motorway</td><td>10–13 km/l motorway</td></tr>
+          <tr><td>Availability</td><td>Very high</td><td>Highest of any car</td><td>Very high</td></tr>
+          <tr><td>Rear-seat comfort (4 adults)</td><td>Tight</td><td>Comfortable</td><td>Comfortable</td></tr>
+          <tr><td>Feel</td><td>Basic, nimble</td><td>Practical, comfortable</td><td>Sportier, more premium interior</td></tr>
         </tbody>
       </table>
 
-      <h2>Which is cheaper to rent?</h2>
+      <h2>Which is cheapest to rent?</h2>
       <p>
-        The Corolla — usually by about PKR 1,000–1,500/day. It is also the most
-        widely stocked rental car in Pakistan, so you have the most vendors to
+        The Cultus — typically PKR 2,000–3,000/day less than a Corolla. For
+        solo travellers, couples, or city-only use, it covers 90% of trips at
+        the lowest price. The Corolla is the next step up and the most widely
+        stocked rental car in Pakistan, so you have the most vendors to
         compare and the best chance of a last-minute booking. See live{" "}
-        <a href="/cars/toyota-corolla">Corolla</a> and{" "}
-        <a href="/cars/honda-civic">Civic</a> listings.
+        <a href="/cars/toyota-corolla">Corolla</a>,{" "}
+        <a href="/cars/honda-civic">Civic</a>, and{" "}
+        <a href="/cars/suzuki-cultus">Cultus</a> listings.
       </p>
 
       <h2>Which is better for a wedding?</h2>
       <p>
-        The Civic, especially in white, is the more popular rukhsati car — the
-        newer Pakistan-market generation has a premium interior that photographs
-        well. The Corolla still works for the baraat convoy and guest transport
-        at a lower cost. Many couples rent one Civic for the couple and several
-        Corollas for the family.
+        The Civic, especially in white, is the most popular rukhsati car — the
+        newer Pakistan-market generation has a premium interior that
+        photographs well. The Corolla works for the baraat convoy and guest
+        transport at a lower cost. Many couples rent one Civic for themselves
+        and several Corollas for the family. Cultus rarely appears as a
+        wedding car — it&apos;s the wrong tool for that job.
+      </p>
+
+      <h2>Which is best for a long motorway trip?</h2>
+      <p>
+        The Corolla — best fuel economy of the two sedans, a settled ride at
+        120 km/h, and comfortable rear seats for four adults. The Civic rides
+        firmer but feels more refined. The Cultus manages the motorway fine
+        but engine noise and light steering make it tiring past 3–4 hours.
       </p>
 
       <h2>Which should you pick?</h2>
       <ul>
-        <li><strong>Budget / daily / business:</strong> Corolla.</li>
+        <li><strong>Tightest budget / city-only / 2–3 people:</strong> Cultus.</li>
+        <li><strong>Balanced value / business / family of four:</strong> Corolla.</li>
         <li><strong>Wedding / executive / first impression:</strong> Civic.</li>
         <li><strong>Long motorway trips:</strong> Corolla, for fuel economy and ride comfort.</li>
       </ul>

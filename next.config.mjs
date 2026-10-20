@@ -90,6 +90,18 @@ const nextConfig = {
           },
         ],
       },
+      // Badge assets are hotlinked from ~1,400 vendor sites — cache hard,
+      // allow cross-origin embedding.
+      {
+        source: "/badges/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+        ],
+      },
       // Tell Vercel's edge to send Last-Modified-derived ETags for HTML
       // pages so crawlers can prioritise re-fetch. We can't set a precise
       // Last-Modified per page from the config — Vercel ships one based on

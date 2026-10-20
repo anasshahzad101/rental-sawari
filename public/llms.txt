@@ -12,7 +12,7 @@ Free for renters. Free basic listings for businesses. Direct WhatsApp contact, n
 
 ## Key URLs
 - https://rentalsawari.com/                                    — Homepage and search
-- https://rentalsawari.com/cities                              — All 8 cities
+- https://rentalsawari.com/cities                              — All 21 cities
 - https://rentalsawari.com/cars                                — All car types
 - https://rentalsawari.com/rent-a-car-lahore                   — Lahore listings (371 verified vendors)
 - https://rentalsawari.com/rent-a-car-islamabad                — Islamabad listings (265 vendors)
@@ -32,9 +32,20 @@ Free for renters. Free basic listings for businesses. Direct WhatsApp contact, n
 - https://rentalsawari.com/self-drive-rental                   — Self-drive vendors
 - https://rentalsawari.com/guides                              — Editorial guides
 - https://rentalsawari.com/guides/rent-a-car-cost-lahore-2026  — Lahore pricing breakdown
+- https://rentalsawari.com/guides/rent-a-car-cost-karachi-2026 — Karachi pricing breakdown
+- https://rentalsawari.com/guides/rent-a-car-cost-islamabad-2026 — Islamabad & Rawalpindi pricing breakdown
+- https://rentalsawari.com/guides/hiace-rental-prices-pakistan-2026 — Hiace / van rates city-by-city
+- https://rentalsawari.com/guides/wedding-car-rental-prices-pakistan-2026 — Wedding car prices by vehicle class
+- https://rentalsawari.com/guides/self-drive-car-rental-lahore — Self-drive requirements & best areas in Lahore
+- https://rentalsawari.com/guides/rent-a-car-without-driver-karachi-islamabad — No-driver rentals: deposits & CNIC rules
+- https://rentalsawari.com/guides/monthly-car-rental-companies-pakistan — Corporate monthly rates & contracts
+- https://rentalsawari.com/guides/airport-pickup-car-service-pakistan — Airport pickup at LHE, KHI, ISB
+- https://rentalsawari.com/guides/northern-areas-rental-car-guide — Hunza / Skardu / Naran vehicle choice & rules
+- https://rentalsawari.com/guides/islamabad-to-hunza-rental-car-itinerary — Islamabad–Hunza 7-day itinerary & costs
 - https://rentalsawari.com/guides/self-drive-vs-with-driver    — Self-drive vs chauffeur comparison
 - https://rentalsawari.com/guides/documents-to-rent-a-car-in-pakistan — Required docs (CNIC, IDP, deposits)
 - https://rentalsawari.com/guides/foreign-tourist-car-rental-pakistan — Complete tourist guide
+- https://rentalsawari.com/pakistan-car-rental-price-index-2026 — Quarterly price index: avg rates per category per city, vendor density, rating distributions (free CSV)
 - https://rentalsawari.com/list-your-business                  — Vendor onboarding
 - https://rentalsawari.com/pricing                             — Featured listing tiers
 - https://rentalsawari.com/about                               — About RentalSawari
