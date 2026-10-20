@@ -20,17 +20,10 @@ const websiteJsonLd = {
   "@type": "WebSite",
   name: "RentalSawari Pakistan",
   url: "https://rentalsawari.com",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: "https://rentalsawari.com/search?city={city}&car={car}",
-    },
-    "query-input": [
-      "required name=city",
-      "required name=car",
-    ],
-  },
+  // NOTE: no SearchAction here — it pointed at /search, which doesn't exist
+  // (404). A dead sitelinks-searchbox target is a quality signal against the
+  // site (AdSense "low value content" review). Re-add only if a real /search
+  // page ships.
 };
 
 const organizationJsonLd = {

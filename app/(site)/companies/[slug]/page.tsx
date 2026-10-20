@@ -45,13 +45,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const c = await getCompanyBySlug(params.slug);
   if (!c) return { title: "Company not found" };
-  // Thin-content guard. We keep only *genuinely* thin pages out of the index:
-  // a vendor with a unique "about" description carries enough original content
-  // to index even with few reviews, whereas a bare name/phone/rating stub does
-  // not. (Pure reviewCount<5 hid ~240 content-rich vendors — this indexes them.)
-  // Pages flip to indexable automatically as `about` or reviews are added.
-  const hasUniqueContent = Boolean(c.about && c.about.trim().length >= 100);
-  const isThin = c.reviewCount < 5 && !hasUniqueContent;
+  // Thin-content guard (SEO plan §1.4 / AdSense "low value content" fix).
+  // A profile needs at least 2 richness signals to be indexable: a real
+  // description, meaningful review count, listed services, fleet data, or
+  // a website. Bare stubs (name + phone + rating only) stay noindex,follow
+  // so Google's reviewers and crawlers don't see a sea of thin pages.
+  // Pages flip to indexable automatically as profiles are enriched.
+  const signals = [
+    Boolean(c.about && c.about.trim().length >= 100),
+    c.reviewCount >= 5,
+    c.servicesOffered.length > 0,
+    Boolean(c.topCars && c.topCars.length > 0),
+    Boolean(c.website),
+  ].filter(Boolean).length;
+  const isThin = signals < 2;
   return {
     title: `${c.name} — Car Rental in ${c.city} · ★${c.rating.toFixed(1)} (${c.reviewCount})`,
     description: `${c.name} — verified car rental in ${c.area}, ${c.city}. ${c.servicesOffered.slice(0, 3).join(", ")}. Direct WhatsApp, no booking fees.`,
