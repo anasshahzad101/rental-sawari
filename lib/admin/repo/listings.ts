@@ -4,6 +4,7 @@ import { getDb } from "../db";
 import type { Row } from "../db/driver";
 import { fmtDay, pktDay, slugify } from "../format";
 import type { FieldChange, Listing, ListingEditable, ListingField, ListingVersion, VersionKind } from "../types";
+import { pingIndexNow, companyUrl } from "@/lib/indexnow";
 
 /**
  * Listings: reads (cached), writes (always versioned), history, undo and
@@ -289,6 +290,8 @@ export async function createListing(data: ListingEditable, meta: WriteMeta, opts
   const id = await d.insert("listings", row as unknown as Row);
   await writeVersion(id, null, editable(row as Listing), [], meta);
   invalidateListings();
+  // New page → tell IndexNow (Bing/Yandex/Naver) right away.
+  await pingIndexNow([companyUrl(slug)]);
   return id;
 }
 
@@ -336,6 +339,12 @@ export async function updateListing(id: number, next: ListingEditable, meta: Wri
 
   const vid = await writeVersion(id, before, editable({ ...cur, ...next } as Listing), changes, meta);
   invalidateListings();
+  // Content changed (and possibly the URL) → re-ping IndexNow.
+  await pingIndexNow(
+    next.slug !== cur.slug
+      ? [companyUrl(next.slug), companyUrl(cur.slug)]
+      : [companyUrl(next.slug)],
+  );
   return vid;
 }
 
@@ -376,6 +385,12 @@ export async function undoVersion(versionId: number): Promise<{ listingId: numbe
   }
   await d.remove("listingVersions", { id: v.id });
   invalidateListings();
+  // Undo restored earlier content → re-ping IndexNow.
+  await pingIndexNow(
+    v.prior.slug !== cur.slug
+      ? [companyUrl(v.prior.slug), companyUrl(cur.slug)]
+      : [companyUrl(v.prior.slug)],
+  );
   return { listingId: v.listingId, kind: v.kind, refId: v.refId };
 }
 
